@@ -17,8 +17,6 @@ class ClientesController extends BaseController
     // Listado
     public function index()
     {
-        if (! auth()->loggedIn()) return redirect()->to('/login');
-
         $data = [
             'clientes' => $this->clienteModel->conPlan()->findAll(),
         ];
@@ -29,8 +27,6 @@ class ClientesController extends BaseController
     // Formulario nuevo cliente
     public function crear()
     {
-        if (! auth()->loggedIn()) return redirect()->to('/login');
-
         $data = [
             'planes' => (new PlanModel())->where('activo', 1)->findAll(),
         ];
@@ -75,8 +71,6 @@ class ClientesController extends BaseController
     // Formulario editar
     public function editar(int $id)
     {
-        if (! auth()->loggedIn()) return redirect()->to('/login');
-
         $data = [
             'cliente' => $this->clienteModel->findOrFail($id),
             'planes'  => (new PlanModel())->where('activo', 1)->findAll(),

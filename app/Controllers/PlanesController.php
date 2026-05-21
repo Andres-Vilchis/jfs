@@ -15,8 +15,6 @@ class PlanesController extends BaseController
 
     public function index()
     {
-        if (! auth()->loggedIn()) return redirect()->to('/login');
-
         return view('planes/index', [
             'planes' => $this->planModel->orderBy('precio', 'ASC')->findAll(),
         ]);
@@ -24,7 +22,6 @@ class PlanesController extends BaseController
 
     public function crear()
     {
-        if (! auth()->loggedIn()) return redirect()->to('/login');
         return view('planes/form');
     }
 
@@ -56,8 +53,6 @@ class PlanesController extends BaseController
 
     public function editar(int $id)
     {
-        if (! auth()->loggedIn()) return redirect()->to('/login');
-
         return view('planes/form', [
             'plan' => $this->planModel->findOrFail($id),
         ]);

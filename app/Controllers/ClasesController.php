@@ -18,8 +18,6 @@ class ClasesController extends BaseController
 
     public function index()
     {
-        if (! auth()->loggedIn()) return redirect()->to('/login');
-
         return view('clases/index', [
             'clases' => $this->claseModel->conTrainer(),
         ]);
@@ -27,8 +25,6 @@ class ClasesController extends BaseController
 
     public function crear()
     {
-        if (! auth()->loggedIn()) return redirect()->to('/login');
-
         return view('clases/form', [
             'trainers' => $this->trainerModel->where('activo', 1)->findAll(),
         ]);
@@ -71,8 +67,6 @@ class ClasesController extends BaseController
 
     public function editar(int $id)
     {
-        if (! auth()->loggedIn()) return redirect()->to('/login');
-
         return view('clases/form', [
             'clase'    => $this->claseModel->findOrFail($id),
             'trainers' => $this->trainerModel->where('activo', 1)->findAll(),
