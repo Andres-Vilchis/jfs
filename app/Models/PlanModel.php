@@ -15,4 +15,10 @@ class PlanModel extends Model
         'nombre', 'descripcion', 'precio',
         'duracion_dias', 'beneficios', 'activo',
     ];
+
+    protected $validationRules = [
+        'nombre'        => 'required|min_length[2]|max_length[100]',
+        'precio'        => 'required|decimal',
+        'duracion_dias' => 'required|integer|greater_than[0]',
+    ];
 }
