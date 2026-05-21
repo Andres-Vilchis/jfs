@@ -1,0 +1,280 @@
+@import url(//fonts.googleapis.com/css2?family=Neonderthaw&family=Satisfy&display=swap);
+
+html,
+body {
+  height: 100%;
+  margin: 2px
+}
+
+body {
+  background: #112 url(//i.imgur.com/6QJjYMe.jpg) center repeat;
+  background-size: cover;
+}
+
+.logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-14deg);
+  text-align: center;
+  width: 100%;
+  user-select: none;
+}
+
+.logo b {
+  transform: rotate(-14deg);
+  display: inline-block;
+  font: 400 clamp(40px, 9vw, 40px) "Neonderthaw";
+  color: #fff;
+  text-shadow: 0 -40px 100px, 0 0 2px, 0 0 1em #4EDDFF,
+    0 0 .5em #24AAE0, 0 0 .1em #0A9CE4, 0 10px 3px #000;
+}
+
+.logo b span {
+  animation: blink linear infinite 2s;
+}
+
+.logo b span:nth-of-type(2) {
+  animation: blink linear infinite 3s;
+}
+
+.logo-circle {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(200px, 50vh, 200px);
+  height: clamp(200px, 50vh, 200px);
+  border-radius: 50%;
+  border: .3vh solid #fff;
+  box-shadow:
+    0 0 25px #4EDDFF,
+    0 0 50px #24AAE0,
+    0 0 90px #0A9CE4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes blink {
+  78% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+
+  79% {
+    color: #333;
+  }
+
+  80% {
+
+    text-shadow: none;
+  }
+
+  81% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+
+  82% {
+    color: #333;
+    text-shadow: none;
+  }
+
+  83% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+
+  92% {
+    color: #333;
+    text-shadow: none;
+  }
+
+  92.5% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+}
+
+/*Formulario LOGIN*/
+.login-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+}
+
+.login-form {
+  width: 500px;
+  min-width: 500px;
+  background: rgba(0, 0, 0, 0);
+  padding: 5px;
+  margin: 10px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+form h3 {
+  margin: 0 0 15px;
+  color: #4EDDFF !important;
+  font-family: Arial, sans-serif;
+  text-shadow: 0 0 8px #24AAE0;
+}
+
+.login-form input {
+  width: 90%;
+  padding: 20px;
+  border-radius: 12px;
+  border: none;
+  margin-bottom: 50px;
+  font-size: clamp(1.5rem, 1.2vw, 1.7rem);
+  font-family: Arial, sans-serif;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.login-form button {
+  width: 50%;
+  margin-top: 20px;
+  background: #24AAE0;
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-size: clamp(2rem, 2vw, 2.5rem);
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 0 10px #24AAE0;
+}
+
+.login-form button:hover {
+  background: #4EDDFF;
+  box-shadow: 0 0 15px #4EDDFF;
+}
+
+.neon {
+  color: #fff;
+
+  text-shadow:
+    0 0 8px #4EDDFF,
+    0 0 16px #4EDDFF,
+    0 0 32px #24AAE0,
+    0 0 64px #0A9CE4,
+    0 0 120px #0A9CE4;
+
+  animation: neonGlow 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes neonGlow {
+
+  from {
+    text-shadow:
+      0 0 4px #4EDDFF,
+      0 0 8px #4EDDFF,
+      0 0 16px #24AAE0,
+      0 0 32px #0A9CE4;
+
+    filter: brightness(0.95);
+  }
+
+  to {
+    text-shadow:
+      0 0 10px #4EDDFF,
+      0 0 20px #4EDDFF,
+      0 0 40px #24AAE0,
+      0 0 80px #0A9CE4,
+      0 0 140px #0A9CE4;
+
+    filter: brightness(1.25);
+  }
+}
+.rotate-btn{
+  position: relative !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 50px;
+
+  border: none;
+  border-radius: 18px;
+
+  background: #070b1a !important;
+  color: #fff !important;
+
+  font-size: 16px;
+  font-weight: 350;
+
+  overflow: hidden;
+
+  z-index: 0;
+}
+
+
+/* ARO GIRATORIO */
+.rotate-btn::before{
+  content: '';
+
+  position: absolute;
+
+  width: 180%;
+  height: 600%;
+
+  background: conic-gradient(
+    from 0deg,
+    #4EDDFF,
+    #7c3aed,
+    #4ec4ff,
+    #7c3aed,
+    #4EDDFF
+  );
+
+  animation: rotateBorder 3s linear infinite;
+
+  z-index: -2;
+}
+
+
+/* CENTRO DEL BOTÓN */
+.rotate-btn::after{
+  content: '';
+
+  position: absolute;
+
+  inset: 2px;
+
+  background: #111827;
+
+  border-radius: 16px;
+
+  z-index: -1;
+}
+
+
+/* HOVER */
+.rotate-btn:hover::before{
+  animation-duration: 1.5s;
+
+  filter: brightness(1.2);
+}
+
+
+/* EFECTO PRESIÓN */
+.rotate-btn:active{
+  transform: scale(0.98);
+}
+
+
+@keyframes rotateBorder{
+  from{
+    transform: rotate(0deg);
+  }
+
+  to{
+    transform: rotate(360deg);
+  }
+}
