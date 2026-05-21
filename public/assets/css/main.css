@@ -5,3 +5,8 @@ body {
   background: #112;
   background-size: cover;
 }
+
+th {
+  font-size: .8rem;
+  text-align: center;
+}

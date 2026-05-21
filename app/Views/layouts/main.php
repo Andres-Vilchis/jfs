@@ -1,4 +1,3 @@
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,7 +13,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/main.css') ?>">
     <?= $this->renderSection('styles') ?>
 </head>
-<body>
+<body data-bs-theme="dark">
 
     <?= $this->include('partials/navbar') ?>
 

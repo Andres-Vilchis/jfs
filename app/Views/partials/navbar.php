@@ -6,7 +6,7 @@
 ?>
 <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom shadow-sm">
     <div class="container-fluid">
-        <a class="navbar-brand fw-semibold" href="<?= route_to('dashboard') ?>">
+        <a class="navbar-brand fw-semibold fs-6" href="<?= route_to('dashboard') ?>" >
             Jump Flow Studio
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -15,7 +15,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarMain">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0"  style="font-size:.87rem">
                 <li class="nav-item">
                     <a class="nav-link <?= esActivo('dashboard') ?>" href="<?= route_to('dashboard') ?>">
                         <i class="bi bi-house-fill me-1"></i> Dashboard
@@ -45,13 +45,13 @@
                 <?php endif; ?>
             </ul>
             <div class="d-flex align-items-center gap-3">
-                <span class="text-muted small">
+               <!-- <span class="text-muted small">
                     <i class="bi bi-person-circle me-1"></i>
-                    <?= esc(auth()->user()->username) ?>
-                </span>
+                    <?//= esc(auth()->user()->username) ?>
+                </span>-->
                 <form action="<?= route_to('logout') ?>" method="post">
                     <?= csrf_field() ?>
-                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                    <button type="submit" class="small btn btn-outline-secondary btn-sm">
                         <i class="bi bi-box-arrow-right me-1"></i> Cerrar sesión
                     </button>
                 </form>
