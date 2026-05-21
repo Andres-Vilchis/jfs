@@ -36,6 +36,11 @@
                         <i class="bi bi-calendar-event-fill me-1"></i> Clases
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link <?= esActivo('planes') ?>" href="<?= route_to('planes.index') ?>">
+                        <i class="bi bi-bag-dash-fill me-1"></i> Planes
+                    </a>
+                </li>
                 <?php if (auth()->user()->inGroup('admin')): ?>
                 <li class="nav-item">
                     <a class="nav-link <?= esActivo('usuarios') ?>" href="<?= route_to('usuarios.index') ?>">

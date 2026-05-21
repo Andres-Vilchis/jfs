@@ -5,7 +5,7 @@ use CodeIgniter\I18n\Time;
 if (! function_exists('esActivo')) {
     function esActivo(string $ruta): string
     {
-        return uri_string() === $ruta ? 'active text-info" aria-current="page' : '';
+        return uri_string() === $ruta ? 'active text-primary-emphasis" aria-current="page' : '';
     }
 }
 
