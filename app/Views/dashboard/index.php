@@ -12,6 +12,7 @@
  * @var int    $vencidos
  * @var array  $ultimosClientes
  * @var array  $clasesHoy
+ * @var mixed  $cl
  */
 ?>
 

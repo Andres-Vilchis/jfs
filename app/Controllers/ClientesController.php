@@ -18,6 +18,7 @@ class ClientesController extends BaseController
     public function index()
     {
         $data = [
+            'fecha_formateada' => fechaFormateada(),
             'clientes' => $this->clienteModel->conPlan()->findAll(),
         ];
 

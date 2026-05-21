@@ -4,14 +4,22 @@
 <?php
 /**
  * @var array $clientes
+ * @var string $fecha_formateada
+ * @var mixed 
  */
 ?>
 
+<!-- Encabezado -->
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h5 class="mb-0">Clientes</h5>
-    <a href="<?= route_to('clientes.crear') ?>" class="btn btn-sm btn-primary">
-        <i class="bi bi-person-plus-fill me-1"></i> Nuevo cliente
-    </a>
+    <div>
+        <h5 class="mb-0">Clientes</h5>
+        <small class="text-muted"><?= $fecha_formateada ?></small>
+    </div>
+    <span class="text-muted small">
+        <a href="<?= route_to('clientes.crear') ?>" class="btn btn-sm btn-primary">
+            <i class="bi bi-person-plus-fill me-1"></i> Nuevo cliente
+        </a>
+    </span>
 </div>
 
 <?php if (session()->getFlashdata('success')): ?>

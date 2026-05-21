@@ -36,7 +36,10 @@ class UsuariosController extends BaseController
             $u->email  = $identity?->secret ?? '—';
         }
 
-        return view('usuarios/index', ['usuarios' => $usuarios]);
+        return view('usuarios/index', [
+            'fecha_formateada' => fechaFormateada(),
+            'usuarios' => $usuarios
+        ]);
     }
 
     public function crear()

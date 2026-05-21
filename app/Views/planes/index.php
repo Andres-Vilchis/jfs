@@ -4,14 +4,21 @@
 <?php
 /**
  * @var array $planes
+ * @var string $fecha_formateada
  */
 ?>
 
+<!-- Encabezado -->
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h5 class="mb-0">Planes de membresía</h5>
+    <div>
+        <h5 class="mb-0">Planes de membresía</h5>
+        <small class="text-muted"><?= $fecha_formateada ?></small>
+    </div>
+    <span class="text-muted small">
     <a href="<?= route_to('planes.crear') ?>" class="btn btn-sm btn-primary">
         <i class="bi bi-plus-circle me-1"></i> Nuevo plan
     </a>
+    </span>
 </div>
 
 <?php if (session()->getFlashdata('success')): ?>

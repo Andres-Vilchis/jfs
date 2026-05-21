@@ -16,6 +16,7 @@ class PlanesController extends BaseController
     public function index()
     {
         return view('planes/index', [
+            'fecha_formateada' => fechaFormateada(),
             'planes' => $this->planModel->orderBy('precio', 'ASC')->findAll(),
         ]);
     }

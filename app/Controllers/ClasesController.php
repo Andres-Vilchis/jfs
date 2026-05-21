@@ -19,6 +19,7 @@ class ClasesController extends BaseController
     public function index()
     {
         return view('clases/index', [
+            'fecha_formateada' => fechaFormateada(),
             'clases' => $this->claseModel->conTrainer(),
         ]);
     }
