@@ -17,28 +17,28 @@
         <div class="collapse navbar-collapse" id="navbarMain">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link <?= $esActivo('dashboard') ?>" href="<?= route_to('dashboard') ?>">
+                    <a class="nav-link <?= esActivo('dashboard') ?>" href="<?= route_to('dashboard') ?>">
                         <i class="bi bi-house-fill me-1"></i> Dashboard
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $esActivo('clientes') ?>" href="<?= route_to('clientes.index') ?>">
+                    <a class="nav-link <?= esActivo('clientes') ?>" href="<?= route_to('clientes.index') ?>">
                         <i class="bi bi-people-fill me-1"></i> Clientes
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $esActivo('trainers') ?>" href="<?= route_to('trainers.index') ?>">
+                    <a class="nav-link <?= esActivo('trainers') ?>" href="<?= route_to('trainers.index') ?>">
                         <i class="bi bi-person-arms-up me-1"></i> Trainers
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $esActivo('clases') ?>" href="<?= route_to('clases.index') ?>">
+                    <a class="nav-link <?= esActivo('clases') ?>" href="<?= route_to('clases.index') ?>">
                         <i class="bi bi-calendar-event-fill me-1"></i> Clases
                     </a>
                 </li>
                 <?php if (auth()->user()->inGroup('admin')): ?>
                 <li class="nav-item">
-                    <a class="nav-link <?= $esActivo('usuarios') ?>" href="<?= route_to('usuarios.index') ?>">
+                    <a class="nav-link <?= esActivo('usuarios') ?>" href="<?= route_to('usuarios.index') ?>">
                         <i class="bi bi-shield-lock-fill me-1"></i> Usuarios
                     </a>
                 </li>

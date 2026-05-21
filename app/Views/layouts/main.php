@@ -1,8 +1,3 @@
-<?php
-$esActivo = function (string $ruta) {
-    $segmento = service('request')->getUri()->getSegment(1);
-    return $segmento === $ruta ? 'active fw-semibold' : '';
-};
 ?>
 <!DOCTYPE html>
 <html lang="es">

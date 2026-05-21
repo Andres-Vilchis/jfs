@@ -32,17 +32,6 @@ class LoginController extends BaseController
                 ->with('error', 'Correo o contraseña incorrectos.');
         }
 
-        // Redirige según el rol
-        $user = auth()->user();
-
-        if ($user->inGroup('admin')) {
-            return redirect()->to('/admin/dashboard');
-        } elseif ($user->inGroup('recepcionista')) {
-            return redirect()->to('/recepcion/dashboard');
-        } elseif ($user->inGroup('entrenador')) {
-            return redirect()->to('/entrenador/dashboard');
-        }
-
-        return redirect()->to('/dashboard');
+        return redirect()->to('/dashboard');  // ← todos al mismo dashboard por ahora
     }
 }
