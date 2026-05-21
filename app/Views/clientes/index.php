@@ -29,8 +29,8 @@
 <div class="card">
     <div class="card-body px-0 py-0">
         <div class="table-responsive">
-            <table class="table table-hover table-striped mb-0">
-                <thead>
+            <table class="table table-hover table-striped table-sm mb-0">
+                <thead class="small">
                     <tr>
                         <th>Cliente</th>
                         <th>Teléfono</th>
@@ -49,13 +49,13 @@
                         <?php foreach ($clientes as $c): ?>
                             <tr>
                                 <td>
-                                    <div class="fw-semibold"><?= esc($c['nombre'] . ' ' . $c['apellidos']) ?></div>
+                                    <div class="fw-semibold" style="font-size:.87rem"><?= esc($c['nombre'] . ' ' . $c['apellidos']) ?></div>
                                     <div class="text-muted small"><?= esc($c['correo'] ?? '—') ?></div>
                                 </td>
-                                <td><?= esc($c['telefono'] ?? '—') ?></td>
-                                <td><?= esc($c['plan_nombre'] ?? '—') ?></td>
-                                <td><span class="badge bg-secondary"><?= esc($c['nivel']) ?></span></td>
-                                <td><?= $c['fecha_vencimiento'] ?? '—' ?></td>
+                                <td class="small text-secondary-emphasis text-center align-middle"><?= esc($c['telefono'] ?? '—') ?></td>
+                                <td class="small text-secondary-emphasis text-center align-middle"><?= esc($c['plan_nombre'] ?? '—') ?></td>
+                                <td class="small text-secondary-emphasis text-center align-middle"><span><?= esc($c['nivel']) ?></span></td>
+                                <td class="small text-secondary-emphasis text-center align-middle"><?= $c['fecha_vencimiento'] ?? '—' ?></td>
                                 <td class="text-end">
                                     <a href="<?= route_to('clientes.editar', $c['id']) ?>"
                                         class="btn btn-sm btn-outline-primary">
@@ -66,7 +66,7 @@
                                         <?= csrf_field() ?>
                                         <button class="btn btn-sm btn-outline-danger"
                                             onclick="return confirm('¿Desactivar cliente?')">
-                                            <i class="bi bi-person-x"></i>
+                                            <i class="bi bi-trash3-fill"></i>
                                         </button>
                                     </form>
                                 </td>
