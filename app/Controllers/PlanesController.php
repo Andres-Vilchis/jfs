@@ -54,9 +54,13 @@ class PlanesController extends BaseController
 
     public function editar(int $id)
     {
-        return view('planes/form', [
-            'plan' => $this->planModel->findOrFail($id),
-        ]);
+        $plan = $this->planModel->find($id);
+
+        if (! $plan) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException("Plan #{$id} no encontrado.");
+        }
+
+        return view('planes/form', ['plan' => $plan]);
     }
 
     public function actualizar(int $id)
@@ -86,7 +90,12 @@ class PlanesController extends BaseController
 
     public function toggleActivo(int $id)
     {
-        $plan = $this->planModel->findOrFail($id);
+        $plan = $this->planModel->find($id);
+
+        if (! $plan) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException("Plan #{$id} no encontrado.");
+        }
+
         $this->planModel->update($id, ['activo' => $plan['activo'] ? 0 : 1]);
 
         return redirect()->to('/planes')

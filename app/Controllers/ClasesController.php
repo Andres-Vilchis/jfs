@@ -68,8 +68,14 @@ class ClasesController extends BaseController
 
     public function editar(int $id)
     {
+        $clase = $this->claseModel->find($id);
+
+        if (! $clase) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException("Clase #{$id} no encontrada.");
+        }
+
         return view('clases/form', [
-            'clase'    => $this->claseModel->findOrFail($id),
+            'clase'    => $clase,
             'trainers' => $this->trainerModel->where('activo', 1)->findAll(),
         ]);
     }
@@ -110,7 +116,12 @@ class ClasesController extends BaseController
 
     public function toggleActivo(int $id)
     {
-        $clase = $this->claseModel->findOrFail($id);
+        $clase = $this->claseModel->find($id);
+
+        if (! $clase) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException("Clase #{$id} no encontrada.");
+        }
+
         $this->claseModel->update($id, ['activo' => $clase['activo'] ? 0 : 1]);
 
         return redirect()->to('/clases')

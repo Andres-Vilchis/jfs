@@ -56,9 +56,13 @@ class TrainersController extends BaseController
 
     public function editar(int $id)
     {
-        return view('trainers/form', [
-            'trainer' => $this->trainerModel->findOrFail($id),
-        ]);
+        $trainer = $this->trainerModel->find($id);
+
+        if (! $trainer) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException("Trainer #{$id} no encontrado.");
+        }
+
+        return view('trainers/form', ['trainer' => $trainer]);
     }
 
     public function actualizar(int $id)
@@ -90,7 +94,12 @@ class TrainersController extends BaseController
 
     public function toggleActivo(int $id)
     {
-        $trainer = $this->trainerModel->findOrFail($id);
+        $trainer = $this->trainerModel->find($id);
+
+        if (! $trainer) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException("Trainer #{$id} no encontrado.");
+        }
+
         $this->trainerModel->update($id, ['activo' => $trainer['activo'] ? 0 : 1]);
 
         return redirect()->to('/trainers')
