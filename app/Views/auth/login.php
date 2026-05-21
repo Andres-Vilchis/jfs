@@ -27,9 +27,7 @@
     </div>
     <div class="login-box mt-5">
         <?= form_open('auth/login/attempt', ['class' => 'needs-validation', 'novalidate' => true]) ?>
-
         <p class="text-center neon fs-4">Inicia sesión</p>
-
         <div class="input-group mb-3" data-bs-theme="dark">
             <span class="input-group-text"><i class="bi bi-person-badge-fill"> </i></span>
             <?= form_input([
