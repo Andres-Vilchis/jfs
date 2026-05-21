@@ -41,25 +41,21 @@ class AuthGroups extends ShieldAuthGroups
      * @see https://codeigniter4.github.io/shield/quick_start_guide/using_authorization/#change-available-groups for more info
      */
     public array $groups = [
-        'superadmin' => [
-            'title'       => 'Super Admin',
-            'description' => 'Complete control of the site.',
-        ],
         'admin' => [
-            'title'       => 'Admin',
-            'description' => 'Day to day administrators of the site.',
+            'title'       => 'Administrador',
+            'description' => 'Control total del sistema',
         ],
-        'developer' => [
-            'title'       => 'Developer',
-            'description' => 'Site programmers.',
+        'recepcionista' => [
+            'title'       => 'Recepcionista',
+            'description' => 'Gestión de clientes, pagos y asistencia',
         ],
-        'user' => [
-            'title'       => 'User',
-            'description' => 'General users of the site. Often customers.',
+        'entrenador' => [
+            'title'       => 'Entrenador',
+            'description' => 'Ver clientes asignados y rutinas',
         ],
-        'beta' => [
-            'title'       => 'Beta User',
-            'description' => 'Has access to beta-level features.',
+        'cliente' => [
+            'title'       => 'Cliente',
+            'description' => 'Ver su perfil, rutinas y pagos',
         ],
     ];
 
@@ -72,13 +68,36 @@ class AuthGroups extends ShieldAuthGroups
      * If a permission is not listed here it cannot be used.
      */
     public array $permissions = [
-        'admin.access'        => 'Can access the sites admin area',
-        'admin.settings'      => 'Can access the main site settings',
-        'users.manage-admins' => 'Can manage other admins',
-        'users.create'        => 'Can create new non-admin users',
-        'users.edit'          => 'Can edit existing non-admin users',
-        'users.delete'        => 'Can delete existing non-admin users',
-        'beta.access'         => 'Can access beta-level features',
+        // Usuarios del sistema
+        'usuarios.crear'    => 'Crear usuarios',
+        'usuarios.editar'   => 'Editar usuarios',
+        'usuarios.eliminar' => 'Eliminar usuarios',
+        'usuarios.ver'      => 'Ver usuarios',
+
+        // Clientes del gimnasio
+        'clientes.crear'    => 'Registrar nuevos clientes',
+        'clientes.editar'   => 'Editar datos de clientes',
+        'clientes.eliminar' => 'Eliminar clientes',
+        'clientes.ver'      => 'Ver listado de clientes',
+
+        // Membresías
+        'membresias.crear'    => 'Crear membresías',
+        'membresias.editar'   => 'Editar membresías',
+        'membresias.eliminar' => 'Eliminar membresías',
+        'membresias.ver'      => 'Ver membresías',
+
+        // Pagos
+        'pagos.crear'    => 'Registrar pagos',
+        'pagos.ver'      => 'Ver historial de pagos',
+        'pagos.eliminar' => 'Eliminar pagos',
+
+        // Rutinas
+        'rutinas.crear'    => 'Crear rutinas',
+        'rutinas.editar'   => 'Editar rutinas',
+        'rutinas.ver'      => 'Ver rutinas',
+
+        // Reportes
+        'reportes.ver' => 'Ver reportes y estadísticas',
     ];
 
     /**
@@ -90,28 +109,33 @@ class AuthGroups extends ShieldAuthGroups
      * This defines group-level permissions.
      */
     public array $matrix = [
-        'superadmin' => [
-            'admin.*',
-            'users.*',
-            'beta.*',
-        ],
         'admin' => [
-            'admin.access',
-            'users.create',
-            'users.edit',
-            'users.delete',
-            'beta.access',
+            'usuarios.*',
+            'clientes.*',
+            'membresias.*',
+            'pagos.*',
+            'rutinas.*',
+            'reportes.*',
         ],
-        'developer' => [
-            'admin.access',
-            'admin.settings',
-            'users.create',
-            'users.edit',
-            'beta.access',
+        'recepcionista' => [
+            'clientes.crear',
+            'clientes.editar',
+            'clientes.ver',
+            'membresias.ver',
+            'membresias.crear',
+            'pagos.crear',
+            'pagos.ver',
         ],
-        'user' => [],
-        'beta' => [
-            'beta.access',
+        'entrenador' => [
+            'clientes.ver',
+            'rutinas.crear',
+            'rutinas.editar',
+            'rutinas.ver',
+        ],
+        'cliente' => [
+            'rutinas.ver',
+            'pagos.ver',
+            'membresias.ver',
         ],
     ];
 }
