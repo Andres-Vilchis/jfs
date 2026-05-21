@@ -11,7 +11,6 @@ $routes->get('/', 'Home::index');
 $routes->get('/login',          'Auth\LoginController::index');
 $routes->post('/auth/login/attempt', 'Auth\LoginController::attempt');
 $routes->get('/dashboard', 'DashboardController::index',  ['as' => 'dashboard']);
-$routes->get('/trainers',  'TrainersController::index',   ['as' => 'trainers.index']);
 $routes->get('/clases',    'ClasesController::index',     ['as' => 'clases.index']);
 $routes->get('/usuarios',  'UsuariosController::index',   ['as' => 'usuarios.index']);
 
@@ -30,5 +29,13 @@ $routes->post('/planes/guardar',           'PlanesController::guardar',     ['as
 $routes->get('/planes/editar/(:num)',      'PlanesController::editar/$1',   ['as' => 'planes.editar']);
 $routes->post('/planes/actualizar/(:num)', 'PlanesController::actualizar/$1', ['as' => 'planes.actualizar']);
 $routes->post('/planes/toggle/(:num)',     'PlanesController::toggleActivo/$1', ['as' => 'planes.toggle']);
+
+// Trainers
+$routes->get('/trainers',                    'TrainersController::index',         ['as' => 'trainers.index']);
+$routes->get('/trainers/crear',              'TrainersController::crear',         ['as' => 'trainers.crear']);
+$routes->post('/trainers/guardar',           'TrainersController::guardar',       ['as' => 'trainers.guardar']);
+$routes->get('/trainers/editar/(:num)',      'TrainersController::editar/$1',     ['as' => 'trainers.editar']);
+$routes->post('/trainers/actualizar/(:num)', 'TrainersController::actualizar/$1', ['as' => 'trainers.actualizar']);
+$routes->post('/trainers/toggle/(:num)',     'TrainersController::toggleActivo/$1', ['as' => 'trainers.toggle']);
 
 service('auth')->routes($routes);
