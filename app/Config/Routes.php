@@ -11,7 +11,6 @@ $routes->get('/', 'Home::index');
 $routes->get('/login',          'Auth\LoginController::index');
 $routes->post('/auth/login/attempt', 'Auth\LoginController::attempt');
 $routes->get('/dashboard', 'DashboardController::index',  ['as' => 'dashboard']);
-$routes->get('/usuarios',  'UsuariosController::index',   ['as' => 'usuarios.index']);
 
 // Clientes
 $routes->get('/clientes',              'ClientesController::index',      ['as' => 'clientes.index']);
@@ -44,5 +43,13 @@ $routes->post('/clases/guardar',           'ClasesController::guardar',       ['
 $routes->get('/clases/editar/(:num)',      'ClasesController::editar/$1',     ['as' => 'clases.editar']);
 $routes->post('/clases/actualizar/(:num)', 'ClasesController::actualizar/$1', ['as' => 'clases.actualizar']);
 $routes->post('/clases/toggle/(:num)',     'ClasesController::toggleActivo/$1', ['as' => 'clases.toggle']);
+
+// Usuarios (solo admin)
+$routes->get('/usuarios',                    'UsuariosController::index',         ['as' => 'usuarios.index']);
+$routes->get('/usuarios/crear',              'UsuariosController::crear',         ['as' => 'usuarios.crear']);
+$routes->post('/usuarios/guardar',           'UsuariosController::guardar',       ['as' => 'usuarios.guardar']);
+$routes->get('/usuarios/editar/(:num)',      'UsuariosController::editar/$1',     ['as' => 'usuarios.editar']);
+$routes->post('/usuarios/actualizar/(:num)', 'UsuariosController::actualizar/$1', ['as' => 'usuarios.actualizar']);
+$routes->post('/usuarios/toggle/(:num)',     'UsuariosController::toggleActivo/$1', ['as' => 'usuarios.toggle']);
 
 service('auth')->routes($routes);
