@@ -15,42 +15,31 @@
 </head>
 
 <body class="bg-dark">
-    <!-- Alertas -->
-    <?php if (session()->getFlashdata('success')): ?>
-        <div class="alert alert-success py-2"><i class="bi bi-check-circle"></i>
-            <?= esc(session()->getFlashdata('success')) ?>
-        </div>
-    <?php endif; ?>
+    <!-- Alertas-->
     <?php if (session()->getFlashdata('error')): ?>
-        <div class="alert alert-danger py-2"><i class="bi bi-exclamation-triangle"></i>
-            <?= esc(session()->getFlashdata('error')) ?>
+        <div class="alert alert-danger text-center py-1 mb-3">
+            <?= session()->getFlashdata('error') ?>
         </div>
     <?php endif; ?>
-    <?php if (session()->getFlashdata('errors')): ?>
-        <div class="alert alert-danger py-2">
-            <?php foreach ((array) session()->getFlashdata('errors') as $err): ?>
-                <div><i class="bi bi-x-circle"></i> <?= esc($err) ?></div>
-            <?php endforeach; ?>
-        </div>
-    <?php endif; ?>
-
     <!-- Inicio -->
     <div class="logo-circle">
         <div class="logo"><b><span>J</span>umpFlow<br>Stud<span>i</span>o</b></div>
     </div>
     <div class="login-box mt-5">
-        <?= form_open('login', ['class' => 'needs-validation', 'novalidate' => true]) ?>
+        <?= form_open('auth/login/attempt', ['class' => 'needs-validation', 'novalidate' => true]) ?>
+
         <p class="text-center neon fs-4">Inicia sesión</p>
 
         <div class="input-group mb-3" data-bs-theme="dark">
             <span class="input-group-text"><i class="bi bi-person-badge-fill"> </i></span>
             <?= form_input([
-                'name'        => 'usuario',
-                'id'          => 'usuario',
-                'class'       => 'form-control',
-                'placeholder' => 'Usuario',
-                'required'    => true,
-                'autocomplete' => 'usuario',
+                'name'         => 'email',
+                'id'           => 'email',
+                'type'         => 'email',
+                'class'        => 'form-control',
+                'placeholder'  => 'Correo electrónico',
+                'required'     => true,
+                'autocomplete' => 'email',
             ]) ?>
         </div>
         <div class="input-group mb-4" data-bs-theme="dark">
@@ -72,7 +61,6 @@
         <?= form_close() ?>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
