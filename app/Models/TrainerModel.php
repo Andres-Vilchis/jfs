@@ -39,8 +39,8 @@ class TrainerModel extends Model
     public function conClases(): array
     {
         return $this->db->table('trainers t')
-            ->select('t.*, COUNT(tc.clase_id) AS total_clases')
-            ->join('trainer_clases tc', 'tc.trainer_id = t.id', 'left')
+            ->select('t.*, COUNT(c.id) AS total_clases')
+            ->join('clases c', 'c.trainer_id = t.id AND c.activo = 1', 'left')
             ->where('t.activo', 1)
             ->groupBy('t.id')
             ->orderBy('t.nombre', 'ASC')
