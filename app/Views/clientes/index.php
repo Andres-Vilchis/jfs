@@ -116,14 +116,11 @@
                             <span class="input-group-text" style="min-width:110px">Nombre</span>
                             <input type="text" name="nombre" id="m_nombre"
                                 class="form-control" placeholder="Nombre" required>
-                            <span class="input-group-text">Apellidos</span>
-                            <input type="text" name="apellidos" id="m_apellidos"
-                                class="form-control" placeholder="Apellidos" required>
                         </div>
 
                         <!-- Apellidos -->
                         <div class="input-group input-group-sm">
-                            <span class="input-group-text"  style="min-width:110px">Apellidos</span>
+                            <span class="input-group-text" style="min-width:110px">Apellidos</span>
                             <input type="text" name="apellidos" id="m_apellidos"
                                 class="form-control" placeholder="Apellidos" required>
                         </div>
