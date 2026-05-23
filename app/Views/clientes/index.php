@@ -214,7 +214,7 @@
 
                 <div class="modal-footer py-2 justify-content-between">
 
-                    <div class="d-flex gap-2">
+                    <div class="container-fluid d-flex gap-2">
                         <button type="button" class="btn btn-sm btn-outline-secondary"
                             data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-sm btn-primary">
