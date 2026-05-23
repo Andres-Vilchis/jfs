@@ -50,20 +50,27 @@
                     <?php else: ?>
                         <?php foreach ($clientes as $c): ?>
                             <?php
-                                $hoy  = new DateTime();
-                                $venc = new DateTime($c['fecha_vencimiento'] ?? 'now');
-                                $diff = (int) $hoy->diff($venc)->format('%r%a');
-                                if ($diff < 0)      { $badgeClass = 'text-danger-emphasis';  $badgeText = 'Vencido'; }
-                                elseif ($diff <= 7) { $badgeClass = 'text-warning-emphasis'; $badgeText = "Vence en {$diff}d"; }
-                                else                { $badgeClass = 'text-success-emphasis'; $badgeText = date('d/m/Y', strtotime($c['fecha_vencimiento'])); }
+                            $hoy  = new DateTime();
+                            $venc = new DateTime($c['fecha_vencimiento'] ?? 'now');
+                            $diff = (int) $hoy->diff($venc)->format('%r%a');
+                            if ($diff < 0) {
+                                $badgeClass = 'text-danger-emphasis';
+                                $badgeText = 'Vencido';
+                            } elseif ($diff <= 7) {
+                                $badgeClass = 'text-warning-emphasis';
+                                $badgeText = "Vence en {$diff}d";
+                            } else {
+                                $badgeClass = 'text-success-emphasis';
+                                $badgeText = date('d/m/Y', strtotime($c['fecha_vencimiento']));
+                            }
                             ?>
                             <tr>
                                 <td>
                                     <a href="#"
-                                       class="fw-semibold text-decoration-none link-info abrir-ficha"
-                                       data-bs-toggle="modal"
-                                       data-bs-target="#fichaModal"
-                                       data-cliente='<?= esc(json_encode($c), 'attr') ?>'>
+                                        class="fw-semibold text-decoration-none link-info abrir-ficha"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#fichaModal"
+                                        data-cliente='<?= esc(json_encode($c), 'attr') ?>'>
                                         <?= esc($c['nombre'] . ' ' . $c['apellidos']) ?>
                                     </a>
                                     <?php if ($c['correo']): ?>
@@ -104,14 +111,21 @@
                 <div class="modal-body py-3">
                     <div class="d-flex flex-column gap-2">
 
-                        <!-- Nombre + Apellidos -->
+                        <!-- Nombre -->
                         <div class="input-group input-group-sm">
                             <span class="input-group-text" style="min-width:110px">Nombre</span>
                             <input type="text" name="nombre" id="m_nombre"
-                                   class="form-control" placeholder="Nombre" required>
+                                class="form-control" placeholder="Nombre" required>
                             <span class="input-group-text">Apellidos</span>
                             <input type="text" name="apellidos" id="m_apellidos"
-                                   class="form-control" placeholder="Apellidos" required>
+                                class="form-control" placeholder="Apellidos" required>
+                        </div>
+
+                        <!-- Apellidos -->
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text"  style="min-width:110px">Apellidos</span>
+                            <input type="text" name="apellidos" id="m_apellidos"
+                                class="form-control" placeholder="Apellidos" required>
                         </div>
 
                         <!-- Correo -->
@@ -120,7 +134,7 @@
                                 <i class="bi bi-envelope me-1"></i>Correo
                             </span>
                             <input type="email" name="correo" id="m_correo"
-                                   class="form-control" placeholder="correo@ejemplo.com">
+                                class="form-control" placeholder="correo@ejemplo.com">
                         </div>
 
                         <!-- Teléfono -->
@@ -129,17 +143,21 @@
                                 <i class="bi bi-phone me-1"></i>Teléfono
                             </span>
                             <input type="text" name="telefono" id="m_telefono"
-                                   class="form-control" placeholder="10 dígitos">
+                                class="form-control" placeholder="10 dígitos">
                         </div>
 
-                        <!-- Fecha nacimiento + Género -->
+                        <!-- Fecha nacimiento -->
                         <div class="input-group input-group-sm">
                             <span class="input-group-text" style="min-width:110px">
                                 <i class="bi bi-calendar3 me-1"></i>Nacimiento
                             </span>
                             <input type="date" name="fecha_nacimiento" id="m_fecha_nacimiento"
-                                   class="form-control">
-                            <span class="input-group-text">Género</span>
+                                class="form-control">
+                        </div>
+
+                        <!-- Fecha nacimiento -->
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text" style="min-width:110px">Género</span>
                             <select name="genero" id="m_genero" class="form-select">
                                 <option value="">— —</option>
                                 <option value="masculino">Masculino</option>
@@ -181,7 +199,7 @@
                                 <i class="bi bi-calendar-check me-1"></i>Vencimiento
                             </span>
                             <input type="date" name="fecha_vencimiento" id="m_fecha_vencimiento"
-                                   class="form-control">
+                                class="form-control">
                         </div>
 
                         <!-- Notas -->
@@ -190,29 +208,30 @@
                                 <i class="bi bi-sticky me-1"></i>Notas
                             </span>
                             <textarea name="notas" id="m_notas"
-                                      class="form-control" rows="2"
-                                      placeholder="Observaciones..."></textarea>
+                                class="form-control" rows="2"
+                                placeholder="Observaciones..."></textarea>
                         </div>
 
                     </div><!-- /gap-2 -->
                 </div><!-- /modal-body -->
 
                 <div class="modal-footer py-2 justify-content-between">
-                    <form id="formBaja" method="post" action="" class="m-0">
-                        <?= csrf_field() ?>
-                        <button type="submit"
-                                class="btn btn-sm btn-outline-danger"
-                                onclick="return confirm('¿Dar de baja a este cliente? Esta acción lo desactivará del sistema.')">
-                            <i class="bi bi-person-x me-1"></i> Dar de baja
-                        </button>
-                    </form>
 
                     <div class="d-flex gap-2">
                         <button type="button" class="btn btn-sm btn-outline-secondary"
-                                data-bs-dismiss="modal">Cancelar</button>
+                            data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-sm btn-primary">
-                            <i class="bi bi-save me-1"></i> Guardar cambios
+                            <i class="bi bi-save me-1"></i> Guardar
                         </button>
+
+                        <form id="formBaja" method="post" action="" class="m-0">
+                            <?= csrf_field() ?>
+                            <button type="submit"
+                                class="btn btn-sm btn-outline-danger"
+                                onclick="return confirm('¿Dar de baja a este cliente? Esta acción lo desactivará del sistema.')">
+                                <i class="bi bi-person-x me-1"></i> Baja
+                            </button>
+                        </form>
                     </div>
                 </div>
 
@@ -225,53 +244,53 @@
 
 <?= $this->section('scripts') ?>
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
 
-    const fichaModal = document.getElementById('fichaModal');
+        const fichaModal = document.getElementById('fichaModal');
 
-    fichaModal.addEventListener('show.bs.modal', function (event) {
-        const trigger = event.relatedTarget;
-        const c       = JSON.parse(trigger.getAttribute('data-cliente'));
+        fichaModal.addEventListener('show.bs.modal', function(event) {
+            const trigger = event.relatedTarget;
+            const c = JSON.parse(trigger.getAttribute('data-cliente'));
 
-        document.getElementById('fichaModalLabel').innerHTML =
-            '<i class="bi bi-person-vcard me-2"></i>' +
-            escHtml(c.nombre) + ' ' + escHtml(c.apellidos);
+            document.getElementById('fichaModalLabel').innerHTML =
+                '<i class="bi bi-person-vcard me-2"></i>' +
+                escHtml(c.nombre) + ' ' + escHtml(c.apellidos);
 
-        document.getElementById('m_nombre').value            = c.nombre            ?? '';
-        document.getElementById('m_apellidos').value         = c.apellidos         ?? '';
-        document.getElementById('m_correo').value            = c.correo            ?? '';
-        document.getElementById('m_telefono').value          = c.telefono          ?? '';
-        document.getElementById('m_fecha_nacimiento').value  = c.fecha_nacimiento  ?? '';
-        document.getElementById('m_fecha_vencimiento').value = c.fecha_vencimiento ?? '';
-        document.getElementById('m_notas').value             = c.notas             ?? '';
+            document.getElementById('m_nombre').value = c.nombre ?? '';
+            document.getElementById('m_apellidos').value = c.apellidos ?? '';
+            document.getElementById('m_correo').value = c.correo ?? '';
+            document.getElementById('m_telefono').value = c.telefono ?? '';
+            document.getElementById('m_fecha_nacimiento').value = c.fecha_nacimiento ?? '';
+            document.getElementById('m_fecha_vencimiento').value = c.fecha_vencimiento ?? '';
+            document.getElementById('m_notas').value = c.notas ?? '';
 
-        setSelect('m_genero',  c.genero);
-        setSelect('m_nivel',   c.nivel);
-        setSelect('m_plan_id', c.plan_id);
+            setSelect('m_genero', c.genero);
+            setSelect('m_nivel', c.nivel);
+            setSelect('m_plan_id', c.plan_id);
 
-        document.getElementById('formFicha').action =
-            '<?= base_url('clientes/actualizar') ?>/' + c.id;
+            document.getElementById('formFicha').action =
+                '<?= base_url('clientes/actualizar') ?>/' + c.id;
 
-        document.getElementById('formBaja').action =
-            '<?= base_url('clientes/desactivar') ?>/' + c.id;
-    });
+            document.getElementById('formBaja').action =
+                '<?= base_url('clientes/desactivar') ?>/' + c.id;
+        });
 
-    function setSelect(id, value) {
-        const el = document.getElementById(id);
-        if (!el) return;
-        for (const opt of el.options) {
-            opt.selected = (String(opt.value) === String(value ?? ''));
+        function setSelect(id, value) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            for (const opt of el.options) {
+                opt.selected = (String(opt.value) === String(value ?? ''));
+            }
         }
-    }
 
-    function escHtml(str) {
-        return String(str ?? '')
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;');
-    }
-});
+        function escHtml(str) {
+            return String(str ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+    });
 </script>
 <?= $this->endSection() ?>
 
