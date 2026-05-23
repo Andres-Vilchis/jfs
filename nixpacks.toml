@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 [phases.setup]
 nixPkgs = [
   "php82",
@@ -6,32 +5,5 @@ nixPkgs = [
   "php82Extensions.mbstring",
   "php82Extensions.zip",
   "php82Extensions.pdo_mysql",
-  "composer"
+  "php82Packages.composer"
 ]
-
-[phases.install]
-cmds = [
-  "composer install --no-dev --optimize-autoloader"
-]
-
-[start]
-cmd = "php spark serve --host 0.0.0.0 --port $PORT"
-=======
-[phases.setup]
-nixPkgs = [
-  "php82",
-  "php82Extensions.intl",
-  "php82Extensions.mbstring",
-  "php82Extensions.zip",
-  "php82Extensions.pdo_mysql",
-  "composer"
-]
-
-[phases.install]
-cmds = [
-  "composer install --no-dev --optimize-autoloader"
-]
-
-[start]
-cmd = "php spark serve --host 0.0.0.0 --port $PORT"
->>>>>>> a3e5522a93c29596c9a3b92f2b5cd487340202d7
