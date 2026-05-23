@@ -3,8 +3,8 @@
 
 <?php
 /**
- * @var list<array{id: int, nombre: string, apellidos: string, correo: string|null, telefono: string|null, plan_nombre: string|null, nivel: string, fecha_vencimiento: string|null}> $clientes
- * @var string $fecha_formateada
+ * @var array $clientes
+ * @var array $planes
  */
 ?>
 
@@ -16,11 +16,14 @@
 </div>
 
 <?php if (session()->getFlashdata('success')): ?>
-    <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
+    <div class="alert alert-success alert-dismissible py-2">
+        <?= session()->getFlashdata('success') ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
 <?php endif; ?>
 <?php if (session()->getFlashdata('errors')): ?>
-    <div class="alert alert-danger">
-        <ul class="mb-0">
+    <div class="alert alert-danger py-2">
+        <ul class="mb-0 small">
             <?php foreach (session()->getFlashdata('errors') as $e): ?>
                 <li><?= esc($e) ?></li>
             <?php endforeach; ?>
@@ -47,27 +50,20 @@
                     <?php else: ?>
                         <?php foreach ($clientes as $c): ?>
                             <?php
-                            $hoy  = new DateTime();
-                            $venc = new DateTime($c['fecha_vencimiento'] ?? 'now');
-                            $diff = (int) $hoy->diff($venc)->format('%r%a');
-                            if ($diff < 0) {
-                                $badgeClass = 'text-danger-emphasis';
-                                $badgeText = 'Vencido';
-                            } elseif ($diff <= 7) {
-                                $badgeClass = 'text-warning-emphasis';
-                                $badgeText = "Vence en {$diff}d";
-                            } else {
-                                $badgeClass = 'text-success-emphasis';
-                                $badgeText = date('d/m/Y', strtotime($c['fecha_vencimiento']));
-                            }
+                                $hoy  = new DateTime();
+                                $venc = new DateTime($c['fecha_vencimiento'] ?? 'now');
+                                $diff = (int) $hoy->diff($venc)->format('%r%a');
+                                if ($diff < 0)      { $badgeClass = 'text-danger-emphasis';  $badgeText = 'Vencido'; }
+                                elseif ($diff <= 7) { $badgeClass = 'text-warning-emphasis'; $badgeText = "Vence en {$diff}d"; }
+                                else                { $badgeClass = 'text-success-emphasis'; $badgeText = date('d/m/Y', strtotime($c['fecha_vencimiento'])); }
                             ?>
                             <tr>
                                 <td>
                                     <a href="#"
-                                        class="fw-semibold text-decoration-none link-info abrir-ficha"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#fichaModal"
-                                        data-cliente='<?= esc(json_encode($c), 'attr') ?>'>
+                                       class="fw-semibold text-decoration-none link-info abrir-ficha"
+                                       data-bs-toggle="modal"
+                                       data-bs-target="#fichaModal"
+                                       data-cliente='<?= esc(json_encode($c), 'attr') ?>'>
                                         <?= esc($c['nombre'] . ' ' . $c['apellidos']) ?>
                                     </a>
                                     <?php if ($c['correo']): ?>
@@ -90,64 +86,86 @@
 </div>
 
 
-<!-- ── Modal Ficha del Cliente ────────────────────────────────────── -->
+<!-- ── Modal Ficha del Cliente ─────────────────────────────────── -->
 <div class="modal fade" id="fichaModal" tabindex="-1" aria-labelledby="fichaModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
 
-            <div class="modal-header">
-                <h6 class="modal-title fw-semibold" id="fichaModalLabel">
+            <div class="modal-header py-2">
+                <h6 class="modal-title" id="fichaModalLabel">
                     <i class="bi bi-person-vcard me-2"></i>Ficha del cliente
                 </h6>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                <button type="button" class="btn-close btn-sm" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
 
-            <!-- Formulario de edición -->
             <form id="formFicha" method="post" action="">
                 <?= csrf_field() ?>
 
-                <div class="modal-body">
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label form-label-sm">Nombre *</label>
-                            <input type="text" name="nombre" id="m_nombre" class="form-control form-control-sm" required>
+                <div class="modal-body py-3">
+                    <div class="d-flex flex-column gap-2">
+
+                        <!-- Nombre + Apellidos -->
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text" style="min-width:110px">Nombre</span>
+                            <input type="text" name="nombre" id="m_nombre"
+                                   class="form-control" placeholder="Nombre" required>
+                            <span class="input-group-text">Apellidos</span>
+                            <input type="text" name="apellidos" id="m_apellidos"
+                                   class="form-control" placeholder="Apellidos" required>
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label form-label-sm">Apellidos *</label>
-                            <input type="text" name="apellidos" id="m_apellidos" class="form-control form-control-sm" required>
+
+                        <!-- Correo -->
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text" style="min-width:110px">
+                                <i class="bi bi-envelope me-1"></i>Correo
+                            </span>
+                            <input type="email" name="correo" id="m_correo"
+                                   class="form-control" placeholder="correo@ejemplo.com">
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label form-label-sm">Correo</label>
-                            <input type="email" name="correo" id="m_correo" class="form-control form-control-sm">
+
+                        <!-- Teléfono -->
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text" style="min-width:110px">
+                                <i class="bi bi-phone me-1"></i>Teléfono
+                            </span>
+                            <input type="text" name="telefono" id="m_telefono"
+                                   class="form-control" placeholder="10 dígitos">
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label form-label-sm">Teléfono</label>
-                            <input type="text" name="telefono" id="m_telefono" class="form-control form-control-sm">
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label form-label-sm">Fecha de nacimiento</label>
-                            <input type="date" name="fecha_nacimiento" id="m_fecha_nacimiento" class="form-control form-control-sm">
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label form-label-sm">Género</label>
-                            <select name="genero" id="m_genero" class="form-select form-select-sm">
-                                <option value="">— Selecciona —</option>
+
+                        <!-- Fecha nacimiento + Género -->
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text" style="min-width:110px">
+                                <i class="bi bi-calendar3 me-1"></i>Nacimiento
+                            </span>
+                            <input type="date" name="fecha_nacimiento" id="m_fecha_nacimiento"
+                                   class="form-control">
+                            <span class="input-group-text">Género</span>
+                            <select name="genero" id="m_genero" class="form-select">
+                                <option value="">— —</option>
                                 <option value="masculino">Masculino</option>
                                 <option value="femenino">Femenino</option>
                                 <option value="otro">Otro</option>
                             </select>
                         </div>
-                        <div class="col-md-4">
-                            <label class="form-label form-label-sm">Nivel *</label>
-                            <select name="nivel" id="m_nivel" class="form-select form-select-sm">
+
+                        <!-- Nivel -->
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text" style="min-width:110px">
+                                <i class="bi bi-bar-chart me-1"></i>Nivel
+                            </span>
+                            <select name="nivel" id="m_nivel" class="form-select">
                                 <option value="principiante">Principiante</option>
                                 <option value="intermedio">Intermedio</option>
                                 <option value="avanzado">Avanzado</option>
                             </select>
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label form-label-sm">Plan</label>
-                            <select name="plan_id" id="m_plan_id" class="form-select form-select-sm">
+
+                        <!-- Plan -->
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text" style="min-width:110px">
+                                <i class="bi bi-credit-card me-1"></i>Plan
+                            </span>
+                            <select name="plan_id" id="m_plan_id" class="form-select">
                                 <option value="">— Sin plan —</option>
                                 <?php foreach ($planes as $p): ?>
                                     <option value="<?= $p['id'] ?>">
@@ -156,32 +174,42 @@
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label form-label-sm">Fecha de vencimiento</label>
-                            <input type="date" name="fecha_vencimiento" id="m_fecha_vencimiento" class="form-control form-control-sm">
-                        </div>
-                        <div class="col-12">
-                            <label class="form-label form-label-sm">Notas</label>
-                            <textarea name="notas" id="m_notas" class="form-control form-control-sm" rows="2"></textarea>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="modal-footer justify-content-between">
-                    <!-- Baja del cliente -->
+                        <!-- Vencimiento -->
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text" style="min-width:110px">
+                                <i class="bi bi-calendar-check me-1"></i>Vencimiento
+                            </span>
+                            <input type="date" name="fecha_vencimiento" id="m_fecha_vencimiento"
+                                   class="form-control">
+                        </div>
+
+                        <!-- Notas -->
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text" style="min-width:110px">
+                                <i class="bi bi-sticky me-1"></i>Notas
+                            </span>
+                            <textarea name="notas" id="m_notas"
+                                      class="form-control" rows="2"
+                                      placeholder="Observaciones..."></textarea>
+                        </div>
+
+                    </div><!-- /gap-2 -->
+                </div><!-- /modal-body -->
+
+                <div class="modal-footer py-2 justify-content-between">
                     <form id="formBaja" method="post" action="" class="m-0">
                         <?= csrf_field() ?>
                         <button type="submit"
-                            class="btn btn-sm btn-outline-danger"
-                            onclick="return confirm('¿Dar de baja a este cliente?')">
+                                class="btn btn-sm btn-outline-danger"
+                                onclick="return confirm('¿Dar de baja a este cliente? Esta acción lo desactivará del sistema.')">
                             <i class="bi bi-person-x me-1"></i> Dar de baja
                         </button>
                     </form>
 
                     <div class="d-flex gap-2">
-                        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">
-                            Cancelar
-                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary"
+                                data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-sm btn-primary">
                             <i class="bi bi-save me-1"></i> Guardar cambios
                         </button>
@@ -197,49 +225,53 @@
 
 <?= $this->section('scripts') ?>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
 
-        const fichaModal = document.getElementById('fichaModal');
+    const fichaModal = document.getElementById('fichaModal');
 
-        fichaModal.addEventListener('show.bs.modal', function(event) {
-            const trigger = event.relatedTarget;
-            const cliente = JSON.parse(trigger.getAttribute('data-cliente'));
+    fichaModal.addEventListener('show.bs.modal', function (event) {
+        const trigger = event.relatedTarget;
+        const c       = JSON.parse(trigger.getAttribute('data-cliente'));
 
-            // Título
-            document.getElementById('fichaModalLabel').innerHTML =
-                '<i class="bi bi-person-vcard me-2"></i>' +
-                cliente.nombre + ' ' + cliente.apellidos;
+        document.getElementById('fichaModalLabel').innerHTML =
+            '<i class="bi bi-person-vcard me-2"></i>' +
+            escHtml(c.nombre) + ' ' + escHtml(c.apellidos);
 
-            // Campos editables
-            document.getElementById('m_nombre').value = cliente.nombre ?? '';
-            document.getElementById('m_apellidos').value = cliente.apellidos ?? '';
-            document.getElementById('m_correo').value = cliente.correo ?? '';
-            document.getElementById('m_telefono').value = cliente.telefono ?? '';
-            document.getElementById('m_fecha_nacimiento').value = cliente.fecha_nacimiento ?? '';
-            document.getElementById('m_fecha_vencimiento').value = cliente.fecha_vencimiento ?? '';
-            document.getElementById('m_notas').value = cliente.notas ?? '';
+        document.getElementById('m_nombre').value            = c.nombre            ?? '';
+        document.getElementById('m_apellidos').value         = c.apellidos         ?? '';
+        document.getElementById('m_correo').value            = c.correo            ?? '';
+        document.getElementById('m_telefono').value          = c.telefono          ?? '';
+        document.getElementById('m_fecha_nacimiento').value  = c.fecha_nacimiento  ?? '';
+        document.getElementById('m_fecha_vencimiento').value = c.fecha_vencimiento ?? '';
+        document.getElementById('m_notas').value             = c.notas             ?? '';
 
-            // Selects
-            setSelect('m_genero', cliente.genero);
-            setSelect('m_nivel', cliente.nivel);
-            setSelect('m_plan_id', cliente.plan_id);
+        setSelect('m_genero',  c.genero);
+        setSelect('m_nivel',   c.nivel);
+        setSelect('m_plan_id', c.plan_id);
 
-            // Acciones de formularios
-            document.getElementById('formFicha').action =
-                '<?= base_url('clientes/actualizar') ?>/' + cliente.id;
+        document.getElementById('formFicha').action =
+            '<?= base_url('clientes/actualizar') ?>/' + c.id;
 
-            document.getElementById('formBaja').action =
-                '<?= base_url('clientes/desactivar') ?>/' + cliente.id;
-        });
-
-        function setSelect(id, value) {
-            const el = document.getElementById(id);
-            if (!el || value === null || value === undefined) return;
-            for (let opt of el.options) {
-                opt.selected = (opt.value == value);
-            }
-        }
+        document.getElementById('formBaja').action =
+            '<?= base_url('clientes/desactivar') ?>/' + c.id;
     });
+
+    function setSelect(id, value) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        for (const opt of el.options) {
+            opt.selected = (String(opt.value) === String(value ?? ''));
+        }
+    }
+
+    function escHtml(str) {
+        return String(str ?? '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+    }
+});
 </script>
 <?= $this->endSection() ?>
 
