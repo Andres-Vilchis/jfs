@@ -3,9 +3,8 @@
 
 <?php
 /**
- * @var array $clientes
+ * @var list<array{id: int, nombre: string, apellidos: string, correo: string|null, telefono: string|null, plan_nombre: string|null, nivel: string, fecha_vencimiento: string|null}> $clientes
  * @var string $fecha_formateada
- * @var mixed 
  */
 ?>
 

@@ -3,7 +3,7 @@
 
 <?php
 /**
- * @var array|null $plan
+ * @var array{id: int, nombre: string, descripcion: string|null, precio: float|string, duracion_dias: int, beneficios: string|null}|null $plan
  */
 $editando = isset($plan);
 ?>

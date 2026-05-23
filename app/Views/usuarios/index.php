@@ -3,7 +3,7 @@
 
 <?php
 /**
- * @var array $usuarios
+ * @var list<\CodeIgniter\Shield\Entities\User> $usuarios
  * @var string $fecha_formateada
  */
 $badgeRol = [

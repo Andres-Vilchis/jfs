@@ -3,8 +3,8 @@
 
 <?php
 /**
- * @var array|null $clase
- * @var array      $trainers
+ * @var array{id: int, nombre: string, descripcion: string|null, trainer_id: int|null, nivel: string, capacidad_max: int|string, hora_inicio: string, hora_fin: string, dias_semana: string, salon: string|null}|null $clase
+ * @var list<array{id: int, nombre: string, apellidos: string}> $trainers
  */
 $editando  = isset($clase);
 $diasGuardados = $editando ? explode(',', $clase['dias_semana']) : [];

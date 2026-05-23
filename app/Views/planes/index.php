@@ -3,7 +3,7 @@
 
 <?php
 /**
- * @var array $planes
+ * @var list<array{id: int, nombre: string, descripcion: string|null, precio: float|string, duracion_dias: int, beneficios: string|null, activo: int}> $planes
  * @var string $fecha_formateada
  */
 ?>

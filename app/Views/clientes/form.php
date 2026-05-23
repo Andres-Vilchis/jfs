@@ -3,8 +3,8 @@
 
 <?php
 /**
- * @var array       $planes
- * @var array|null  $cliente
+ * @var list<array{id: int, nombre: string, descripcion: string|null, precio: float|string, duracion_dias: int}> $planes
+ * @var array{id: int, nombre: string, apellidos: string, correo: string|null, telefono: string|null, fecha_nacimiento: string|null, genero: string|null, plan_id: int|null, fecha_vencimiento: string|null, nivel: string, notas: string|null}|null $cliente
  */
 $editando = isset($cliente);
 ?>

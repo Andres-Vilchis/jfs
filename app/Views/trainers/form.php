@@ -3,7 +3,7 @@
 
 <?php
 /**
- * @var array|null $trainer
+ * @var array{id: int, nombre: string, apellidos: string, correo: string|null, telefono: string|null, nivel: string, especialidad: string|null}|null $trainer
  */
 $editando = isset($trainer);
 ?>

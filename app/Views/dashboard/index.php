@@ -8,11 +8,10 @@
  * @var int    $totalTrainers
  * @var int    $totalClases
  * @var int    $totalPlanes
- * @var array  $proximosVencer
+ * @var list<array{nombre: string, apellidos: string, correo: string|null, plan_nombre: string|null, fecha_vencimiento: string}> $proximosVencer
  * @var int    $vencidos
- * @var array  $ultimosClientes
- * @var array  $clasesHoy
- * @var mixed  $cl
+ * @var list<array{nombre: string, apellidos: string, correo: string|null, plan_nombre: string|null, nivel: string, fecha_vencimiento: string|null}> $ultimosClientes
+ * @var list<array{nombre: string, trainer_nombre: string|null, hora_inicio: string, hora_fin: string, nivel: string}> $clasesHoy
  */
 ?>
 

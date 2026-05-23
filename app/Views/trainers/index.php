@@ -3,7 +3,7 @@
 
 <?php
 /**
- * @var array $trainers
+ * @var list<array{id: int, nombre: string, apellidos: string, correo: string|null, telefono: string|null, especialidad: string|null, nivel: string, activo: int, total_clases: int|string}> $trainers
  * @var string $fecha_formateada
  */
 ?>
