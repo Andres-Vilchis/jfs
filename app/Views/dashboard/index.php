@@ -175,7 +175,7 @@
                 <div class="card-header border-0 pt-3 pb-2 px-4 bg-warning bg-opacity-10">
                     <h6 class="small mb-0 text-warning-emphasis">
                         <i class="bi bi-exclamation-triangle-fill me-1"></i>
-                        Membresías próximas a vencer (7 días)
+                        Membresías a vencer <small>(próx. 7 días)</small>
                     </h6>
                 </div>
                 <div class="card-body px-0 py-0">
@@ -219,7 +219,6 @@
             </div>
         </div>
     <?php endif; ?>
-
 </div>
 
 <?= $this->endSection() ?>
