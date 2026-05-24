@@ -37,7 +37,7 @@
             <table class="table table-hover table-striped table-sm mb-0">
                 <thead>
                     <tr>
-                        <th style="max-width:140px !important">Cliente</th>
+                        <th>Cliente</th>
                         <th class="text-center">Plan</th>
                         <th class="text-center">Vencimiento</th>
                     </tr>
@@ -65,27 +65,55 @@
                             }
                             ?>
                             <tr>
-                                <td>
+                                <td style="width:1%; white-space:nowrap;">
+
                                     <a href="#"
-                                        class="fw-semibold text-decoration-none link-info abrir-ficha small text-nowrap"
+                                        class="fw-semibold text-decoration-none link-info abrir-ficha small"
                                         data-bs-toggle="modal"
                                         data-bs-target="#fichaModal"
                                         data-cliente='<?= esc(json_encode($c), 'attr') ?>'>
+
                                         <?= esc($c['nombre'] . ' ' . $c['apellidos']) ?>
+
                                     </a>
+
                                     <?php if ($c['telefono']): ?>
-                                        <span style="max-width:140px !important" class="badge d-flex align-items-center p-1 pe-2 text-dark-emphasis bg-light-subtle border border-dark-subtle rounded-pill">
-                                            <a href="tel:<?= esc($c['telefono']) ?>" class="text-decoration-none text-center text-muted me-1">
-                                                <i class="bi bi-telephone-outbound-fill me-1"></i>
-                                            </a>
-                                            <span class="vr mx-2"></span>
-                                            <a href="https://wa.me/+52<?= esc($c['telefono']) ?>" class="text-decoration-none text-center text-muted me-1"><i class="bi bi-whatsapp me-1"></i>
-                                            </a>
-                                            <span class="vr mx-2"></span>
-                                            <a mailto="<?= esc($c['correo']) ?>" class="text-decoration-none text-center text-muted me-1"><i class="bi bi-envelope-fill me-1"></i>
-                                            </a>
-                                        </span>
+
+                                        <div class="mt-1">
+
+                                            <span class="badge text-dark-emphasis bg-light-subtle border border-dark-subtle rounded-pill px-2 py-1">
+
+                                                <a href="tel:<?= esc($c['telefono']) ?>"
+                                                    class="text-decoration-none text-muted">
+
+                                                    <i class="bi bi-telephone-outbound-fill"></i>
+
+                                                </a>
+
+                                                <span class="mx-1">|</span>
+
+                                                <a href="https://wa.me/+52<?= esc($c['telefono']) ?>"
+                                                    class="text-decoration-none text-muted">
+
+                                                    <i class="bi bi-whatsapp"></i>
+
+                                                </a>
+
+                                                <span class="mx-1">|</span>
+
+                                                <a href="mailto:<?= esc($c['correo']) ?>"
+                                                    class="text-decoration-none text-muted">
+
+                                                    <i class="bi bi-envelope-fill"></i>
+
+                                                </a>
+
+                                            </span>
+
+                                        </div>
+
                                     <?php endif; ?>
+
                                 </td>
                                 <td class="text-center align-middle small text-muted">
                                     <?= esc($c['plan_nombre'] ?? '—') ?>
