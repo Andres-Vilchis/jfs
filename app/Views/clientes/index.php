@@ -8,33 +8,23 @@
 ?>
 
 <!-- ── Toast de contacto ──────────────────────────────────────── -->
-<div class="toast-container"
-     style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); z-index:1200;">
-    <div id="contactoToast"
-         class="toast align-items-center border shadow-lg"
-         role="alert" aria-live="assertive" aria-atomic="true"
-         data-bs-autohide="false"
-         style="opacity:1 !important; min-width:260px;
-                background:var(--bs-body-bg, #1a1a2e);">
+<div class="toast-container" style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); z-index:1200;">
+    <div id="contactoToast" class="toast align-items-center border shadow-lg" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false" style="opacity:1 !important; min-width:260px; background:var(--bs-body-bg, #1a1a2e);">
         <div class="toast-header border-bottom">
             <i class="bi bi-person-lines-fill me-2 text-primary"></i>
             <strong class="me-auto" id="toast-nombre">—</strong>
-            <button type="button" class="btn-close btn-sm"
-                    data-bs-dismiss="toast" aria-label="Cerrar"></button>
+            <button type="button" class="btn-close btn-sm" data-bs-dismiss="toast" aria-label="Cerrar"></button>
         </div>
         <div class="toast-body d-flex flex-column gap-2 py-3">
-            <a id="toast-tel" href="#"
-               class="btn btn-sm btn-outline-success w-100 text-start">
+            <a id="toast-tel" href="#" class="btn btn-sm btn-outline-success w-100 text-start">
                 <i class="bi bi-telephone-outbound-fill me-2"></i>
                 <span id="toast-tel-txt">—</span>
             </a>
-            <a id="toast-wa" href="#" target="_blank"
-               class="btn btn-sm btn-outline-success w-100 text-start">
+            <a id="toast-wa" href="#" target="_blank" class="btn btn-sm btn-outline-success w-100 text-start">
                 <i class="bi bi-whatsapp me-2"></i>
                 <span id="toast-wa-txt">—</span>
             </a>
-            <a id="toast-email" href="#"
-               class="btn btn-sm btn-outline-primary w-100 text-start">
+            <a id="toast-email" href="#" class="btn btn-sm btn-outline-primary w-100 text-start">
                 <i class="bi bi-envelope-fill me-2"></i>
                 <span id="toast-email-txt">—</span>
             </a>
@@ -153,34 +143,29 @@
                     <div class="d-flex flex-column gap-2">
                         <div class="input-group input-group-sm">
                             <span class="input-group-text" style="min-width:110px">Nombre</span>
-                            <input type="text" name="nombre" id="m_nombre"
-                                class="form-control" placeholder="Nombre" required>
+                            <input type="text" name="nombre" id="m_nombre" class="form-control" placeholder="Nombre" required>
                         </div>
                         <div class="input-group input-group-sm">
                             <span class="input-group-text" style="min-width:110px">Apellidos</span>
-                            <input type="text" name="apellidos" id="m_apellidos"
-                                class="form-control" placeholder="Apellidos" required>
+                            <input type="text" name="apellidos" id="m_apellidos" class="form-control" placeholder="Apellidos" required>
                         </div>
                         <div class="input-group input-group-sm">
                             <span class="input-group-text" style="min-width:110px">
                                 <i class="bi bi-envelope me-1"></i>Correo
                             </span>
-                            <input type="email" name="correo" id="m_correo"
-                                class="form-control" placeholder="correo@ejemplo.com">
+                            <input type="email" name="correo" id="m_correo" class="form-control" placeholder="correo@ejemplo.com">
                         </div>
                         <div class="input-group input-group-sm">
                             <span class="input-group-text" style="min-width:110px">
                                 <i class="bi bi-phone me-1"></i>Teléfono
                             </span>
-                            <input type="text" name="telefono" id="m_telefono"
-                                class="form-control" placeholder="10 dígitos">
+                            <input type="text" name="telefono" id="m_telefono" class="form-control" placeholder="10 dígitos">
                         </div>
                         <div class="input-group input-group-sm">
                             <span class="input-group-text" style="min-width:110px">
                                 <i class="bi bi-calendar3 me-1"></i>Nacimiento
                             </span>
-                            <input type="date" name="fecha_nacimiento" id="m_fecha_nacimiento"
-                                class="form-control">
+                            <input type="date" name="fecha_nacimiento" id="m_fecha_nacimiento" class="form-control">
                         </div>
                         <div class="input-group input-group-sm">
                             <span class="input-group-text" style="min-width:110px">Género</span>
