@@ -73,8 +73,8 @@
                                         data-cliente='<?= esc(json_encode($c), 'attr') ?>'>
                                         <?= esc($c['nombre'] . ' ' . $c['apellidos']) ?>
                                     </a>
-                                    <?php if ($c['correo']): ?>
-                                        <div class="text-muted small"><?= esc($c['correo']) ?></div>
+                                    <?php if ($c['telefono']): ?>
+                                        <div class="text-muted small"><?= esc($c['telefono']) ?></div>
                                     <?php endif; ?>
                                 </td>
                                 <td class="text-center align-middle small text-muted">
