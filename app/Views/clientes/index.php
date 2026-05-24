@@ -74,7 +74,7 @@
                                         <?= esc($c['nombre'] . ' ' . $c['apellidos']) ?>
                                     </a>
                                     <?php if ($c['telefono']): ?>
-                                        <span style="max-width:140px !important" class="badge d-flex align-items-center p-1 pe-2 text-dark-emphasis bg-secondary-subtle border border-dark-subtle rounded-pill"> <i class="bi bi-telephone-outbound-fill"></i>
+                                        <span style="max-width:140px !important" class="badge d-flex align-items-center p-1 pe-2 text-dark-emphasis bg-light-subtle border border-dark-subtle rounded-pill"> <i class="bi bi-telephone-outbound-fill"></i>
                                             <span class="vr mx-2"></span> <a href="tel:<?= esc($c['telefono']) ?>" class="text-decoration-none text-muted me-1">
                                                 <?= esc($c['telefono']) ?></a> </span>
                                     <?php endif; ?>
