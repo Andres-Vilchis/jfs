@@ -74,7 +74,7 @@
                                         <?= esc($c['nombre'] . ' ' . $c['apellidos']) ?>
                                     </a>
                                     <?php if ($c['telefono']): ?>
-                                        <div class="text-muted small"><a href="te:<?= esc($c['telefono']) ?>"><?= esc($c['telefono']) ?></a></div>
+                                        <div class="text-muted small"><a href="tel:<?= esc($c['telefono']) ?>"><?= esc($c['telefono']) ?></a></div>
                                     <?php endif; ?>
                                 </td>
                                 <td class="text-center align-middle small text-muted">
