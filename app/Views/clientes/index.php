@@ -82,30 +82,21 @@
                                         <div class="mt-1">
 
                                             <span class="badge text-dark-emphasis bg-light-subtle border border-dark-subtle rounded-pill px-2 py-1">
-
                                                 <a href="tel:<?= esc($c['telefono']) ?>"
                                                     class="text-decoration-none text-muted">
-
-                                                    <i class="bi bi-telephone-outbound-fill"></i>
-
+                                                    <i class="bi bi-telephone-outbound-fill me-1"></i>
                                                 </a>
 
                                                 <span class="mx-1">|</span>
-
                                                 <a href="https://wa.me/+52<?= esc($c['telefono']) ?>"
                                                     class="text-decoration-none text-muted">
-
-                                                    <i class="bi bi-whatsapp"></i>
-
+                                                    <i class="bi bi-whatsapp me-1"></i>
                                                 </a>
 
                                                 <span class="mx-1">|</span>
-
                                                 <a href="mailto:<?= esc($c['correo']) ?>"
                                                     class="text-decoration-none text-muted">
-
-                                                    <i class="bi bi-envelope-fill"></i>
-
+                                                    <i class="bi bi-envelope-fill me-1"></i>
                                                 </a>
 
                                             </span>
