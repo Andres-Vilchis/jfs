@@ -103,7 +103,7 @@
                                     <div class="d-flex align-items-center gap-1">
                                         <!-- Tres puntos → Toast contacto -->
                                         <button type="button"
-                                            class="btn btn-link btn-sm p-0 lh-1 text-secondary border-0"
+                                            class="btn btn-link btn-sm p-0 lh-1 text-info border-0"
                                             title="Contacto"
                                             onclick="abrirContacto(
                                                 '<?= esc(addslashes($c['nombre'] . ' ' . $c['apellidos']), 'js') ?>',
@@ -114,7 +114,7 @@
                                         </button>
                                         <!-- Nombre → abre Modal ficha -->
                                         <a href="#"
-                                            class="text-decoration-none link-primary abrir-ficha small"
+                                            class="text-decoration-none link-body-emphasis abrir-ficha small"
                                             data-bs-toggle="modal"
                                             data-bs-target="#fichaModal"
                                             data-cliente='<?= esc(json_encode($c), 'attr') ?>'>
