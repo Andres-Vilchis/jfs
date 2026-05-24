@@ -75,8 +75,8 @@
                                     </a>
                                     <?php if ($c['telefono']): ?>
                                         <span class="badge d-flex align-items-center p-1 pe-2 text-dark-emphasis bg-secondary-subtle border border-dark-subtle rounded-pill"> <i class="bi bi-telephone-outbound-fill"></i>
-<span class="vr mx-2"></span> <a href="#" class="text-dark me-1" aria-label="Delete primary">
-5536673044</a> </span> 
+                                            <span class="vr mx-2"></span> <a href="tel:<?= esc($c['telefono']) ?>" class="text-decoration-none text-muted me-1">
+                                                <?= esc($c['telefono']) ?></a> </span>
                                     <?php endif; ?>
                                 </td>
                                 <td class="text-center align-middle small text-muted">
@@ -218,10 +218,10 @@
 
                     <div class="d-flex gap-2">
                         <button type="submit" class="btn btn-sm btn-primary">
-                        <i class="bi bi-floppy-fill me-1"></i></i> Guardar
+                            <i class="bi bi-floppy-fill me-1"></i></i> Guardar
                         </button>
                         <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">
-                        <i class="bi bi-x-diamond-fill me-1"></i>Cancelar</button>
+                            <i class="bi bi-x-diamond-fill me-1"></i>Cancelar</button>
                     </div>
                     <form id="formBaja" method="post" action="" class="m-0">
                         <?= csrf_field() ?>
