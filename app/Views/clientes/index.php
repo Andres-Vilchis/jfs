@@ -212,35 +212,22 @@
                     </div><!-- /gap-2 -->
                 </div><!-- /modal-body -->
 
-
                 <div class="modal-footer py-2 justify-content-between">
+                    <form id="formBaja" method="post" action="" class="m-0">
+                        <?= csrf_field() ?>
+                        <button type="submit"
+                            class="btn btn-sm btn-outline-danger"
+                            onclick="return confirm('¿Dar de baja a este cliente? Esta acción lo desactivará del sistema.')">
+                            <i class="bi bi-person-x me-1"></i> Eliminar
+                        </button>
+                    </form>
 
-                    <div class="container-fluid gap-2">
-
-                        <div class="row">
-                            <div class="d-grid col-sm-4 p-3 bg-primary text-white">
-                                <button type="button" class="btn btn-sm btn-outline-secondary"
-                                    data-bs-dismiss="modal">Cancelar</button>
-                            </div>
-
-                            <div class="d-grid col-sm-4 p-3 bg-dark text-white"><button type="submit" class="btn btn-sm btn-primary">
-                                    <i class="bi bi-save me-1"></i> Guardar
-                                </button></div>
-
-                            <div class="d-grid col-sm-4 p-3 bg-primary text-white">
-                                <form id="formBaja" method="post" action="" class="m-0">
-                                    <?= csrf_field() ?>
-                                    <button type="submit"
-                                        class="btn btn-sm btn-outline-danger"
-                                        onclick="return confirm('¿Dar de baja a este cliente? Esta acción lo desactivará del sistema.')">
-                                        <i class="bi bi-person-x me-1"></i> Baja
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-
-
-
+                    <div class="d-flex gap-2">
+                        <button type="button" class="btn btn-sm btn-outline-secondary"
+                            data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-sm btn-primary">
+                            <i class="bi bi-save me-1"></i> Guardar
+                        </button>
                     </div>
                 </div>
 
