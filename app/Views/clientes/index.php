@@ -81,6 +81,9 @@
                                             <span class="vr mx-2"></span>
                                             <a href="https://wa.me/+52<?= esc($c['telefono']) ?>" class="text-decoration-none text-muted me-1"><i class="bi bi-whatsapp me-1"></i>
                                             </a>
+                                            <span class="vr mx-2"></span>
+                                            <a mailto="<?= esc($c['correo']) ?>" class="text-decoration-none text-muted me-1"><i class="bi bi-envelope-fill me-1"></i>
+                                            </a>
                                         </span>
                                     <?php endif; ?>
                                 </td>
