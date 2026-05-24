@@ -67,7 +67,7 @@
                             <tr>
                                 <td>
                                     <a href="#"
-                                        class="fw-semibold text-decoration-none link-info abrir-ficha"
+                                        class="fw-semibold text-decoration-none link-info abrir-ficha small"
                                         data-bs-toggle="modal"
                                         data-bs-target="#fichaModal"
                                         data-cliente='<?= esc(json_encode($c), 'attr') ?>'>
