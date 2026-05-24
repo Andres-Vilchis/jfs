@@ -75,14 +75,14 @@
                                     </a>
                                     <?php if ($c['telefono']): ?>
                                         <span style="max-width:140px !important" class="badge d-flex align-items-center p-1 pe-2 text-dark-emphasis bg-light-subtle border border-dark-subtle rounded-pill">
-                                            <a href="tel:<?= esc($c['telefono']) ?>" class="text-decoration-none text-muted me-1">
+                                            <a href="tel:<?= esc($c['telefono']) ?>" class="text-decoration-none text-center text-muted me-1">
                                                 <i class="bi bi-telephone-outbound-fill me-1"></i>
                                             </a>
                                             <span class="vr mx-2"></span>
-                                            <a href="https://wa.me/+52<?= esc($c['telefono']) ?>" class="text-decoration-none text-muted me-1"><i class="bi bi-whatsapp me-1"></i>
+                                            <a href="https://wa.me/+52<?= esc($c['telefono']) ?>" class="text-decoration-none text-center text-muted me-1"><i class="bi bi-whatsapp me-1"></i>
                                             </a>
                                             <span class="vr mx-2"></span>
-                                            <a mailto="<?= esc($c['correo']) ?>" class="text-decoration-none text-muted me-1"><i class="bi bi-envelope-fill me-1"></i>
+                                            <a mailto="<?= esc($c['correo']) ?>" class="text-decoration-none text-center text-muted me-1"><i class="bi bi-envelope-fill me-1"></i>
                                             </a>
                                         </span>
                                     <?php endif; ?>
