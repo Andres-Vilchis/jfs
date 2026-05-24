@@ -34,10 +34,10 @@
 <div class="card">
     <div class="card-body px-0 py-0">
         <div class="table-responsive">
-            <table class="table table-hover table-striped mb-0">
+            <table class="table table-hover table-striped table-sm mb-0">
                 <thead>
                     <tr>
-                        <th>Cliente</th>
+                        <th style="max-width:140px !important">Cliente</th>
                         <th class="text-center">Plan</th>
                         <th class="text-center">Vencimiento</th>
                     </tr>
