@@ -3,13 +3,11 @@
 
 <?php
 /**
- * @var list<array{id: int, nombre: string, descripcion: string|null, precio: float|string, duracion_dias: int}> $planes
- * @var array{id: int, nombre: string, apellidos: string, correo: string|null, telefono: string|null, fecha_nacimiento: string|null, genero: string|null, plan_id: int|null, fecha_vencimiento: string|null, nivel: string, notas: string|null}|null $cliente
+ * @var array       $planes
+ * @var array|null  $cliente
  */
 $editando = isset($cliente);
 ?>
-
-<?php $editando = isset($cliente); ?>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h5 class="mb-0"><?= $editando ? 'Editar cliente' : 'Nuevo cliente' ?></h5>
@@ -37,102 +35,117 @@ $editando = isset($cliente);
         ?>
         <?= form_open($action) ?>
 
-        <div class="row g-3">
+        <div class="row g-2">
+
             <div class="col-md-6">
-                <label class="form-label">Nombre *</label>
-                <?= form_input([
-                    'name' => 'nombre',
-                    'class' => 'form-control',
-                    'value' => set_value('nombre', $cliente['nombre'] ?? '')
-                ]) ?>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="min-width:130px">Nombre *</span>
+                    <input type="text" name="nombre" class="form-control"
+                        placeholder="Nombre"
+                        value="<?= set_value('nombre', $cliente['nombre'] ?? '') ?>" required>
+                </div>
             </div>
+
             <div class="col-md-6">
-                <label class="form-label">Apellidos *</label>
-                <?= form_input([
-                    'name' => 'apellidos',
-                    'class' => 'form-control',
-                    'value' => set_value('apellidos', $cliente['apellidos'] ?? '')
-                ]) ?>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="min-width:130px">Apellidos *</span>
+                    <input type="text" name="apellidos" class="form-control"
+                        placeholder="Apellidos"
+                        value="<?= set_value('apellidos', $cliente['apellidos'] ?? '') ?>" required>
+                </div>
             </div>
+
             <div class="col-md-6">
-                <label class="form-label">Correo</label>
-                <?= form_input([
-                    'name' => 'correo',
-                    'type' => 'email',
-                    'class' => 'form-control',
-                    'value' => set_value('correo', $cliente['correo'] ?? '')
-                ]) ?>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="min-width:130px">Correo</span>
+                    <input type="email" name="correo" class="form-control"
+                        placeholder="correo@ejemplo.com"
+                        value="<?= set_value('correo', $cliente['correo'] ?? '') ?>">
+                </div>
             </div>
+
             <div class="col-md-6">
-                <label class="form-label">Teléfono</label>
-                <?= form_input([
-                    'name' => 'telefono',
-                    'class' => 'form-control',
-                    'value' => set_value('telefono', $cliente['telefono'] ?? '')
-                ]) ?>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="min-width:130px">Teléfono</span>
+                    <input type="text" name="telefono" class="form-control"
+                        placeholder="10 dígitos"
+                        value="<?= set_value('telefono', $cliente['telefono'] ?? '') ?>">
+                </div>
             </div>
+
             <div class="col-md-4">
-                <label class="form-label">Fecha de nacimiento</label>
-                <?= form_input([
-                    'name' => 'fecha_nacimiento',
-                    'type' => 'date',
-                    'class' => 'form-control',
-                    'value' => set_value('fecha_nacimiento', $cliente['fecha_nacimiento'] ?? '')
-                ]) ?>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="min-width:130px">Fecha nacimiento</span>
+                    <input type="date" name="fecha_nacimiento" class="form-control"
+                        value="<?= set_value('fecha_nacimiento', $cliente['fecha_nacimiento'] ?? '') ?>">
+                </div>
             </div>
+
             <div class="col-md-4">
-                <label class="form-label">Género</label>
-                <select name="genero" class="form-select">
-                    <option value="">— Selecciona —</option>
-                    <?php foreach (['masculino', 'femenino', 'otro'] as $g): ?>
-                        <option value="<?= $g ?>" <?= (($cliente['genero'] ?? '') === $g) ? 'selected' : '' ?>>
-                            <?= ucfirst($g) ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="min-width:130px">Género</span>
+                    <select name="genero" class="form-select form-select-sm">
+                        <option value="">— Selecciona —</option>
+                        <?php foreach (['masculino', 'femenino', 'otro'] as $g): ?>
+                            <option value="<?= $g ?>" <?= (($cliente['genero'] ?? '') === $g) ? 'selected' : '' ?>>
+                                <?= ucfirst($g) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
             </div>
+
             <div class="col-md-4">
-                <label class="form-label">Nivel *</label>
-                <select name="nivel" class="form-select">
-                    <?php foreach (['principiante', 'intermedio', 'avanzado'] as $n): ?>
-                        <option value="<?= $n ?>" <?= (($cliente['nivel'] ?? 'principiante') === $n) ? 'selected' : '' ?>>
-                            <?= ucfirst($n) ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="min-width:130px">Nivel *</span>
+                    <select name="nivel" class="form-select form-select-sm">
+                        <?php foreach (['principiante', 'intermedio', 'avanzado'] as $n): ?>
+                            <option value="<?= $n ?>" <?= (($cliente['nivel'] ?? 'principiante') === $n) ? 'selected' : '' ?>>
+                                <?= ucfirst($n) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
             </div>
+
             <div class="col-md-6">
-                <label class="form-label">Plan</label>
-                <select name="plan_id" class="form-select">
-                    <option value="">— Sin plan —</option>
-                    <?php foreach ($planes as $p): ?>
-                        <option value="<?= $p['id'] ?>"
-                            <?= (($cliente['plan_id'] ?? '') == $p['id']) ? 'selected' : '' ?>>
-                            <?= esc($p['nombre']) ?> — $<?= $p['precio'] ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="min-width:130px">Plan</span>
+                    <select name="plan_id" class="form-select form-select-sm">
+                        <option value="">— Sin plan —</option>
+                        <?php foreach ($planes as $p): ?>
+                            <option value="<?= $p['id'] ?>"
+                                <?= (($cliente['plan_id'] ?? '') == $p['id']) ? 'selected' : '' ?>>
+                                <?= esc($p['nombre']) ?> — $<?= $p['precio'] ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
             </div>
+
             <div class="col-md-6">
-                <label class="form-label">Fecha de vencimiento</label>
-                <?= form_input([
-                    'name' => 'fecha_vencimiento',
-                    'type' => 'date',
-                    'class' => 'form-control',
-                    'value' => set_value('fecha_vencimiento', $cliente['fecha_vencimiento'] ?? '')
-                ]) ?>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="min-width:130px">Vencimiento</span>
+                    <input type="date" name="fecha_vencimiento" class="form-control"
+                        value="<?= set_value('fecha_vencimiento', $cliente['fecha_vencimiento'] ?? '') ?>">
+                </div>
             </div>
+
             <div class="col-12">
-                <label class="form-label">Notas</label>
-                <textarea name="notas" class="form-control" rows="3"><?= esc($cliente['notas'] ?? '') ?></textarea>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="min-width:130px">Notas</span>
+                    <textarea name="notas" class="form-control" rows="3"
+                        placeholder="Observaciones..."><?= esc($cliente['notas'] ?? '') ?></textarea>
+                </div>
             </div>
+
         </div>
 
-        <div class="mt-4">
-            <button type="submit" class="btn btn-primary">
+        <div class="mt-3">
+            <button type="submit" class="btn btn-sm btn-primary">
                 <i class="bi bi-save me-1"></i> <?= $editando ? 'Actualizar' : 'Registrar' ?>
             </button>
-            <a href="<?= route_to('clientes.index') ?>" class="btn btn-outline-secondary ms-2">Cancelar</a>
+            <a href="<?= route_to('clientes.index') ?>" class="btn btn-sm btn-outline-secondary ms-2">Cancelar</a>
         </div>
 
         <?= form_close() ?>

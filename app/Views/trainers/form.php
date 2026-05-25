@@ -3,7 +3,7 @@
 
 <?php
 /**
- * @var array{id: int, nombre: string, apellidos: string, correo: string|null, telefono: string|null, nivel: string, especialidad: string|null}|null $trainer
+ * @var array|null $trainer
  */
 $editando = isset($trainer);
 ?>
@@ -25,7 +25,7 @@ $editando = isset($trainer);
     </div>
 <?php endif; ?>
 
-<div class="card" style="max-width: 600px;">
+<div class="card" style="max-width:600px">
     <div class="card-body">
         <?php $action = $editando
             ? route_to('trainers.actualizar', $trainer['id'])
@@ -33,67 +33,74 @@ $editando = isset($trainer);
 
         <?= form_open($action) ?>
 
-        <div class="row g-3">
+        <div class="row g-2">
+
             <div class="col-md-6">
-                <label class="form-label">Nombre *</label>
-                <?= form_input([
-                    'name' => 'nombre',
-                    'class' => 'form-control',
-                    'value' => set_value('nombre', $trainer['nombre'] ?? '')
-                ]) ?>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="min-width:120px">Nombre *</span>
+                    <input type="text" name="nombre" class="form-control"
+                        placeholder="Nombre"
+                        value="<?= set_value('nombre', $trainer['nombre'] ?? '') ?>" required>
+                </div>
             </div>
+
             <div class="col-md-6">
-                <label class="form-label">Apellidos *</label>
-                <?= form_input([
-                    'name' => 'apellidos',
-                    'class' => 'form-control',
-                    'value' => set_value('apellidos', $trainer['apellidos'] ?? '')
-                ]) ?>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="min-width:120px">Apellidos *</span>
+                    <input type="text" name="apellidos" class="form-control"
+                        placeholder="Apellidos"
+                        value="<?= set_value('apellidos', $trainer['apellidos'] ?? '') ?>" required>
+                </div>
             </div>
+
             <div class="col-md-6">
-                <label class="form-label">Correo</label>
-                <?= form_input([
-                    'name' => 'correo',
-                    'type' => 'email',
-                    'class' => 'form-control',
-                    'value' => set_value('correo', $trainer['correo'] ?? '')
-                ]) ?>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="min-width:120px">Correo</span>
+                    <input type="email" name="correo" class="form-control"
+                        placeholder="correo@ejemplo.com"
+                        value="<?= set_value('correo', $trainer['correo'] ?? '') ?>">
+                </div>
             </div>
+
             <div class="col-md-6">
-                <label class="form-label">Teléfono</label>
-                <?= form_input([
-                    'name' => 'telefono',
-                    'class' => 'form-control',
-                    'value' => set_value('telefono', $trainer['telefono'] ?? '')
-                ]) ?>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="min-width:120px">Teléfono</span>
+                    <input type="text" name="telefono" class="form-control"
+                        placeholder="10 dígitos"
+                        value="<?= set_value('telefono', $trainer['telefono'] ?? '') ?>">
+                </div>
             </div>
+
             <div class="col-md-6">
-                <label class="form-label">Nivel *</label>
-                <select name="nivel" class="form-select">
-                    <?php foreach (['principiante', 'intermedio', 'avanzado'] as $n): ?>
-                        <option value="<?= $n ?>"
-                            <?= (($trainer['nivel'] ?? 'intermedio') === $n) ? 'selected' : '' ?>>
-                            <?= ucfirst($n) ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="min-width:120px">Nivel *</span>
+                    <select name="nivel" class="form-select form-select-sm">
+                        <?php foreach (['principiante', 'intermedio', 'avanzado'] as $n): ?>
+                            <option value="<?= $n ?>"
+                                <?= (($trainer['nivel'] ?? 'intermedio') === $n) ? 'selected' : '' ?>>
+                                <?= ucfirst($n) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
             </div>
+
             <div class="col-md-6">
-                <label class="form-label">Especialidad</label>
-                <?= form_input([
-                    'name' => 'especialidad',
-                    'class' => 'form-control',
-                    'placeholder' => 'Ej. Crossfit, Yoga, Spinning...',
-                    'value' => set_value('especialidad', $trainer['especialidad'] ?? '')
-                ]) ?>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="min-width:120px">Especialidad</span>
+                    <input type="text" name="especialidad" class="form-control"
+                        placeholder="Ej. Crossfit, Yoga..."
+                        value="<?= set_value('especialidad', $trainer['especialidad'] ?? '') ?>">
+                </div>
             </div>
+
         </div>
 
-        <div class="mt-4">
-            <button type="submit" class="btn btn-primary">
+        <div class="mt-3">
+            <button type="submit" class="btn btn-sm btn-primary">
                 <i class="bi bi-save me-1"></i> <?= $editando ? 'Actualizar' : 'Registrar' ?>
             </button>
-            <a href="<?= route_to('trainers.index') ?>" class="btn btn-outline-secondary ms-2">Cancelar</a>
+            <a href="<?= route_to('trainers.index') ?>" class="btn btn-sm btn-outline-secondary ms-2">Cancelar</a>
         </div>
 
         <?= form_close() ?>

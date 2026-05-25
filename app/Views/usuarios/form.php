@@ -32,7 +32,7 @@ $grupoActual = $editando ? ($usuario->grupos[0] ?? '') : '';
     </div>
 <?php endif; ?>
 
-<div class="card" style="max-width: 520px;">
+<div class="card" style="max-width:520px">
     <div class="card-body">
         <?php $action = $editando
             ? route_to('usuarios.actualizar', $usuario->id)
@@ -40,57 +40,60 @@ $grupoActual = $editando ? ($usuario->grupos[0] ?? '') : '';
 
         <?= form_open($action) ?>
 
-        <div class="row g-3">
+        <div class="row g-2">
+
             <div class="col-12">
-                <label class="form-label">Nombre de usuario *</label>
-                <?= form_input([
-                    'name' => 'username',
-                    'class' => 'form-control',
-                    'value' => set_value('username', $usuario->username ?? '')
-                ]) ?>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="min-width:140px">Usuario *</span>
+                    <input type="text" name="username" class="form-control"
+                        placeholder="Nombre de usuario"
+                        value="<?= set_value('username', $usuario->username ?? '') ?>" required>
+                </div>
             </div>
+
             <div class="col-12">
-                <label class="form-label">Correo electrónico *</label>
-                <?= form_input([
-                    'name' => 'email',
-                    'type' => 'email',
-                    'class' => 'form-control',
-                    'value' => set_value('email', $usuario->email ?? '')
-                ]) ?>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="min-width:140px">Correo *</span>
+                    <input type="email" name="email" class="form-control"
+                        placeholder="correo@ejemplo.com"
+                        value="<?= set_value('email', $usuario->email ?? '') ?>" required>
+                </div>
             </div>
+
             <div class="col-12">
-                <label class="form-label">
-                    Contraseña <?= $editando ? '<span class="text-muted small">(dejar vacío para no cambiar)</span>' : '*' ?>
-                </label>
-                <?= form_input([
-                    'name' => 'password',
-                    'type' => 'password',
-                    'class' => 'form-control',
-                    'autocomplete' => 'new-password'
-                ]) ?>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="min-width:140px">
+                        Contraseña <?= $editando ? '<small class="text-muted">(opcional)</small>' : '*' ?>
+                    </span>
+                    <input type="password" name="password" class="form-control"
+                        placeholder="<?= $editando ? 'Dejar vacío para no cambiar' : 'Mínimo 8 caracteres' ?>"
+                        autocomplete="new-password"
+                        <?= $editando ? '' : 'required' ?>>
+                </div>
             </div>
+
             <div class="col-12">
-                <label class="form-label">Rol *</label>
-                <select name="grupo" class="form-select">
-                    <option value="">— Selecciona un rol —</option>
-                    <?php foreach ($grupos as $key => $label): ?>
-                        <option value="<?= $key ?>"
-                            <?= ($grupoActual === $key) ? 'selected' : '' ?>>
-                            <?= $label ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="min-width:140px">Rol *</span>
+                    <select name="grupo" class="form-select form-select-sm" required>
+                        <option value="">— Selecciona un rol —</option>
+                        <?php foreach ($grupos as $key => $label): ?>
+                            <option value="<?= $key ?>"
+                                <?= ($grupoActual === $key) ? 'selected' : '' ?>>
+                                <?= $label ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
             </div>
+
         </div>
 
-        <div class="mt-4">
-            <button type="submit" class="btn btn-primary">
-                <i class="bi bi-save me-1"></i>
-                <?= $editando ? 'Actualizar' : 'Crear usuario' ?>
+        <div class="mt-3">
+            <button type="submit" class="btn btn-sm btn-primary">
+                <i class="bi bi-save me-1"></i> <?= $editando ? 'Actualizar' : 'Crear usuario' ?>
             </button>
-            <a href="<?= route_to('usuarios.index') ?>" class="btn btn-outline-secondary ms-2">
-                Cancelar
-            </a>
+            <a href="<?= route_to('usuarios.index') ?>" class="btn btn-sm btn-outline-secondary ms-2">Cancelar</a>
         </div>
 
         <?= form_close() ?>

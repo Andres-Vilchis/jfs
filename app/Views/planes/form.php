@@ -3,7 +3,7 @@
 
 <?php
 /**
- * @var array{id: int, nombre: string, descripcion: string|null, precio: float|string, duracion_dias: int, beneficios: string|null}|null $plan
+ * @var array|null $plan
  */
 $editando = isset($plan);
 ?>
@@ -25,7 +25,7 @@ $editando = isset($plan);
     </div>
 <?php endif; ?>
 
-<div class="card" style="max-width: 600px;">
+<div class="card" style="max-width:600px">
     <div class="card-body">
         <?php $action = $editando
             ? route_to('planes.actualizar', $plan['id'])
@@ -33,59 +33,60 @@ $editando = isset($plan);
 
         <?= form_open($action) ?>
 
-        <div class="row g-3">
+        <div class="row g-2">
+
             <div class="col-12">
-                <label class="form-label">Nombre del plan *</label>
-                <?= form_input([
-                    'name' => 'nombre',
-                    'class' => 'form-control',
-                    'placeholder' => 'Ej. Plan Mensual, Plan Trimestral...',
-                    'value' => set_value('nombre', $plan['nombre'] ?? '')
-                ]) ?>
-            </div>
-            <div class="col-md-6">
-                <label class="form-label">Precio (MXN) *</label>
-                <div class="input-group">
-                    <span class="input-group-text">$</span>
-                    <?= form_input([
-                        'name' => 'precio',
-                        'type' => 'number',
-                        'step' => '0.01',
-                        'min' => '0',
-                        'class' => 'form-control',
-                        'value' => set_value('precio', $plan['precio'] ?? '')
-                    ]) ?>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="min-width:130px">Nombre *</span>
+                    <input type="text" name="nombre" class="form-control"
+                        placeholder="Ej. Plan Mensual, Plan Trimestral..."
+                        value="<?= set_value('nombre', $plan['nombre'] ?? '') ?>" required>
                 </div>
             </div>
+
             <div class="col-md-6">
-                <label class="form-label">Duración (días) *</label>
-                <?= form_input([
-                    'name' => 'duracion_dias',
-                    'type' => 'number',
-                    'min' => '1',
-                    'class' => 'form-control',
-                    'placeholder' => 'Ej. 30, 90, 365',
-                    'value' => set_value('duracion_dias', $plan['duracion_dias'] ?? '')
-                ]) ?>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="min-width:130px">Precio (MXN) *</span>
+                    <span class="input-group-text">$</span>
+                    <input type="number" name="precio" step="0.01" min="0" class="form-control"
+                        placeholder="0.00"
+                        value="<?= set_value('precio', $plan['precio'] ?? '') ?>" required>
+                </div>
             </div>
+
+            <div class="col-md-6">
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="min-width:130px">Duración (días) *</span>
+                    <input type="number" name="duracion_dias" min="1" class="form-control"
+                        placeholder="Ej. 30, 90, 365"
+                        value="<?= set_value('duracion_dias', $plan['duracion_dias'] ?? '') ?>" required>
+                </div>
+            </div>
+
             <div class="col-12">
-                <label class="form-label">Descripción</label>
-                <textarea name="descripcion" class="form-control" rows="2"
-                    placeholder="Descripción breve del plan..."><?= esc($plan['descripcion'] ?? '') ?></textarea>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="min-width:130px">Descripción</span>
+                    <textarea name="descripcion" class="form-control" rows="2"
+                        placeholder="Descripción breve del plan..."><?= esc($plan['descripcion'] ?? '') ?></textarea>
+                </div>
             </div>
+
             <div class="col-12">
-                <label class="form-label">Beneficios</label>
-                <textarea name="beneficios" class="form-control" rows="4"
-                    placeholder="Un beneficio por línea...&#10;Acceso ilimitado&#10;Clases grupales&#10;Casillero incluido"><?= esc($plan['beneficios'] ?? '') ?></textarea>
-                <div class="form-text">Escribe un beneficio por línea.</div>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="min-width:130px">Beneficios</span>
+                    <textarea name="beneficios" class="form-control" rows="4"
+                        placeholder="Un beneficio por línea...&#10;Acceso ilimitado&#10;Clases grupales&#10;Casillero incluido"><?= esc($plan['beneficios'] ?? '') ?></textarea>
+                </div>
+                <div class="form-text ps-1">Escribe un beneficio por línea.</div>
             </div>
+
         </div>
 
-        <div class="mt-4">
-            <button type="submit" class="btn btn-primary">
+        <div class="mt-3">
+            <button type="submit" class="btn btn-sm btn-primary">
                 <i class="bi bi-save me-1"></i> <?= $editando ? 'Actualizar' : 'Crear plan' ?>
             </button>
-            <a href="<?= route_to('planes.index') ?>" class="btn btn-outline-secondary ms-2">Cancelar</a>
+            <a href="<?= route_to('planes.index') ?>" class="btn btn-sm btn-outline-secondary ms-2">Cancelar</a>
         </div>
 
         <?= form_close() ?>
