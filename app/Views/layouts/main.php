@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neonderthaw&family=Satisfy&display=swap">
     <link rel="stylesheet" href="<?= base_url('assets/css/main.css') ?>">
+    <script src="<?= base_url('assets/js/main.js') ?>"></script>
     <?= $this->renderSection('styles') ?>
 </head>
 <body data-bs-theme="dark">

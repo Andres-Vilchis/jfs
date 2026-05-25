@@ -58,7 +58,7 @@
 <div class="card">
     <div class="card-body px-0 py-0">
         <div class="table-responsive">
-            <table class="table table-hover table-striped table-sm mb-0">
+            <table>
                 <thead>
                     <tr>
                         <th>Cliente</th>
@@ -241,69 +241,69 @@
 
 <?= $this->section('scripts') ?>
 <script>
-/* ── Toast contacto ─────────────────────────────────────────── */
-function abrirContacto(nombre, telefono, correo) {
-    document.getElementById('toast-nombre').textContent  = nombre;
-    document.getElementById('toast-tel-txt').textContent = telefono || 'Sin teléfono';
-    document.getElementById('toast-wa-txt').textContent  = telefono || 'Sin WhatsApp';
-    document.getElementById('toast-email-txt').textContent = correo || 'Sin correo';
+    /* ── Toast contacto ─────────────────────────────────────────── */
+    function abrirContacto(nombre, telefono, correo) {
+        document.getElementById('toast-nombre').textContent = nombre;
+        document.getElementById('toast-tel-txt').textContent = telefono || 'Sin teléfono';
+        document.getElementById('toast-wa-txt').textContent = telefono || 'Sin WhatsApp';
+        document.getElementById('toast-email-txt').textContent = correo || 'Sin correo';
 
-    const telBtn   = document.getElementById('toast-tel');
-    const waBtn    = document.getElementById('toast-wa');
-    const emailBtn = document.getElementById('toast-email');
+        const telBtn = document.getElementById('toast-tel');
+        const waBtn = document.getElementById('toast-wa');
+        const emailBtn = document.getElementById('toast-email');
 
-    telBtn.href   = telefono ? 'tel:' + telefono                         : '#';
-    waBtn.href    = telefono ? 'https://wa.me/+52' + telefono            : '#';
-    emailBtn.href = correo   ? 'mailto:' + correo                        : '#';
+        telBtn.href = telefono ? 'tel:' + telefono : '#';
+        waBtn.href = telefono ? 'https://wa.me/+52' + telefono : '#';
+        emailBtn.href = correo ? 'mailto:' + correo : '#';
 
-    telBtn.classList.toggle('disabled',   !telefono);
-    waBtn.classList.toggle('disabled',    !telefono);
-    emailBtn.classList.toggle('disabled', !correo);
+        telBtn.classList.toggle('disabled', !telefono);
+        waBtn.classList.toggle('disabled', !telefono);
+        emailBtn.classList.toggle('disabled', !correo);
 
-    bootstrap.Toast.getOrCreateInstance(
-        document.getElementById('contactoToast')
-    ).show();
-}
+        bootstrap.Toast.getOrCreateInstance(
+            document.getElementById('contactoToast')
+        ).show();
+    }
 
-/* ── Modal ficha ────────────────────────────────────────────── */
-document.addEventListener('DOMContentLoaded', function () {
-    const fichaModal = document.getElementById('fichaModal');
-    fichaModal.addEventListener('show.bs.modal', function (event) {
-        const trigger = event.relatedTarget;
-        const c = JSON.parse(trigger.getAttribute('data-cliente'));
-        document.getElementById('fichaModalLabel').innerHTML =
-            '<i class="bi bi-person-vcard me-2"></i>' +
-            escHtml(c.nombre) + ' ' + escHtml(c.apellidos);
-        document.getElementById('m_nombre').value           = c.nombre           ?? '';
-        document.getElementById('m_apellidos').value        = c.apellidos        ?? '';
-        document.getElementById('m_correo').value           = c.correo           ?? '';
-        document.getElementById('m_telefono').value         = c.telefono         ?? '';
-        document.getElementById('m_fecha_nacimiento').value = c.fecha_nacimiento ?? '';
-        document.getElementById('m_fecha_vencimiento').value= c.fecha_vencimiento?? '';
-        document.getElementById('m_notas').value            = c.notas            ?? '';
-        setSelect('m_genero',  c.genero);
-        setSelect('m_nivel',   c.nivel);
-        setSelect('m_plan_id', c.plan_id);
-        document.getElementById('formFicha').action =
-            '<?= base_url('clientes/actualizar') ?>/' + c.id;
-        document.getElementById('formBaja').action =
-            '<?= base_url('clientes/desactivar') ?>/' + c.id;
-    });
+    /* ── Modal ficha ────────────────────────────────────────────── */
+    document.addEventListener('DOMContentLoaded', function() {
+        const fichaModal = document.getElementById('fichaModal');
+        fichaModal.addEventListener('show.bs.modal', function(event) {
+            const trigger = event.relatedTarget;
+            const c = JSON.parse(trigger.getAttribute('data-cliente'));
+            document.getElementById('fichaModalLabel').innerHTML =
+                '<i class="bi bi-person-vcard me-2"></i>' +
+                escHtml(c.nombre) + ' ' + escHtml(c.apellidos);
+            document.getElementById('m_nombre').value = c.nombre ?? '';
+            document.getElementById('m_apellidos').value = c.apellidos ?? '';
+            document.getElementById('m_correo').value = c.correo ?? '';
+            document.getElementById('m_telefono').value = c.telefono ?? '';
+            document.getElementById('m_fecha_nacimiento').value = c.fecha_nacimiento ?? '';
+            document.getElementById('m_fecha_vencimiento').value = c.fecha_vencimiento ?? '';
+            document.getElementById('m_notas').value = c.notas ?? '';
+            setSelect('m_genero', c.genero);
+            setSelect('m_nivel', c.nivel);
+            setSelect('m_plan_id', c.plan_id);
+            document.getElementById('formFicha').action =
+                '<?= base_url('clientes/actualizar') ?>/' + c.id;
+            document.getElementById('formBaja').action =
+                '<?= base_url('clientes/desactivar') ?>/' + c.id;
+        });
 
-    function setSelect(id, value) {
-        const el = document.getElementById(id);
-        if (!el) return;
-        for (const opt of el.options) {
-            opt.selected = (String(opt.value) === String(value ?? ''));
+        function setSelect(id, value) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            for (const opt of el.options) {
+                opt.selected = (String(opt.value) === String(value ?? ''));
+            }
         }
-    }
 
-    function escHtml(str) {
-        return String(str ?? '')
-            .replace(/&/g, '&amp;').replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-    }
-});
+        function escHtml(str) {
+            return String(str ?? '')
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+    });
 </script>
 <?= $this->endSection() ?>
 <?= $this->endSection() ?>
