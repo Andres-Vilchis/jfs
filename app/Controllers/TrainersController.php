@@ -17,6 +17,7 @@ class TrainersController extends BaseController
     public function index()
     {
         return view('trainers/index', [
+            'fecha_formateada' => fechaFormateada(),
             'trainers' => $this->trainerModel->conClases(),
         ]);
     }
