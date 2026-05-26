@@ -57,7 +57,7 @@ class TrainersController extends BaseController
     public function editar(int $id)
     {
         return view('trainers/form', [
-            'trainer' => $this->trainerModel->findOrFail($id),
+            'trainer' => $this->trainerModel->find($id),
         ]);
     }
 
@@ -90,21 +90,24 @@ class TrainersController extends BaseController
 
     public function toggleActivo(int $id)
     {
-        $trainer     = $this->trainerModel->findOrFail($id);
-        $nuevoEstado = $trainer['activo'] ? 0 : 1;
+        $trainer     = $this->trainerModel->find($id);
+        if (! $trainer) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
 
+        $nuevoEstado = $trainer['activo'] ? 0 : 1;
         $this->trainerModel->update($id, ['activo' => $nuevoEstado]);
 
         if ($nuevoEstado === 0) {
             // Suspender también las clases activas del trainer
-            $claseModel = new ClaseModel();
-            $clasesActivas = $claseModel
+            $db            = db_connect();
+            $clasesActivas = $db->table('clases')
                 ->where('trainer_id', $id)
                 ->where('activo', 1)
                 ->countAllResults();
 
             if ($clasesActivas > 0) {
-                $this->db->table('clases')
+                $db->table('clases')
                     ->where('trainer_id', $id)
                     ->where('activo', 1)
                     ->update(['activo' => 0]);
@@ -117,7 +120,6 @@ class TrainersController extends BaseController
             $msg = 'Trainer activado correctamente.';
         }
 
-        return redirect()->to('/trainers')
-            ->with('success', $msg);
+        return redirect()->to('/trainers')->with('success', $msg);
     }
 }

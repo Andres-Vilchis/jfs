@@ -58,8 +58,8 @@ class ClasesController extends BaseController
         }
 
         // Validar que el nivel de la clase no supere el del trainer
-        $trainerId = $this->request->getPost('trainer_id');
-        $trainer   = $this->trainerModel->find($trainerId);
+        $trainerId    = $this->request->getPost('trainer_id');
+        $trainer      = $this->trainerModel->find($trainerId);
         $nivelClase   = $this->niveles[$this->request->getPost('nivel')] ?? 0;
         $nivelTrainer = $this->niveles[$trainer['nivel']] ?? 0;
 
@@ -92,8 +92,13 @@ class ClasesController extends BaseController
 
     public function editar(int $id)
     {
-        $clase = $this->claseModel->findOrFail($id);
-        $inscritos = $this->db->table('clientes_clases')
+        $clase = $this->claseModel->find($id);
+        if (! $clase) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        $db        = db_connect();
+        $inscritos = $db->table('clientes_clases')
             ->where('clase_id', $id)
             ->where('activo', 1)
             ->countAllResults();
@@ -129,8 +134,8 @@ class ClasesController extends BaseController
         }
 
         // Validar que el nivel de la clase no supere el del trainer
-        $trainerId = $this->request->getPost('trainer_id');
-        $trainer   = $this->trainerModel->find($trainerId);
+        $trainerId    = $this->request->getPost('trainer_id');
+        $trainer      = $this->trainerModel->find($trainerId);
         $nivelClase   = $this->niveles[$this->request->getPost('nivel')] ?? 0;
         $nivelTrainer = $this->niveles[$trainer['nivel']] ?? 0;
 
@@ -162,7 +167,11 @@ class ClasesController extends BaseController
 
     public function toggleActivo(int $id)
     {
-        $clase = $this->claseModel->findOrFail($id);
+        $clase = $this->claseModel->find($id);
+        if (! $clase) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
         $nuevoEstado = $clase['activo'] ? 0 : 1;
         $this->claseModel->update($id, ['activo' => $nuevoEstado]);
 
@@ -170,19 +179,23 @@ class ClasesController extends BaseController
             ? 'Clase activada correctamente.'
             : 'Clase suspendida correctamente.';
 
-        return redirect()->to('/clases')
-            ->with('success', $msg);
+        return redirect()->to('/clases')->with('success', $msg);
     }
 
     // ─── Gestión de participantes ────────────────────────────────────────────
 
     public function participantes(int $id)
     {
-        $clase = $this->claseModel->findOrFail($id);
+        $clase = $this->claseModel->find($id);
+        if (! $clase) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        $db = db_connect();
 
         // Clientes ya inscritos en esta clase
-        $inscritos = $this->db->table('clientes_clases cc')
-            ->select('c.id, c.nombre, c.apellidos, c.nivel, cc.fecha_inscripcion, cc.id AS inscripcion_id')
+        $inscritos = $db->table('clientes_clases cc')
+            ->select('c.id, c.nombre, c.apellidos, c.nivel, cc.fecha_inscripcion')
             ->join('clientes c', 'c.id = cc.cliente_id')
             ->where('cc.clase_id', $id)
             ->where('cc.activo', 1)
@@ -193,30 +206,34 @@ class ClasesController extends BaseController
         $inscritosIds = array_column($inscritos, 'id');
 
         // Clientes activos NO inscritos en esta clase
-        $clienteModel    = new ClienteModel();
+        $clienteModel   = new ClienteModel();
         $clientesLibres = $clienteModel->where('activo', 1)->findAll();
-        $clientesLibres = array_filter($clientesLibres, function ($c) use ($inscritosIds) {
+        $clientesLibres = array_values(array_filter($clientesLibres, function ($c) use ($inscritosIds) {
             return ! in_array($c['id'], $inscritosIds);
-        });
+        }));
 
-        $inscritos_count = count($inscritos);
-        $disponibles     = $clase['capacidad_max'] - $inscritos_count;
+        $disponibles = $clase['capacidad_max'] - count($inscritos);
 
         return view('clases/participantes', [
             'clase'          => $clase,
             'inscritos'      => $inscritos,
-            'clientesLibres' => array_values($clientesLibres),
+            'clientesLibres' => $clientesLibres,
             'disponibles'    => $disponibles,
         ]);
     }
 
     public function agregarParticipante(int $id)
     {
-        $clase     = $this->claseModel->findOrFail($id);
+        $clase = $this->claseModel->find($id);
+        if (! $clase) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
         $clienteId = (int) $this->request->getPost('cliente_id');
+        $db        = db_connect();
 
         // 1. Verificar que no esté ya inscrito
-        $yaInscrito = $this->db->table('clientes_clases')
+        $yaInscrito = $db->table('clientes_clases')
             ->where('clase_id', $id)
             ->where('cliente_id', $clienteId)
             ->where('activo', 1)
@@ -228,24 +245,24 @@ class ClasesController extends BaseController
         }
 
         // 2. Verificar capacidad
-        $inscritos = $this->db->table('clientes_clases')
+        $totalInscritos = $db->table('clientes_clases')
             ->where('clase_id', $id)
             ->where('activo', 1)
             ->countAllResults();
 
-        if ($inscritos >= $clase['capacidad_max']) {
+        if ($totalInscritos >= $clase['capacidad_max']) {
             return redirect()->to("/clases/{$id}/participantes")
                 ->with('error', 'La clase ya alcanzó su capacidad máxima (' . $clase['capacidad_max'] . ' participantes).');
         }
 
         // 3. Verificar conflicto de horario
-        if ($this->tieneConflictoHorario($clienteId, $id)) {
+        if ($this->tieneConflictoHorario($clienteId, $id, $db)) {
             return redirect()->to("/clases/{$id}/participantes")
-                ->with('error', 'El cliente ya tiene otra clase en ese horario.');
+                ->with('error', 'El cliente ya tiene otra clase en ese mismo horario.');
         }
 
         // Insertar inscripción
-        $this->db->table('clientes_clases')->insert([
+        $db->table('clientes_clases')->insert([
             'cliente_id'        => $clienteId,
             'clase_id'          => $id,
             'fecha_inscripcion' => date('Y-m-d'),
@@ -258,7 +275,8 @@ class ClasesController extends BaseController
 
     public function quitarParticipante(int $id, int $clienteId)
     {
-        $this->db->table('clientes_clases')
+        $db = db_connect();
+        $db->table('clientes_clases')
             ->where('clase_id', $id)
             ->where('cliente_id', $clienteId)
             ->update(['activo' => 0]);
@@ -269,13 +287,13 @@ class ClasesController extends BaseController
 
     // ─── Helper: detección de conflicto de horario ──────────────────────────
 
-    private function tieneConflictoHorario(int $clienteId, int $claseId): bool
+    private function tieneConflictoHorario(int $clienteId, int $claseId, $db): bool
     {
         $clase    = $this->claseModel->find($claseId);
         $diasNueva = array_map('trim', explode(',', $clase['dias_semana']));
 
-        // Otras clases en las que el cliente ya está inscrito
-        $otrasClases = $this->db->table('clientes_clases cc')
+        // Otras clases activas en las que el cliente ya está inscrito
+        $otrasClases = $db->table('clientes_clases cc')
             ->select('cl.id, cl.hora_inicio, cl.hora_fin, cl.dias_semana')
             ->join('clases cl', 'cl.id = cc.clase_id')
             ->where('cc.cliente_id', $clienteId)
