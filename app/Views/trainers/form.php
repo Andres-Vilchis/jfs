@@ -77,7 +77,7 @@ $editando = isset($trainer);
                     <select name="nivel" class="form-select form-select-sm">
                         <?php foreach (['principiante', 'intermedio', 'avanzado'] as $n): ?>
                             <option value="<?= $n ?>"
-                                <?= (($trainer['nivel'] ?? 'intermedio') === $n) ? 'selected' : '' ?>>
+                                <?= (($trainer['nivel'] ?? 'principiante') === $n) ? 'selected' : '' ?>>
                                 <?= ucfirst($n) ?>
                             </option>
                         <?php endforeach; ?>

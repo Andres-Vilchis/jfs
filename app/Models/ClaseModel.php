@@ -26,11 +26,12 @@ class ClaseModel extends Model
         'nivel'         => 'required|in_list[principiante,intermedio,avanzado]',
     ];
 
-    // Clases con nombre del trainer
+    // Clases con nombre del trainer y conteo de inscritos
     public function conTrainer(): array
     {
         return $this->db->table('clases c')
-            ->select('c.*, CONCAT(t.nombre, " ", t.apellidos) AS trainer_nombre')
+            ->select('c.*, CONCAT(t.nombre, " ", t.apellidos) AS trainer_nombre,
+                      (SELECT COUNT(*) FROM clientes_clases cc WHERE cc.clase_id = c.id AND cc.activo = 1) AS inscritos')
             ->join('trainers t', 't.id = c.trainer_id', 'left')
             ->where('c.activo', 1)
             ->orderBy('c.hora_inicio', 'ASC')

@@ -61,6 +61,11 @@ $routes->group('', ['filter' => 'session'], function ($routes) {
         $routes->post('/clases/actualizar/(:num)', 'ClasesController::actualizar/$1',   ['as' => 'clases.actualizar']);
         $routes->post('/clases/toggle/(:num)',     'ClasesController::toggleActivo/$1', ['as' => 'clases.toggle']);
 
+        // Participantes de clase
+        $routes->get('/clases/(:num)/participantes',                    'ClasesController::participantes/$1',                    ['as' => 'clases.participantes']);
+        $routes->post('/clases/(:num)/participantes/agregar',           'ClasesController::agregarParticipante/$1',              ['as' => 'clases.agregarParticipante']);
+        $routes->post('/clases/(:num)/participantes/quitar/(:num)',     'ClasesController::quitarParticipante/$1/$2',            ['as' => 'clases.quitarParticipante']);
+
         // Trainers
         $routes->get('/trainers',                    'TrainersController::index',           ['as' => 'trainers.index']);
         $routes->get('/trainers/crear',              'TrainersController::crear',           ['as' => 'trainers.crear']);
