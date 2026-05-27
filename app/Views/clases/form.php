@@ -42,7 +42,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
             <!-- Nombre -->
             <div class="col-12">
-                <div class="input-group">
+                <div class="input-group input-group-sm">
                     <span class="input-group-text">Nombre de la clase *</span>
                     <?= form_input([
                         'name'        => 'nombre',
@@ -55,7 +55,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
             <!-- Trainer -->
             <div class="col-md-6">
-                <div class="input-group">
+                <div class="input-group input-group-sm">
                     <span class="input-group-text">Trainer <span class="text-danger">*</span></span>
                     <select name="trainer_id" class="form-select">
                         <option value="">— Selecciona —</option>
@@ -72,7 +72,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
             <!-- Nivel -->
             <div class="col-md-6">
-                <div class="input-group">
+                <div class="input-group input-group-sm">
                     <span class="input-group-text">Nivel *</span>
                     <select name="nivel" class="form-select">
                         <?php foreach (['principiante', 'intermedio', 'avanzado'] as $n): ?>
@@ -87,7 +87,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
             <!-- Hora inicio -->
             <div class="col-md-4">
-                <div class="input-group">
+                <div class="input-group input-group-sm">
                     <span class="input-group-text"><i class="bi bi-clock"></i> Hr. inicio *</span>
                     <?= form_input([
                         'name'  => 'hora_inicio',
@@ -100,7 +100,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
             <!-- Hora fin -->
             <div class="col-md-4">
-                <div class="input-group">
+                <div class="input-group input-group-sm">
                     <span class="input-group-text"><i class="bi bi-clock-history"></i> Hr. fin *</span>
                     <?= form_input([
                         'name'  => 'hora_fin',
@@ -113,7 +113,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
             <!-- Capacidad máx -->
             <div class="col-md-4">
-                <div class="input-group">
+                <div class="input-group input-group-sm">
                     <span class="input-group-text"><i class="bi bi-people"></i> Capacidad *</span>
                     <?= form_input([
                         'name'  => 'capacidad_max',
@@ -127,7 +127,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
             <!-- Salón -->
             <div class="col-md-6">
-                <div class="input-group">
+                <div class="input-group input-group-sm">
                     <span class="input-group-text"><i class="bi bi-door-open"></i> Salón</span>
                     <?= form_input([
                         'name'        => 'salon',
