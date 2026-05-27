@@ -11,7 +11,6 @@ $editando      = isset($clase);
 $diasGuardados = $editando ? explode(',', $clase['dias_semana']) : [];
 $diasOpciones  = ['lun', 'mar', 'mie', 'jue', 'vie', 'sab', 'dom'];
 $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
-$errors        = session()->getFlashdata('errors') ?? [];
 ?>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -21,18 +20,14 @@ $errors        = session()->getFlashdata('errors') ?? [];
     </a>
 </div>
 
-<?php if (! empty($errors)): ?>
+<?php if (session()->getFlashdata('errors')): ?>
     <div class="alert alert-danger">
         <ul class="mb-0">
-            <?php foreach ($errors as $e): ?>
+            <?php foreach (session()->getFlashdata('errors') as $e): ?>
                 <li><?= esc($e) ?></li>
             <?php endforeach; ?>
         </ul>
     </div>
-<?php endif; ?>
-
-<?php if (session()->getFlashdata('success')): ?>
-    <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
 <?php endif; ?>
 
 <div class="card" style="max-width: 650px;">
@@ -44,95 +39,117 @@ $errors        = session()->getFlashdata('errors') ?? [];
         <?= form_open($action) ?>
 
         <div class="row g-3">
+
+            <!-- Nombre -->
             <div class="col-12">
                 <label class="form-label">Nombre de la clase *</label>
-                <?= form_input([
-                    'name'  => 'nombre',
-                    'class' => 'form-control' . (isset($errors['nombre']) ? ' is-invalid' : ''),
-                    'placeholder' => 'Ej. Spinning, Yoga, Crossfit...',
-                    'value' => set_value('nombre', $clase['nombre'] ?? ''),
-                ]) ?>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-calendar-event"></i></span>
+                    <?= form_input([
+                        'name'        => 'nombre',
+                        'class'       => 'form-control',
+                        'placeholder' => 'Ej. Spinning, Yoga, Crossfit...',
+                        'value'       => set_value('nombre', $clase['nombre'] ?? ''),
+                    ]) ?>
+                </div>
             </div>
 
+            <!-- Trainer -->
             <div class="col-md-6">
                 <label class="form-label">Trainer <span class="text-danger">*</span></label>
-                <select name="trainer_id"
-                    class="form-select <?= isset($errors['trainer_id']) ? 'is-invalid' : '' ?>">
-                    <option value="">— Selecciona un trainer —</option>
-                    <?php foreach ($trainers as $t): ?>
-                        <option value="<?= $t['id'] ?>"
-                            <?= ((set_value('trainer_id', $clase['trainer_id'] ?? '')) == $t['id']) ? 'selected' : '' ?>>
-                            <?= esc($t['nombre'] . ' ' . $t['apellidos']) ?>
-                            (<?= ucfirst($t['nivel']) ?>)
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-                <?php if (isset($errors['trainer_id'])): ?>
-                    <div class="invalid-feedback d-block">
-                        <?= esc($errors['trainer_id']) ?>
-                    </div>
-                <?php endif; ?>
-                <div class="form-text">El nivel de la clase no puede superar el nivel del trainer.</div>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-person-arms-up"></i></span>
+                    <select name="trainer_id" class="form-select">
+                        <option value="">— Selecciona —</option>
+                        <?php foreach ($trainers as $t): ?>
+                            <option value="<?= $t['id'] ?>"
+                                <?= (set_value('trainer_id', $clase['trainer_id'] ?? '') == $t['id']) ? 'selected' : '' ?>>
+                                <?= esc($t['nombre'] . ' ' . $t['apellidos']) ?>
+                                (<?= ucfirst($t['nivel']) ?>)
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-text">El nivel de la clase no puede superar el del trainer.</div>
             </div>
 
+            <!-- Nivel -->
             <div class="col-md-6">
                 <label class="form-label">Nivel *</label>
-                <select name="nivel"
-                    class="form-select <?= isset($errors['nivel']) ? 'is-invalid' : '' ?>">
-                    <?php foreach (['principiante', 'intermedio', 'avanzado'] as $n): ?>
-                        <option value="<?= $n ?>"
-                            <?= ((set_value('nivel', $clase['nivel'] ?? 'principiante')) === $n) ? 'selected' : '' ?>>
-                            <?= ucfirst($n) ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-                <?php if (isset($errors['nivel'])): ?>
-                    <div class="invalid-feedback d-block">
-                        <?= esc($errors['nivel']) ?>
-                    </div>
-                <?php endif; ?>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-bar-chart-fill"></i></span>
+                    <select name="nivel" class="form-select">
+                        <?php foreach (['principiante', 'intermedio', 'avanzado'] as $n): ?>
+                            <option value="<?= $n ?>"
+                                <?= (set_value('nivel', $clase['nivel'] ?? 'principiante') === $n) ? 'selected' : '' ?>>
+                                <?= ucfirst($n) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
             </div>
 
+            <!-- Hora inicio -->
             <div class="col-md-4">
                 <label class="form-label">Hora inicio *</label>
-                <?= form_input([
-                    'name'  => 'hora_inicio',
-                    'type'  => 'time',
-                    'class' => 'form-control',
-                    'value' => set_value('hora_inicio', $clase['hora_inicio'] ?? ''),
-                ]) ?>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-clock"></i></span>
+                    <?= form_input([
+                        'name'  => 'hora_inicio',
+                        'type'  => 'time',
+                        'class' => 'form-control',
+                        'value' => set_value('hora_inicio', $clase['hora_inicio'] ?? ''),
+                    ]) ?>
+                </div>
             </div>
+
+            <!-- Hora fin -->
             <div class="col-md-4">
                 <label class="form-label">Hora fin *</label>
-                <?= form_input([
-                    'name'  => 'hora_fin',
-                    'type'  => 'time',
-                    'class' => 'form-control',
-                    'value' => set_value('hora_fin', $clase['hora_fin'] ?? ''),
-                ]) ?>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-clock-history"></i></span>
+                    <?= form_input([
+                        'name'  => 'hora_fin',
+                        'type'  => 'time',
+                        'class' => 'form-control',
+                        'value' => set_value('hora_fin', $clase['hora_fin'] ?? ''),
+                    ]) ?>
+                </div>
             </div>
+
+            <!-- Capacidad máx -->
             <div class="col-md-4">
                 <label class="form-label">Capacidad máx. *</label>
-                <?= form_input([
-                    'name'  => 'capacidad_max',
-                    'type'  => 'number',
-                    'min'   => '1',
-                    'class' => 'form-control',
-                    'value' => set_value('capacidad_max', $clase['capacidad_max'] ?? 20),
-                ]) ?>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-people"></i></span>
+                    <?= form_input([
+                        'name'  => 'capacidad_max',
+                        'type'  => 'number',
+                        'min'   => '1',
+                        'class' => 'form-control',
+                        'value' => set_value('capacidad_max', $clase['capacidad_max'] ?? 20),
+                    ]) ?>
+                </div>
             </div>
+
+            <!-- Salón -->
             <div class="col-md-6">
                 <label class="form-label">Salón</label>
-                <?= form_input([
-                    'name'        => 'salon',
-                    'class'       => 'form-control',
-                    'placeholder' => 'Ej. Sala A, Sala Principal...',
-                    'value'       => set_value('salon', $clase['salon'] ?? ''),
-                ]) ?>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-door-open"></i></span>
+                    <?= form_input([
+                        'name'        => 'salon',
+                        'class'       => 'form-control',
+                        'placeholder' => 'Ej. Sala A, Sala Principal...',
+                        'value'       => set_value('salon', $clase['salon'] ?? ''),
+                    ]) ?>
+                </div>
             </div>
+
+            <!-- Días de la semana -->
             <div class="col-md-6">
                 <label class="form-label d-block">Días de la semana *</label>
-                <div class="d-flex flex-wrap gap-2">
+                <div class="d-flex flex-wrap gap-2 pt-1">
                     <?php foreach ($diasOpciones as $i => $dia): ?>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox"
@@ -147,37 +164,42 @@ $errors        = session()->getFlashdata('errors') ?? [];
                     <?php endforeach; ?>
                 </div>
             </div>
+
+            <!-- Descripción -->
             <div class="col-12">
                 <label class="form-label">Descripción</label>
                 <textarea name="descripcion" class="form-control" rows="2"
                     placeholder="Descripción breve de la clase..."><?= esc($clase['descripcion'] ?? '') ?></textarea>
             </div>
-        </div>
+
+        </div><!-- /row -->
 
         <div class="mt-4 d-flex justify-content-between align-items-center">
             <div>
                 <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-save me-1"></i> <?= $editando ? 'Actualizar' : 'Registrar' ?>
+                    <i class="bi bi-save me-1"></i>
+                    <?= $editando ? 'Actualizar' : 'Registrar' ?>
                 </button>
-                <a href="<?= route_to('clases.index') ?>" class="btn btn-outline-secondary ms-2">Cancelar</a>
+                <a href="<?= route_to('clases.index') ?>" class="btn btn-outline-secondary ms-2">
+                    Cancelar
+                </a>
             </div>
 
             <?php if ($editando): ?>
                 <?php
-                $inscritos = $inscritos ?? 0;
-                $accion    = $clase['activo'] ? 'suspender' : 'activar';
-                $icono     = $clase['activo'] ? 'bi-trash3-fill' : 'bi-play-circle';
-                $colorBtn  = $clase['activo'] ? 'btn-danger' : 'btn-success';
                 $confirmar = $clase['activo']
-                    ? "¿Seguro que deseas SUSPENDER esta clase? Los participantes inscritos permanecerán en el registro."
-                    : "¿Deseas ACTIVAR esta clase?";
+                    ? '¿Seguro que deseas ELIMINAR esta clase? Los participantes inscritos permanecerán en el registro.'
+                    : '¿Deseas ACTIVAR esta clase?';
+                $colorBtn  = $clase['activo'] ? 'btn-danger' : 'btn-success';
+                $icono     = $clase['activo'] ? 'bi-trash3-fill' : 'bi-play-circle';
+                $etiqueta  = $clase['activo'] ? 'Eliminar' : 'Activar clase';
                 ?>
                 <form action="<?= route_to('clases.toggle', $clase['id']) ?>" method="post"
                       onsubmit="return confirm('<?= addslashes($confirmar) ?>')">
                     <?= csrf_field() ?>
                     <button type="submit" class="btn <?= $colorBtn ?>">
                         <i class="bi <?= $icono ?> me-1"></i>
-                        <?= ucfirst($accion) ?> clase
+                        <?= $etiqueta ?>
                     </button>
                 </form>
             <?php endif; ?>

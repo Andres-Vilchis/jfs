@@ -84,12 +84,12 @@
 
                     <div class="card-footer d-flex justify-content-between align-items-center gap-2">
                         <a href="<?= route_to('clases.editar', $c['id']) ?>"
-                            class="btn btn-sm btn-outline-primary flex-fill">
+                            class="btn btn-sm btn-secondary flex-fill">
                             <i class="bi bi-pencil me-1"></i> Editar
                         </a>
 
                         <a href="<?= route_to('clases.participantes', $c['id']) ?>"
-                           class="btn btn-sm btn-outline-success"
+                           class="btn btn-sm btn-success"
                            title="Gestionar participantes">
                             <i class="bi bi-person-plus-fill"></i>
                             <span class="ms-1 small"><?= $inscritos ?>/<?= $c['capacidad_max'] ?></span>
