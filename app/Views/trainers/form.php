@@ -116,7 +116,7 @@ $editando = isset($trainer);
                 onsubmit="return confirm('¿Seguro que deseas eliminar al trainer <?= addslashes(esc($trainer['nombre'] . ' ' . $trainer['apellidos'])) ?>? También se suspenderán sus clases activas.')">
                 <?= csrf_field() ?>
                 <button type="submit" class="btn btn-danger">
-                    <i class="bi bi-trash3-fill me-1"></i> Eliminar
+                    <i class="bi bi-trash3-fill me-1"></i>
                 </button>
             </form>
         <?php endif; ?>

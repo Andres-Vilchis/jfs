@@ -195,7 +195,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
                 <?= csrf_field() ?>
                 <button type="submit" class="btn <?= $colorBtn ?>">
                     <i class="bi <?= $icono ?> me-1"></i>
-                    <?= $etiqueta ?>
+                    <!--<//?= $etiqueta ?> -->
                 </button>
             </form>
         <?php endif; ?>

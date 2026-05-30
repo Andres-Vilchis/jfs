@@ -161,7 +161,7 @@ $editando = isset($cliente);
                 onsubmit="return confirm('¿Seguro que deseas eliminar a <?= addslashes(esc($cliente['nombre'] . ' ' . $cliente['apellidos'])) ?>? Esta acción lo desactivará del sistema.')">
                 <?= csrf_field() ?>
                 <button type="submit" class="btn btn-danger">
-                    <i class="bi bi-trash3-fill me-1"></i> Eliminar
+                    <i class="bi bi-trash3-fill me-1"></i>
                 </button>
             </form>
         <?php endif; ?>

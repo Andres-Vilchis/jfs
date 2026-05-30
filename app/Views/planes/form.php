@@ -102,7 +102,7 @@ $editando = isset($plan);
                 onsubmit="return confirm('¿Seguro que deseas eliminar el plan &quot;<?= addslashes(esc($plan['nombre'])) ?>&quot;?')">
                 <?= csrf_field() ?>
                 <button type="submit" class="btn btn-danger">
-                    <i class="bi bi-trash3-fill me-1"></i> Eliminar
+                    <i class="bi bi-trash3-fill me-1"></i>
                 </button>
             </form>
         <?php endif; ?>
