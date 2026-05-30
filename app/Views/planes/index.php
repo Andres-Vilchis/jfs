@@ -70,16 +70,9 @@
                     </div>
                     <div class="card-footer d-flex gap-2">
                         <a href="<?= route_to('planes.editar', $p['id']) ?>"
-                            class="btn btn-sm btn-outline-primary flex-fill">
+                            class="btn btn-sm btn-secondary flex-fill">
                             <i class="bi bi-pencil me-1"></i> Editar
                         </a>
-                        <form action="<?= route_to('planes.toggle', $p['id']) ?>" method="post">
-                            <?= csrf_field() ?>
-                            <button class="btn btn-sm <?= $p['activo'] ? 'btn-outline-warning' : 'btn-outline-success' ?>">
-                                <i class="bi bi-<?= $p['activo'] ? 'pause-circle' : 'play-circle' ?>"></i>
-                                <?= $p['activo'] ? 'Desactivar' : 'Activar' ?>
-                            </button>
-                        </form>
                     </div>
                 </div>
             </div>

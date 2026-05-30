@@ -80,16 +80,10 @@
                     </div>
                     <div class="card-footer d-flex gap-2">
                         <a href="<?= route_to('trainers.editar', $t['id']) ?>"
-                            class="btn btn-sm btn-outline-primary flex-fill">
+                            class="btn btn-sm btn-secondary flex-fill">
                             <i class="bi bi-pencil me-1"></i> Editar
                         </a>
-                        <form action="<?= route_to('trainers.toggle', $t['id']) ?>" method="post">
-                            <?= csrf_field() ?>
-                            <button class="btn btn-sm <?= $t['activo'] ? 'btn-outline-warning' : 'btn-outline-success' ?>">
-                                <i class="bi bi-<?= $t['activo'] ? 'pause-circle' : 'play-circle' ?>"></i>
-                                <?= $t['activo'] ? 'Desactivar' : 'Activar' ?>
-                            </button>
-                        </form>
+                        
                     </div>
                 </div>
             </div>
