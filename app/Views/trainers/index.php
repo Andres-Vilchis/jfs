@@ -22,7 +22,19 @@
 </div>
 
 <?php if (session()->getFlashdata('success')): ?>
-    <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
+    <div class="alert alert-success alert-dismissible fade show py-2">
+        <?= session()->getFlashdata('success') ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+<?php endif; ?>
+<?php if (session()->getFlashdata('errors')): ?>
+    <div class="alert alert-danger alert-dismissible fade show py-2">
+        <ul class="mb-0 small">
+            <?php foreach (session()->getFlashdata('errors') as $e): ?>
+                <li><?= esc($e) ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
 <?php endif; ?>
 
 <div class="row g-3">

@@ -15,11 +15,11 @@
 </div>
 
 <?php if (session()->getFlashdata('success')): ?>
-    <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
+    <div class="alert alert-success alert-dismissible fade show py-2"><?= session()->getFlashdata('success') ?></div>
 <?php endif; ?>
 
 <?php if (session()->getFlashdata('error')): ?>
-    <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
+    <div class="alert alert-danger alert-dismissible fade show py-2"><?= session()->getFlashdata('error') ?></div>
 <?php endif; ?>
 
 <div class="row g-3">
