@@ -138,17 +138,34 @@ $editando = isset($cliente);
                         placeholder="Observaciones..."><?= esc($cliente['notas'] ?? '') ?></textarea>
                 </div>
             </div>
-
         </div>
 
-        <div class="mt-3">
-            <button type="submit" class="btn btn-sm btn-primary">
-                <i class="bi bi-save me-1"></i> <?= $editando ? 'Actualizar' : 'Registrar' ?>
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-save me-1"></i>
+                <?= $editando ? 'Actualizar' : 'Registrar' ?>
             </button>
-            <a href="<?= route_to('clientes.index') ?>" class="btn btn-sm btn-outline-secondary ms-2">Cancelar</a>
+            <a href="<?= route_to('clientes.index') ?>" class="btn btn-outline-secondary ms-2">
+                Cancelar
+            </a>
         </div>
 
         <?= form_close() ?>
+        <!-- ↑ form principal cierra aquí -->
+
+        <?php if ($editando && ($cliente['activo'] ?? 0)): ?>
+            <!-- Form independiente de eliminación — NO anidado en el form de edición -->
+            <form action="<?= route_to('clientes.desactivar', $cliente['id']) ?>"
+                method="post"
+                class="mt-3 text-end"
+                onsubmit="return confirm('¿Seguro que deseas eliminar a <?= addslashes(esc($cliente['nombre'] . ' ' . $cliente['apellidos'])) ?>? Esta acción lo desactivará del sistema.')">
+                <?= csrf_field() ?>
+                <button type="submit" class="btn btn-danger">
+                    <i class="bi bi-trash3-fill me-1"></i> Eliminar
+                </button>
+            </form>
+        <?php endif; ?>
+
     </div>
 </div>
 

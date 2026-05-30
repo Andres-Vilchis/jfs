@@ -79,17 +79,34 @@ $editando = isset($plan);
                 </div>
                 <div class="form-text ps-1">Escribe un beneficio por línea.</div>
             </div>
-
         </div>
 
-        <div class="mt-3">
-            <button type="submit" class="btn btn-sm btn-primary">
-                <i class="bi bi-save me-1"></i> <?= $editando ? 'Actualizar' : 'Crear plan' ?>
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-save me-1"></i>
+                <?= $editando ? 'Actualizar' : 'Crear plan' ?>
             </button>
-            <a href="<?= route_to('planes.index') ?>" class="btn btn-sm btn-outline-secondary ms-2">Cancelar</a>
+            <a href="<?= route_to('planes.index') ?>" class="btn btn-outline-secondary ms-2">
+                Cancelar
+            </a>
         </div>
 
         <?= form_close() ?>
+        <!-- ↑ form principal cierra aquí -->
+
+        <?php if ($editando && ($plan['activo'] ?? 0)): ?>
+            <!-- Form independiente de eliminación — NO anidado en el form de edición -->
+            <form action="<?= route_to('planes.toggle', $plan['id']) ?>"
+                method="post"
+                class="mt-3 text-end"
+                onsubmit="return confirm('¿Seguro que deseas eliminar el plan &quot;<?= addslashes(esc($plan['nombre'])) ?>&quot;?')">
+                <?= csrf_field() ?>
+                <button type="submit" class="btn btn-danger">
+                    <i class="bi bi-trash3-fill me-1"></i> Eliminar
+                </button>
+            </form>
+        <?php endif; ?>
+
     </div>
 </div>
 
