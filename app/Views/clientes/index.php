@@ -229,8 +229,8 @@
                         <?= csrf_field() ?>
                         <button type="submit"
                             class="btn btn-sm btn-outline-danger"
-                            onclick="return confirm('¿Dar de baja a este cliente? Esta acción lo desactivará del sistema.')">
-                            <i class="bi bi-trash-fill me-1"></i> Eliminar
+                            onclick="return confirm('Eliminar a este cliente? Esta acción lo eliminará del sistema.')">
+                            <i class="bi bi-trash-fill me-1"></i>
                         </button>
                     </form>
                 </div>

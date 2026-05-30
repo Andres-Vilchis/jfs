@@ -155,9 +155,7 @@ $editando = isset($cliente);
 
         <?php if ($editando && ($cliente['activo'] ?? 0)): ?>
             <!-- Form independiente de eliminación — NO anidado en el form de edición -->
-            <form action="<?= route_to('clientes.desactivar', $cliente['id']) ?>"
-                method="post"
-                class="mt-3 text-end"
+            <form action="<?= route_to('clientes.desactivar', $cliente['id']) ?>" method="post" class="mt-3 text-end"
                 onsubmit="return confirm('¿Seguro que deseas eliminar a <?= addslashes(esc($cliente['nombre'] . ' ' . $cliente['apellidos'])) ?>? Esta acción lo eliminará del sistema.')">
                 <?= csrf_field() ?>
                 <button type="submit" class="btn btn-outline-danger">
