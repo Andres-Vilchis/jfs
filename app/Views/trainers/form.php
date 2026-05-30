@@ -96,13 +96,15 @@ $editando = isset($trainer);
         </div>
 
         <div class="mt-4 d-flex justify-content-between align-items-center">
-            <button type="submit" class="btn btn-sm btn-primary">
-                <i class="bi bi-save me-1"></i>
-                <?= $editando ? 'Actualizar' : 'Registrar' ?>
-            </button>
-            <a href="<?= route_to('trainers.index') ?>" class="btn btn-sm btn-outline-secondary ms-2">
-                Cancelar
-            </a>
+            <div>
+                <button type="submit" class="btn btn-sm btn-primary">
+                    <i class="bi bi-save me-1"></i>
+                    <?= $editando ? 'Actualizar' : 'Registrar' ?>
+                </button>
+                <a href="<?= route_to('trainers.index') ?>" class="btn btn-sm btn-outline-secondary ms-2">
+                    Cancelar
+                </a>
+            </div>
         </div>
 
         <?= form_close() ?>
@@ -116,7 +118,7 @@ $editando = isset($trainer);
                 onsubmit="return confirm('¿Seguro que deseas eliminar al trainer <?= addslashes(esc($trainer['nombre'] . ' ' . $trainer['apellidos'])) ?>? También se suspenderán sus clases activas.')">
                 <?= csrf_field() ?>
                 <button type="submit" class="btn btn-sm btn-outline-danger">
-                    <i class="bi bi-trash3-fill me-1"></i>
+                    <i class="bi bi-trash3-fill"></i>
                 </button>
             </form>
         <?php endif; ?>

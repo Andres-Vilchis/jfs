@@ -140,7 +140,7 @@ $editando = isset($cliente);
             </div>
         </div>
 
-        <div class="mt-4">
+        <div class="mt-4 d-flex justify-content-between align-items-center">
             <button type="submit" class="btn btn-sm btn-primary">
                 <i class="bi bi-save me-1"></i>
                 <?= $editando ? 'Actualizar' : 'Registrar' ?>
@@ -159,7 +159,7 @@ $editando = isset($cliente);
                 onsubmit="return confirm('¿Seguro que deseas eliminar a <?= addslashes(esc($cliente['nombre'] . ' ' . $cliente['apellidos'])) ?>? Esta acción lo eliminará del sistema.')">
                 <?= csrf_field() ?>
                 <button type="submit" class="btn btn-sm btn-outline-danger">
-                    <i class="bi bi-trash3-fill me-1"></i>
+                    <i class="bi bi-trash3-fill"></i>
                 </button>
             </form>
         <?php endif; ?>

@@ -171,7 +171,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
                     <i class="bi bi-save me-1"></i>
                     <?= $editando ? 'Actualizar' : 'Registrar' ?>
                 </button>
-                <a href="<?= route_to('clases.index') ?>" class="btn btn-outline-secondary ms-2">
+                <a href="<?= route_to('clases.index') ?>" class="btn btn-sm btn-outline-secondary ms-2">
                     Cancelar
                 </a>
             </div>
@@ -193,8 +193,8 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
                   class="mt-3 text-end"
                   onsubmit="return confirm('<?= addslashes($confirmar) ?>')">
                 <?= csrf_field() ?>
-                <button type="submit" class="btn bt-sm <?= $colorBtn ?>">
-                    <i class="bi <?= $icono ?> me-1"></i>
+                <button type="submit" class="btn btn-sm <?= $colorBtn ?>">
+                    <i class="bi <?= $icono ?>"></i>
                     <!--<//?= $etiqueta ?> -->
                 </button>
             </form>

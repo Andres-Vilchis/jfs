@@ -41,7 +41,6 @@ $grupoActual = $editando ? ($usuario->grupos[0] ?? '') : '';
         <?= form_open($action) ?>
 
         <div class="row g-2">
-
             <div class="col-12">
                 <div class="input-group input-group-sm">
                     <span class="input-group-text" style="min-width:140px">Usuario *</span>
@@ -86,7 +85,6 @@ $grupoActual = $editando ? ($usuario->grupos[0] ?? '') : '';
                     </select>
                 </div>
             </div>
-
         </div>
 
         <div class="mt-3">
