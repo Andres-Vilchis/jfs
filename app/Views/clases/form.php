@@ -175,29 +175,33 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
                     Cancelar
                 </a>
             </div>
-
-            <?php if ($editando): ?>
-                <?php
-                $confirmar = $clase['activo']
-                    ? '¿Seguro que deseas ELIMINAR esta clase? Los participantes inscritos permanecerán en el registro.'
-                    : '¿Deseas ACTIVAR esta clase?';
-                $colorBtn  = $clase['activo'] ? 'btn-danger' : 'btn-success';
-                $icono     = $clase['activo'] ? 'bi-trash3-fill' : 'bi-play-circle';
-                $etiqueta  = $clase['activo'] ? 'Eliminar' : 'Activar clase';
-                ?>
-                <form action="<?= route_to('clases.toggle', $clase['id']) ?>" method="post"
-                      onsubmit="return confirm('<?= addslashes($confirmar) ?>')">
-                    <?= csrf_field() ?>
-                    <button type="submit" class="btn <?= $colorBtn ?>">
-                        <i class="bi <?= $icono ?> me-1"></i>
-                        <?= $etiqueta ?>
-                    </button>
-                </form>
-            <?php endif; ?>
-        </div>
-
-        <?= form_close() ?>
-    </div>
-</div>
-
+            <?= form_close() ?>
+        <!-- ↑ El form principal cierra aquí, ANTES del botón Eliminar -->
+ 
+        <?php if ($editando): ?>
+            <?php
+            $confirmar = $clase['activo']
+                ? '¿Seguro que deseas eliminar esta clase? Los participantes inscritos permanecerán en el registro.'
+                : '¿Deseas activar esta clase?';
+            $colorBtn = $clase['activo'] ? 'btn-danger' : 'btn-success';
+            $icono    = $clase['activo'] ? 'bi-trash3-fill' : 'bi-play-circle';
+            $etiqueta = $clase['activo'] ? 'Eliminar' : 'Activar clase';
+            ?>
+            <!-- Form independiente — NO anidado en el form de edición -->
+            <form action="<?= route_to('clases.toggle', $clase['id']) ?>"
+                  method="post"
+                  class="mt-3 text-end"
+                  onsubmit="return confirm('<?= addslashes($confirmar) ?>')">
+                <?= csrf_field() ?>
+                <button type="submit" class="btn <?= $colorBtn ?>">
+                    <i class="bi <?= $icono ?> me-1"></i>
+                    <?= $etiqueta ?>
+                </button>
+            </form>
+        <?php endif; ?>
+ 
+    </div><!-- /card-body -->
+</div><!-- /card -->
+ 
 <?= $this->endSection() ?>
+ 
