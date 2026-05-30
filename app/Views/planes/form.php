@@ -87,7 +87,7 @@ $editando = isset($plan);
                 <?= $editando ? 'Actualizar' : 'Crear plan' ?>
             </button>
             <a href="<?= route_to('planes.index') ?>" class="btn btn-sm btn-outline-secondary ms-2">
-                Cancelar
+            <i class="bi bi-x-diamond-fill me-1"></i>Cancelar
             </a>
         </div>
 

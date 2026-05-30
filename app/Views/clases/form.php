@@ -172,7 +172,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
                     <?= $editando ? 'Actualizar' : 'Registrar' ?>
                 </button>
                 <a href="<?= route_to('clases.index') ?>" class="btn btn-sm btn-outline-secondary ms-2">
-                    Cancelar
+                <i class="bi bi-x-diamond-fill me-1"></i>Cancelar
                 </a>
             </div>
             <?= form_close() ?>

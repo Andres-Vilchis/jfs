@@ -230,7 +230,7 @@
                         <button type="submit"
                             class="btn btn-sm btn-outline-danger"
                             onclick="return confirm('Eliminar a este cliente? Esta acción lo eliminará del sistema.')">
-                            <i class="bi bi-trash-fill me-1"></i>
+                            <i class="bi bi-trash-fill"></i>
                         </button>
                     </form>
                 </div>

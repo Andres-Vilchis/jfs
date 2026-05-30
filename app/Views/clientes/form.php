@@ -146,7 +146,7 @@ $editando = isset($cliente);
                 <?= $editando ? 'Actualizar' : 'Registrar' ?>
             </button>
             <a href="<?= route_to('clientes.index') ?>" class="btn btn-sm btn-outline-secondary ms-2">
-                Cancelar
+            <i class="bi bi-x-diamond-fill me-1"></i>Cancelar
             </a>
         </div>
 

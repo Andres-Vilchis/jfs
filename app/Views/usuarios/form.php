@@ -91,7 +91,7 @@ $grupoActual = $editando ? ($usuario->grupos[0] ?? '') : '';
             <button type="submit" class="btn btn-sm btn-primary">
                 <i class="bi bi-save me-1"></i> <?= $editando ? 'Actualizar' : 'Crear usuario' ?>
             </button>
-            <a href="<?= route_to('usuarios.index') ?>" class="btn btn-sm btn-outline-secondary ms-2">Cancelar</a>
+            <a href="<?= route_to('usuarios.index') ?>" class="btn btn-sm btn-outline-secondary ms-2"><i class="bi bi-x-diamond-fill me-1"></i>Cancelar</a>
         </div>
 
         <?= form_close() ?>
