@@ -82,11 +82,11 @@ $editando = isset($plan);
         </div>
 
         <div class="mt-4">
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-sm btn-primary">
                 <i class="bi bi-save me-1"></i>
                 <?= $editando ? 'Actualizar' : 'Crear plan' ?>
             </button>
-            <a href="<?= route_to('planes.index') ?>" class="btn btn-outline-secondary ms-2">
+            <a href="<?= route_to('planes.index') ?>" class="btn btn-sm btn-outline-secondary ms-2">
                 Cancelar
             </a>
         </div>
@@ -101,7 +101,7 @@ $editando = isset($plan);
                 class="mt-3 text-end"
                 onsubmit="return confirm('¿Seguro que deseas eliminar el plan &quot;<?= addslashes(esc($plan['nombre'])) ?>&quot;?')">
                 <?= csrf_field() ?>
-                <button type="submit" class="btn btn-outline-danger">
+                <button type="submit" class="btn btn-sm btn-outline-danger">
                     <i class="bi bi-trash3-fill me-1"></i>
                 </button>
             </form>

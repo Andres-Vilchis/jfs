@@ -141,11 +141,11 @@ $editando = isset($cliente);
         </div>
 
         <div class="mt-4">
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-sm btn-primary">
                 <i class="bi bi-save me-1"></i>
                 <?= $editando ? 'Actualizar' : 'Registrar' ?>
             </button>
-            <a href="<?= route_to('clientes.index') ?>" class="btn btn-outline-secondary ms-2">
+            <a href="<?= route_to('clientes.index') ?>" class="btn btn-sm btn-outline-secondary ms-2">
                 Cancelar
             </a>
         </div>
@@ -158,7 +158,7 @@ $editando = isset($cliente);
             <form action="<?= route_to('clientes.desactivar', $cliente['id']) ?>" method="post" class="mt-3 text-end"
                 onsubmit="return confirm('¿Seguro que deseas eliminar a <?= addslashes(esc($cliente['nombre'] . ' ' . $cliente['apellidos'])) ?>? Esta acción lo eliminará del sistema.')">
                 <?= csrf_field() ?>
-                <button type="submit" class="btn btn-outline-danger">
+                <button type="submit" class="btn btn-sm btn-outline-danger">
                     <i class="bi bi-trash3-fill me-1"></i>
                 </button>
             </form>

@@ -167,7 +167,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
         <div class="mt-4 d-flex justify-content-between align-items-center">
             <div>
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-sm btn-primary">
                     <i class="bi bi-save me-1"></i>
                     <?= $editando ? 'Actualizar' : 'Registrar' ?>
                 </button>
@@ -193,7 +193,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
                   class="mt-3 text-end"
                   onsubmit="return confirm('<?= addslashes($confirmar) ?>')">
                 <?= csrf_field() ?>
-                <button type="submit" class="btn <?= $colorBtn ?>">
+                <button type="submit" class="btn bt-sm <?= $colorBtn ?>">
                     <i class="bi <?= $icono ?> me-1"></i>
                     <!--<//?= $etiqueta ?> -->
                 </button>

@@ -95,12 +95,12 @@ $editando = isset($trainer);
             </div>
         </div>
 
-        <div class="mt-4">
-            <button type="submit" class="btn btn-primary">
+        <div class="mt-4 d-flex justify-content-between align-items-center">
+            <button type="submit" class="btn btn-sm btn-primary">
                 <i class="bi bi-save me-1"></i>
                 <?= $editando ? 'Actualizar' : 'Registrar' ?>
             </button>
-            <a href="<?= route_to('trainers.index') ?>" class="btn btn-outline-secondary ms-2">
+            <a href="<?= route_to('trainers.index') ?>" class="btn btn-sm btn-outline-secondary ms-2">
                 Cancelar
             </a>
         </div>
@@ -115,7 +115,7 @@ $editando = isset($trainer);
                 class="mt-3 text-end"
                 onsubmit="return confirm('¿Seguro que deseas eliminar al trainer <?= addslashes(esc($trainer['nombre'] . ' ' . $trainer['apellidos'])) ?>? También se suspenderán sus clases activas.')">
                 <?= csrf_field() ?>
-                <button type="submit" class="btn btn-outline-danger">
+                <button type="submit" class="btn btn-sm btn-outline-danger">
                     <i class="bi bi-trash3-fill me-1"></i>
                 </button>
             </form>
