@@ -39,7 +39,7 @@ $editando = isset($cliente);
 
             <div class="col-md-6">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text" style="min-width:130px">Nombre *</span>
+                    <span class="input-group-text">Nombre <span class="text-danger">*</span></span>
                     <input type="text" name="nombre" class="form-control"
                         placeholder="Nombre"
                         value="<?= set_value('nombre', $cliente['nombre'] ?? '') ?>" required>
@@ -48,7 +48,7 @@ $editando = isset($cliente);
 
             <div class="col-md-6">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text" style="min-width:130px">Apellidos *</span>
+                    <span class="input-group-text">Apellidos <span class="text-danger">*</span></span>
                     <input type="text" name="apellidos" class="form-control"
                         placeholder="Apellidos"
                         value="<?= set_value('apellidos', $cliente['apellidos'] ?? '') ?>" required>
@@ -57,7 +57,7 @@ $editando = isset($cliente);
 
             <div class="col-md-6">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text" style="min-width:130px">Correo</span>
+                    <span class="input-group-text">Correo</span>
                     <input type="email" name="correo" class="form-control"
                         placeholder="correo@ejemplo.com"
                         value="<?= set_value('correo', $cliente['correo'] ?? '') ?>">
@@ -66,7 +66,7 @@ $editando = isset($cliente);
 
             <div class="col-md-6">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text" style="min-width:130px">Teléfono</span>
+                    <span class="input-group-text">Teléfono</span>
                     <input type="text" name="telefono" class="form-control"
                         placeholder="10 dígitos"
                         value="<?= set_value('telefono', $cliente['telefono'] ?? '') ?>">
@@ -75,7 +75,7 @@ $editando = isset($cliente);
 
             <div class="col-md-4">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text" style="min-width:130px">Fecha nacimiento</span>
+                    <span class="input-group-text">Fecha nacimiento</span>
                     <input type="date" name="fecha_nacimiento" class="form-control"
                         value="<?= set_value('fecha_nacimiento', $cliente['fecha_nacimiento'] ?? '') ?>">
                 </div>
@@ -83,7 +83,7 @@ $editando = isset($cliente);
 
             <div class="col-md-4">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text" style="min-width:130px">Género</span>
+                    <span class="input-group-text">Género</span>
                     <select name="genero" class="form-select form-select-sm">
                         <option value="">— Selecciona —</option>
                         <?php foreach (['masculino', 'femenino', 'otro'] as $g): ?>
@@ -97,7 +97,7 @@ $editando = isset($cliente);
 
             <div class="col-md-4">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text" style="min-width:130px">Nivel *</span>
+                    <span class="input-group-text">Nivel <span class="text-danger">*</span></span>
                     <select name="nivel" class="form-select form-select-sm">
                         <?php foreach (['principiante', 'intermedio', 'avanzado'] as $n): ?>
                             <option value="<?= $n ?>" <?= (($cliente['nivel'] ?? 'principiante') === $n) ? 'selected' : '' ?>>
@@ -110,7 +110,7 @@ $editando = isset($cliente);
 
             <div class="col-md-6">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text" style="min-width:130px">Plan</span>
+                    <span class="input-group-text">Plan</span>
                     <select name="plan_id" class="form-select form-select-sm">
                         <option value="">— Sin plan —</option>
                         <?php foreach ($planes as $p): ?>
@@ -125,7 +125,7 @@ $editando = isset($cliente);
 
             <div class="col-md-6">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text" style="min-width:130px">Vencimiento</span>
+                    <span class="input-group-text">Vencimiento</span>
                     <input type="date" name="fecha_vencimiento" class="form-control"
                         value="<?= set_value('fecha_vencimiento', $cliente['fecha_vencimiento'] ?? '') ?>">
                 </div>
@@ -133,7 +133,7 @@ $editando = isset($cliente);
 
             <div class="col-12">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text" style="min-width:130px">Notas</span>
+                    <span class="input-group-text">Notas</span>
                     <textarea name="notas" class="form-control" rows="3"
                         placeholder="Observaciones..."><?= esc($cliente['notas'] ?? '') ?></textarea>
                 </div>
@@ -158,9 +158,9 @@ $editando = isset($cliente);
             <form action="<?= route_to('clientes.desactivar', $cliente['id']) ?>"
                 method="post"
                 class="mt-3 text-end"
-                onsubmit="return confirm('¿Seguro que deseas eliminar a <?= addslashes(esc($cliente['nombre'] . ' ' . $cliente['apellidos'])) ?>? Esta acción lo desactivará del sistema.')">
+                onsubmit="return confirm('¿Seguro que deseas eliminar a <?= addslashes(esc($cliente['nombre'] . ' ' . $cliente['apellidos'])) ?>? Esta acción lo eliminará del sistema.')">
                 <?= csrf_field() ?>
-                <button type="submit" class="btn btn-danger">
+                <button type="submit" class="btn btn-outline-danger">
                     <i class="bi bi-trash3-fill me-1"></i>
                 </button>
             </form>

@@ -101,7 +101,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             <!-- Hora fin -->
             <div class="col-md-4">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text"><i class="bi bi-clock-history"></i> Hr. fin *</span>
+                    <span class="input-group-text"><i class="bi bi-clock-history"></i> Hr. fin <span class="text-danger">*</span></span>
                     <?= form_input([
                         'name'  => 'hora_fin',
                         'type'  => 'time',
@@ -114,7 +114,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             <!-- Capacidad máx -->
             <div class="col-md-4">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text"><i class="bi bi-people"></i> Capacidad *</span>
+                    <span class="input-group-text"><i class="bi bi-people"></i> Capacidad <span class="text-danger">*</span></span>
                     <?= form_input([
                         'name'  => 'capacidad_max',
                         'type'  => 'number',
@@ -140,7 +140,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
             <!-- Días de la semana -->
             <div class="col-md-6">
-                <label class="form-label d-block">Días de la semana *</label>
+                <label class="form-label d-block">Días de la semana <span class="text-danger">*</span></label>
                 <div class="d-flex flex-wrap gap-2 pt-1">
                     <?php foreach ($diasOpciones as $i => $dia): ?>
                         <div class="form-check form-check-inline">

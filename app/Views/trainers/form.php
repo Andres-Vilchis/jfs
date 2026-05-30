@@ -36,8 +36,8 @@ $editando = isset($trainer);
         <div class="row g-2">
 
             <div class="col-md-6">
-                <div class="input-group input-group-sm">
-                    <span class="input-group-text" style="min-width:120px">Nombre *</span>
+                <div class="input-group input-group-sm small">
+                    <span class="input-group-text">Nombre <span class="text-danger">*</span></span>
                     <input type="text" name="nombre" class="form-control"
                         placeholder="Nombre"
                         value="<?= set_value('nombre', $trainer['nombre'] ?? '') ?>" required>
@@ -45,8 +45,8 @@ $editando = isset($trainer);
             </div>
 
             <div class="col-md-6">
-                <div class="input-group input-group-sm">
-                    <span class="input-group-text" style="min-width:120px">Apellidos *</span>
+                <div class="input-group input-group-sm small">
+                    <span class="input-group-text">Apellidos <span class="text-danger">*</span></span>
                     <input type="text" name="apellidos" class="form-control"
                         placeholder="Apellidos"
                         value="<?= set_value('apellidos', $trainer['apellidos'] ?? '') ?>" required>
@@ -55,7 +55,7 @@ $editando = isset($trainer);
 
             <div class="col-md-6">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text" style="min-width:120px">Correo</span>
+                    <span class="input-group-text">Correo</span>
                     <input type="email" name="correo" class="form-control"
                         placeholder="correo@ejemplo.com"
                         value="<?= set_value('correo', $trainer['correo'] ?? '') ?>">
@@ -64,7 +64,7 @@ $editando = isset($trainer);
 
             <div class="col-md-6">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text" style="min-width:120px">Teléfono</span>
+                    <span class="input-group-text">Teléfono</span>
                     <input type="text" name="telefono" class="form-control"
                         placeholder="10 dígitos"
                         value="<?= set_value('telefono', $trainer['telefono'] ?? '') ?>">
@@ -73,7 +73,7 @@ $editando = isset($trainer);
 
             <div class="col-md-6">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text" style="min-width:120px">Nivel *</span>
+                    <span class="input-group-text">Nivel <span class="text-danger">*</span></span>
                     <select name="nivel" class="form-select form-select-sm">
                         <?php foreach (['principiante', 'intermedio', 'avanzado'] as $n): ?>
                             <option value="<?= $n ?>"
@@ -87,7 +87,7 @@ $editando = isset($trainer);
 
             <div class="col-md-6">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text" style="min-width:120px">Especialidad</span>
+                    <span class="input-group-text">Especialidad</span>
                     <input type="text" name="especialidad" class="form-control"
                         placeholder="Ej. Crossfit, Yoga..."
                         value="<?= set_value('especialidad', $trainer['especialidad'] ?? '') ?>">
@@ -115,7 +115,7 @@ $editando = isset($trainer);
                 class="mt-3 text-end"
                 onsubmit="return confirm('¿Seguro que deseas eliminar al trainer <?= addslashes(esc($trainer['nombre'] . ' ' . $trainer['apellidos'])) ?>? También se suspenderán sus clases activas.')">
                 <?= csrf_field() ?>
-                <button type="submit" class="btn btn-danger">
+                <button type="submit" class="btn btn-outline-danger">
                     <i class="bi bi-trash3-fill me-1"></i>
                 </button>
             </form>
