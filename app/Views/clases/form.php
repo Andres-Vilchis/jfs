@@ -183,7 +183,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             $confirmar = $clase['activo']
                 ? '¿Seguro que deseas eliminar esta clase? Los participantes inscritos permanecerán en el registro.'
                 : '¿Deseas activar esta clase?';
-            $colorBtn = $clase['activo'] ? 'btn-danger' : 'btn-success';
+            $colorBtn = $clase['activo'] ? 'btn-outline-danger' : 'btn-success';
             $icono    = $clase['activo'] ? 'bi-trash3-fill' : 'bi-play-circle';
             $etiqueta = $clase['activo'] ? 'Eliminar' : 'Activar clase';
             ?>
