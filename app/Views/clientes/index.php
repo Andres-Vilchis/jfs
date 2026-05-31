@@ -128,7 +128,7 @@
                                             </span>
                                         <?php endforeach; ?>
                                     <?php else: ?>
-                                        <span class="text-muted small text-center">—</span>
+                                        <span class="text-muted small text-center">- -</span>
                                     <?php endif; ?>
                                 </td>
 
@@ -155,33 +155,33 @@
                 <?= csrf_field() ?>
                 <div class="modal-body py-3">
                     <div class="d-flex flex-column gap-2">
-                        <div class="input-group input-group-sm">
+                        <div class="input-group input-group-sm small">
                             <span class="input-group-text" style="min-width:110px">Nombre</span>
                             <input type="text" name="nombre" id="m_nombre" class="form-control" placeholder="Nombre" required>
                         </div>
-                        <div class="input-group input-group-sm">
+                        <div class="input-group input-group-sm small">
                             <span class="input-group-text" style="min-width:110px">Apellidos</span>
                             <input type="text" name="apellidos" id="m_apellidos" class="form-control" placeholder="Apellidos" required>
                         </div>
-                        <div class="input-group input-group-sm">
+                        <div class="input-group input-group-sm small">
                             <span class="input-group-text" style="min-width:110px">
                                 <i class="bi bi-envelope me-1"></i>Correo
                             </span>
                             <input type="email" name="correo" id="m_correo" class="form-control" placeholder="correo@ejemplo.com">
                         </div>
-                        <div class="input-group input-group-sm">
+                        <div class="input-group input-group-sm small">
                             <span class="input-group-text" style="min-width:110px">
                                 <i class="bi bi-phone me-1"></i>Teléfono
                             </span>
                             <input type="text" name="telefono" id="m_telefono" class="form-control" placeholder="10 dígitos">
                         </div>
-                        <div class="input-group input-group-sm">
+                        <div class="input-group input-group-sm small">
                             <span class="input-group-text" style="min-width:110px">
                                 <i class="bi bi-calendar3 me-1"></i>Nacimiento
                             </span>
                             <input type="date" name="fecha_nacimiento" id="m_fecha_nacimiento" class="form-control">
                         </div>
-                        <div class="input-group input-group-sm">
+                        <div class="input-group input-group-sm small">
                             <span class="input-group-text" style="min-width:110px">Género</span>
                             <select name="genero" id="m_genero" class="form-select">
                                 <option value="">— —</option>
@@ -190,7 +190,7 @@
                                 <option value="otro">Otro</option>
                             </select>
                         </div>
-                        <div class="input-group input-group-sm">
+                        <div class="input-group input-group-sm small">
                             <span class="input-group-text" style="min-width:110px">
                                 <i class="bi bi-bar-chart me-1"></i>Nivel
                             </span>
@@ -200,7 +200,7 @@
                                 <option value="avanzado">Avanzado</option>
                             </select>
                         </div>
-                        <div class="input-group input-group-sm">
+                        <div class="input-group input-group-sm small">
                             <span class="input-group-text" style="min-width:110px">
                                 <i class="bi bi-credit-card me-1"></i>Plan
                             </span>
@@ -213,14 +213,14 @@
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                        <div class="input-group input-group-sm">
+                        <div class="input-group input-group-sm small">
                             <span class="input-group-text" style="min-width:110px">
                                 <i class="bi bi-calendar-check me-1"></i>Periodo
                             </span>
                             <input type="date" name="fecha_vencimiento" id="m_fecha_vencimiento"
                                 class="form-control">
                         </div>
-                        <div class="input-group input-group-sm">
+                        <div class="input-group input-group-sm small">
                             <span class="input-group-text" style="min-width:110px">
                                 <i class="bi bi-sticky me-1"></i>Notas
                             </span>
