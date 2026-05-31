@@ -34,7 +34,7 @@ class ClaseModel extends Model
                       (SELECT COUNT(*) FROM clientes_clases cc WHERE cc.clase_id = c.id AND cc.activo = 1) AS inscritos')
             ->join('trainers t', 't.id = c.trainer_id', 'left')
             ->where('c.activo', 1)
-            ->orderBy('c.hora_inicio', 'ASC')
+            ->orderBy('c.dias_semana', 'ASC')
             ->get()->getResultArray();
     }
 
