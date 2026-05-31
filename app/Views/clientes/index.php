@@ -235,18 +235,19 @@
                             <i class="bi bi-x-diamond-fill me-1"></i>Cancelar
                         </button>
                     </div>
-                    <form id="formBaja" method="post" action="" class="m-0">
-                        <?= csrf_field() ?>
-                        <button type="submit"
-                            class="btn btn-sm btn-outline-danger"
-                            onclick="return confirm('Eliminar a este cliente? Esta acción lo eliminará del sistema.')">
-                            <i class="bi bi-trash-fill"></i>
-                        </button>
-                    </form>
-                </div>
+
+            </form>
+            <form id="formBaja" method="post" action="" class="m-0">
+                <?= csrf_field() ?>
+                <button type="submit"
+                    class="btn btn-sm btn-outline-danger"
+                    onclick="return confirm('Eliminar a este cliente? Esta acción lo eliminará del sistema.')">
+                    <i class="bi bi-trash-fill"></i>
+                </button>
             </form>
         </div>
     </div>
+</div>
 </div>
 
 <?= $this->section('scripts') ?>
