@@ -35,7 +35,7 @@ class DashboardController extends BaseController
             ->countAllResults();
 
         // Últimos 5 clientes
-        $ultimosClientes = $clienteModel->ultimos(5);
+        $ultimosClientes = $clienteModel->ultimos(3);
 
         // Clases de hoy
         $clasesHoy = $claseModel->hoy();

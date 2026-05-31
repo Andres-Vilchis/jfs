@@ -164,7 +164,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
             <!-- Descripción -->
             <div class="col-12" style="font-size:.75rem">
-                <textarea name="descripcion" class="form-control text-start" rows="2" style="font-size:.75rem" placeholder="Descripción breve de la clase...">
+                <textarea name="descripcion" class="form-control text-start" rows="2" placeholder="Descripción breve de la clase...">
                     <?= esc($clase['descripcion'] ?? '') ?>
                 </textarea>
             </div>

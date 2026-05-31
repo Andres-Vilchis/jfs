@@ -142,7 +142,7 @@ $fechaInscripcion = set_value('fecha_inscripcion', $cliente['fecha_vencimiento']
 
             <div class="col-12" style="font-size:.75rem">
                 <label class="form-label">Notas</label>
-                <textarea name="notas" class="form-control" rows="3" style="font-size:.75rem">
+                <textarea name="notas" class="form-control" rows="3">
                     <?= esc($cliente['notas'] ?? '') ?>
                 </textarea>
             </div>
