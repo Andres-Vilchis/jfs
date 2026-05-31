@@ -220,7 +220,7 @@
                                         </td>
                                         <td class="text-center align-middle" style="font-size:.75rem">
                                             <div class="text-secondary-emphasis">
-                                                <?= esc($c['plan_nombre'] ?? '—') ?>
+                                                <?= esc($p['plan_nombre'] ?? '—') ?>
                                             </div>
                                         </td>
                                         <td class="text-center align-middle" style="font-size:.75rem">
