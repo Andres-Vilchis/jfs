@@ -65,6 +65,7 @@ class ClaseModel extends Model
             ->where('c.activo', 1)
             ->like('c.dias_semana', $hoy)
             ->orderBy("FIELD(c.dias_semana,'lun','mar','mie','jue','vie','sab','dom')", '', false)
+            ->orderBy('c.hora_inicio', 'ASC')
             ->get()->getResultArray();
     }
 }
