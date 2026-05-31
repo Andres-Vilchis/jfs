@@ -41,7 +41,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
         <div class="row g-3">
 
             <!-- Nombre -->
-            <div class="col-12">
+            <div class="col-12" style="font-size:.75rem">
                 <div class="input-group input-group-sm">
                     <span class="input-group-text">Nombre de la clase *</span>
                     <?= form_input([
@@ -54,7 +54,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             </div>
 
             <!-- Trainer -->
-            <div class="col-md-6">
+            <div class="col-md-6" style="font-size:.75rem">
                 <div class="input-group input-group-sm">
                     <span class="input-group-text">Trainer <span class="text-danger">*</span></span>
                     <select name="trainer_id" class="form-select">
@@ -71,9 +71,9 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             </div>
 
             <!-- Nivel -->
-            <div class="col-md-6">
+            <div class="col-md-6" style="font-size:.75rem">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text">Nivel *</span>
+                    <span class="input-group-text">Nivel <span class="text-danger">*</span></span>
                     <select name="nivel" class="form-select">
                         <?php foreach (['principiante', 'intermedio', 'avanzado'] as $n): ?>
                             <option value="<?= $n ?>"
@@ -86,7 +86,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             </div>
 
             <!-- Hora inicio -->
-            <div class="col-md-4">
+            <div class="col-md-4" style="font-size:.75rem">
                 <div class="input-group input-group-sm">
                     <span class="input-group-text"><i class="bi bi-clock"></i> Hr. inicio *</span>
                     <?= form_input([
@@ -99,7 +99,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             </div>
 
             <!-- Hora fin -->
-            <div class="col-md-4">
+            <div class="col-md-4" style="font-size:.75rem">
                 <div class="input-group input-group-sm">
                     <span class="input-group-text"><i class="bi bi-clock-history"></i> Hr. fin <span class="text-danger">*</span></span>
                     <?= form_input([
@@ -112,7 +112,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             </div>
 
             <!-- Capacidad máx -->
-            <div class="col-md-4">
+            <div class="col-md-4" style="font-size:.75rem">
                 <div class="input-group input-group-sm">
                     <span class="input-group-text"><i class="bi bi-people"></i> Capacidad <span class="text-danger">*</span></span>
                     <?= form_input([
@@ -126,7 +126,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             </div>
 
             <!-- Salón -->
-            <div class="col-md-6">
+            <div class="col-md-6" style="font-size:.75rem">
                 <div class="input-group input-group-sm">
                     <span class="input-group-text"><i class="bi bi-door-open"></i> Salón</span>
                     <?= form_input([
@@ -139,7 +139,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             </div>
 
             <!-- Días de la semana -->
-            <div class="col-md-6">
+            <div class="col-md-6" style="font-size:.75rem">
                 <label class="form-label d-block">Días de la semana <span class="text-danger">*</span></label>
                 <div class="d-flex flex-wrap gap-2 pt-1">
                     <?php foreach ($diasOpciones as $i => $dia): ?>
@@ -158,7 +158,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             </div>
 
             <!-- Descripción -->
-            <div class="col-12">
+            <div class="col-12" style="font-size:.75rem">
                 <textarea name="descripcion" class="form-control" rows="2"
                     placeholder="Descripción breve de la clase..."><?= esc($clase['descripcion'] ?? '') ?></textarea>
             </div>

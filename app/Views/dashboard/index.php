@@ -76,7 +76,7 @@
                             <?php if (empty($clasesHoy)): ?>
                                 <tr>
                                     <td colspan="3" class="text-center text-muted py-4" style="font-size:.75rem">
-                                        <div class="fw-light small">
+                                        <div class="fw-semibold">
                                             Sin clases hoy
                                         </div>
                                     </td>
