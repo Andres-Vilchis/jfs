@@ -82,31 +82,32 @@ $editando = isset($plan);
         </div>
 
         <div class="mt-4 d-flex justify-content-between align-items-center">
-            <button type="submit" class="btn btn-sm btn-primary">
-                <i class="bi bi-save me-1"></i>
-                <?= $editando ? 'Actualizar' : 'Crear plan' ?>
-            </button>
-            <a href="<?= route_to('planes.index') ?>" class="btn btn-sm btn-outline-secondary ms-2">
-            <i class="bi bi-x-diamond-fill me-1"></i>Cancelar
-            </a>
-        </div>
-
-        <?= form_close() ?>
-        <!-- ↑ form principal cierra aquí -->
-
-        <?php if ($editando && ($plan['activo'] ?? 0)): ?>
-            <!-- Form independiente de eliminación — NO anidado en el form de edición -->
-            <form action="<?= route_to('planes.toggle', $plan['id']) ?>"
-                method="post"
-                class="mt-3 text-end"
-                onsubmit="return confirm('¿Seguro que deseas eliminar el plan &quot;<?= addslashes(esc($plan['nombre'])) ?>&quot;?')">
-                <?= csrf_field() ?>
-                <button type="submit" class="btn btn-sm btn-outline-danger">
-                    <i class="bi bi-trash3-fill"></i>
+            <div>
+                <button type="submit" class="btn btn-sm btn-primary">
+                    <i class="bi bi-save me-1"></i>
+                    <?= $editando ? 'Actualizar' : 'Crear plan' ?>
                 </button>
-            </form>
-        <?php endif; ?>
+                <a href="<?= route_to('planes.index') ?>" class="btn btn-sm btn-outline-secondary ms-2">
+                    <i class="bi bi-x-diamond-fill me-1"></i>Cancelar
+                </a>
+            </div>
 
+            <?= form_close() ?>
+            <!-- ↑ form principal cierra aquí -->
+
+            <?php if ($editando && ($plan['activo'] ?? 0)): ?>
+                <!-- Form independiente de eliminación — NO anidado en el form de edición -->
+                <form action="<?= route_to('planes.toggle', $plan['id']) ?>"
+                    method="post"
+                    class="mt-3 text-end"
+                    onsubmit="return confirm('¿Seguro que deseas eliminar el plan &quot;<?= addslashes(esc($plan['nombre'])) ?>&quot;?')">
+                    <?= csrf_field() ?>
+                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                        <i class="bi bi-trash3-fill"></i>
+                    </button>
+                </form>
+            <?php endif; ?>
+        </div>
     </div>
 </div>
 

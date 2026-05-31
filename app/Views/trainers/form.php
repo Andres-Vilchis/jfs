@@ -102,27 +102,27 @@ $editando = isset($trainer);
                     <?= $editando ? 'Actualizar' : 'Registrar' ?>
                 </button>
                 <a href="<?= route_to('trainers.index') ?>" class="btn btn-sm btn-outline-secondary ms-2">
-                <i class="bi bi-x-diamond-fill me-1"></i>Cancelar
+                    <i class="bi bi-x-diamond-fill me-1"></i>Cancelar
                 </a>
             </div>
+
+            <?= form_close() ?>
+            <!-- ↑ form principal cierra aquí -->
+
+            <?php if ($editando && ($trainer['activo'] ?? 0)): ?>
+                <!-- Form independiente de eliminación — NO anidado en el form de edición -->
+                <form action="<?= route_to('trainers.toggle', $trainer['id']) ?>"
+                    method="post"
+                    class="mt-3 text-end"
+                    onsubmit="return confirm('¿Seguro que deseas eliminar al trainer <?= addslashes(esc($trainer['nombre'] . ' ' . $trainer['apellidos'])) ?>? También se suspenderán sus clases activas.')">
+                    <?= csrf_field() ?>
+                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                        <i class="bi bi-trash3-fill"></i>
+                    </button>
+                </form>
+            <?php endif; ?>
+
         </div>
-
-        <?= form_close() ?>
-        <!-- ↑ form principal cierra aquí -->
-
-        <?php if ($editando && ($trainer['activo'] ?? 0)): ?>
-            <!-- Form independiente de eliminación — NO anidado en el form de edición -->
-            <form action="<?= route_to('trainers.toggle', $trainer['id']) ?>"
-                method="post"
-                class="mt-3 text-end"
-                onsubmit="return confirm('¿Seguro que deseas eliminar al trainer <?= addslashes(esc($trainer['nombre'] . ' ' . $trainer['apellidos'])) ?>? También se suspenderán sus clases activas.')">
-                <?= csrf_field() ?>
-                <button type="submit" class="btn btn-sm btn-outline-danger">
-                    <i class="bi bi-trash3-fill"></i>
-                </button>
-            </form>
-        <?php endif; ?>
-
     </div>
 </div>
 
