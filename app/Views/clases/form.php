@@ -41,8 +41,8 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
         <div class="row g-3">
 
             <!-- Nombre -->
-            <div class="col-12" style="font-size:.75rem">
-                <div class="input-group input-group-sm">
+            <div class="col-12">
+                <div class="input-group input-group-sm" style="font-size:.75rem">
                     <span class="input-group-text">Nombre de la clase *</span>
                     <?= form_input([
                         'name'        => 'nombre',
@@ -54,8 +54,8 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             </div>
 
             <!-- Trainer -->
-            <div class="col-md-6" style="font-size:.75rem">
-                <div class="input-group input-group-sm">
+            <div class="col-md-6">
+                <div class="input-group input-group-sm" style="font-size:.75rem">
                     <span class="input-group-text">Trainer <span class="text-danger">*</span></span>
                     <select name="trainer_id" class="form-select">
                         <option value="">— Selecciona —</option>
@@ -71,8 +71,8 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             </div>
 
             <!-- Nivel -->
-            <div class="col-md-6" style="font-size:.75rem">
-                <div class="input-group input-group-sm">
+            <div class="col-md-6">
+                <div class="input-group input-group-sm" style="font-size:.75rem">
                     <span class="input-group-text">Nivel <span class="text-danger">*</span></span>
                     <select name="nivel" class="form-select">
                         <?php foreach (['principiante', 'intermedio', 'avanzado'] as $n): ?>
@@ -86,8 +86,8 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             </div>
 
             <!-- Hora inicio -->
-            <div class="col-md-4" style="font-size:.75rem">
-                <div class="input-group input-group-sm">
+            <div class="col-md-4">
+                <div class="input-group input-group-sm" style="font-size:.75rem">
                     <span class="input-group-text"><i class="bi bi-clock"></i> Hr. inicio *</span>
                     <?= form_input([
                         'name'  => 'hora_inicio',
@@ -99,8 +99,8 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             </div>
 
             <!-- Hora fin -->
-            <div class="col-md-4" style="font-size:.75rem">
-                <div class="input-group input-group-sm">
+            <div class="col-md-4">
+                <div class="input-group input-group-sm" style="font-size:.75rem">
                     <span class="input-group-text"><i class="bi bi-clock-history"></i> Hr. fin <span class="text-danger">*</span></span>
                     <?= form_input([
                         'name'  => 'hora_fin',
@@ -112,8 +112,8 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             </div>
 
             <!-- Capacidad máx -->
-            <div class="col-md-4" style="font-size:.75rem">
-                <div class="input-group input-group-sm">
+            <div class="col-md-4">
+                <div class="input-group input-group-sm" style="font-size:.75rem">
                     <span class="input-group-text"><i class="bi bi-people"></i> Capacidad <span class="text-danger">*</span></span>
                     <?= form_input([
                         'name'  => 'capacidad_max',
@@ -126,8 +126,8 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             </div>
 
             <!-- Salón -->
-            <div class="col-md-6" style="font-size:.75rem">
-                <div class="input-group input-group-sm">
+            <div class="col-md-6">
+                <div class="input-group input-group-sm" style="font-size:.75rem">
                     <span class="input-group-text"><i class="bi bi-door-open"></i> Salón</span>
                     <?= form_input([
                         'name'        => 'salon',
