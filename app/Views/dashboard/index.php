@@ -87,7 +87,7 @@
                                         <td style="font-size:.75rem">
                                             <div class="text-start align-middle">
                                                 <div class="fw-semibold">
-                                                    <?= esc($cl['nombre'], 0, 1) ?>
+                                                    <?= esc($cl['nombre']) ?>
                                                 </div>
                                                 <div class="text-start text-secondary-emphasis">
                                                     Trainer: <?= esc($cl['trainer_nombre'] ?? 'Sin trainer') ?>
