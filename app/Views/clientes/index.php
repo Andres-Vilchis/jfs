@@ -115,12 +115,12 @@
                                     </div>
                                 </td>
                                 <td class="text-center align-middle small text-muted">
-                                    <?= esc($c['plan_nombre'] ?? '—') ?>
+                                    <p class="fw-light small"><?= esc($c['plan_nombre'] ?? '—') ?></p>
                                 </td>
-                                <td class="text-center align-middle">
-                                    <span class="small"><?= esc(ucfirst($c['nivel'])) ?></span>
+                                <td class="text-center align-middle small">
+                                    <p class="fw-light small"><?= esc(ucfirst($c['nivel'])) ?></p>
                                 </td>
-                                <td class="text-center align-middle">
+                                <td class="text-center align-middle small">
                                     <?php if (! empty($c['dias_clases'])): ?>
                                         <?php foreach ($c['dias_clases'] as $dia): ?>
                                             <span class="badge bg-primary bg-opacity-10 text-primary small me-1">
