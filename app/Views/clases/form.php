@@ -42,11 +42,12 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
             <!-- Nombre -->
             <div class="col-12">
-                <div class="input-group input-group-sm" style="font-size:.75rem">
-                    <span class="input-group-text">Nombre de la clase *</span>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="font-size:.75rem">Nombre de la clase <span class="text-danger">*</span></span>
                     <?= form_input([
                         'name'        => 'nombre',
                         'class'       => 'form-control',
+                        'style'         => 'font-size:.75rem',
                         'placeholder' => 'Ej. Spinning, Yoga, Crossfit...',
                         'value'       => set_value('nombre', $clase['nombre'] ?? ''),
                     ]) ?>
@@ -55,9 +56,9 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
             <!-- Trainer -->
             <div class="col-md-6">
-                <div class="input-group input-group-sm" style="font-size:.75rem">
-                    <span class="input-group-text">Trainer <span class="text-danger">*</span></span>
-                    <select name="trainer_id" class="form-select">
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="font-size:.75rem">Trainer <span class="text-danger">*</span></span>
+                    <select name="trainer_id" class="form-select" style="font-size:.75rem">
                         <option value="">— Selecciona —</option>
                         <?php foreach ($trainers as $t): ?>
                             <option value="<?= $t['id'] ?>"
@@ -72,9 +73,9 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
             <!-- Nivel -->
             <div class="col-md-6">
-                <div class="input-group input-group-sm" style="font-size:.75rem">
-                    <span class="input-group-text">Nivel <span class="text-danger">*</span></span>
-                    <select name="nivel" class="form-select">
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="font-size:.75rem">Nivel <span class="text-danger">*</span></span>
+                    <select name="nivel" class="form-select" style="font-size:.75rem">
                         <?php foreach (['principiante', 'intermedio', 'avanzado'] as $n): ?>
                             <option value="<?= $n ?>"
                                 <?= (set_value('nivel', $clase['nivel'] ?? 'principiante') === $n) ? 'selected' : '' ?>>
@@ -87,12 +88,13 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
             <!-- Hora inicio -->
             <div class="col-md-4">
-                <div class="input-group input-group-sm" style="font-size:.75rem">
-                    <span class="input-group-text"><i class="bi bi-clock"></i> Hr. inicio *</span>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="font-size:.75rem"><i class="bi bi-clock"></i> Hr. inicio *</span>
                     <?= form_input([
                         'name'  => 'hora_inicio',
                         'type'  => 'time',
                         'class' => 'form-control',
+                        'style' => 'font-size:.75rem',
                         'value' => set_value('hora_inicio', $clase['hora_inicio'] ?? ''),
                     ]) ?>
                 </div>
@@ -100,12 +102,13 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
             <!-- Hora fin -->
             <div class="col-md-4">
-                <div class="input-group input-group-sm" style="font-size:.75rem">
-                    <span class="input-group-text"><i class="bi bi-clock-history"></i> Hr. fin <span class="text-danger">*</span></span>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="font-size:.75rem"><i class="bi bi-clock-history"></i> Hr. fin <span class="text-danger">*</span></span>
                     <?= form_input([
                         'name'  => 'hora_fin',
                         'type'  => 'time',
                         'class' => 'form-control',
+                        'style' => 'font-size:.75rem',
                         'value' => set_value('hora_fin', $clase['hora_fin'] ?? ''),
                     ]) ?>
                 </div>
@@ -114,12 +117,13 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             <!-- Capacidad máx -->
             <div class="col-md-4">
                 <div class="input-group input-group-sm" style="font-size:.75rem">
-                    <span class="input-group-text"><i class="bi bi-people"></i> Capacidad <span class="text-danger">*</span></span>
+                    <span class="input-group-text" style="font-size:.75rem"><i class="bi bi-people"></i> Capacidad <span class="text-danger">*</span></span>
                     <?= form_input([
                         'name'  => 'capacidad_max',
                         'type'  => 'number',
                         'min'   => '1',
                         'class' => 'form-control',
+                        'style' => 'font-size:.75rem',
                         'value' => set_value('capacidad_max', $clase['capacidad_max'] ?? 20),
                     ]) ?>
                 </div>
@@ -127,11 +131,12 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
             <!-- Salón -->
             <div class="col-md-6">
-                <div class="input-group input-group-sm" style="font-size:.75rem">
-                    <span class="input-group-text"><i class="bi bi-door-open"></i> Salón</span>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text" style="font-size:.75rem"><i class="bi bi-door-open"></i> Salón</span>
                     <?= form_input([
                         'name'        => 'salon',
                         'class'       => 'form-control',
+                        'style' => 'font-size:.75rem',
                         'placeholder' => 'Ej. Sala A, Sala Principal...',
                         'value'       => set_value('salon', $clase['salon'] ?? ''),
                     ]) ?>
@@ -159,8 +164,9 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
             <!-- Descripción -->
             <div class="col-12" style="font-size:.75rem">
-                <textarea name="descripcion" class="form-control" rows="2"
-                    placeholder="Descripción breve de la clase..."><?= esc($clase['descripcion'] ?? '') ?></textarea>
+                <textarea name="descripcion" class="form-control" rows="2" style="font-size:.75rem" placeholder="Descripción breve de la clase...">
+                    <?= esc($clase['descripcion'] ?? '') ?>
+                </textarea>
             </div>
 
         </div><!-- /row -->
@@ -172,36 +178,35 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
                     <?= $editando ? 'Actualizar' : 'Registrar' ?>
                 </button>
                 <a href="<?= route_to('clases.index') ?>" class="btn btn-sm btn-outline-secondary ms-2">
-                <i class="bi bi-x-diamond-fill me-1"></i>Cancelar
+                    <i class="bi bi-x-diamond-fill me-1"></i>Cancelar
                 </a>
             </div>
             <?= form_close() ?>
-        <!-- ↑ El form principal cierra aquí, ANTES del botón Eliminar -->
- 
-        <?php if ($editando): ?>
-            <?php
-            $confirmar = $clase['activo']
-                ? '¿Seguro que deseas eliminar esta clase? Los participantes inscritos permanecerán en el registro.'
-                : '¿Deseas activar esta clase?';
-            $colorBtn = $clase['activo'] ? 'btn-outline-danger' : 'btn-success';
-            $icono    = $clase['activo'] ? 'bi-trash3-fill' : 'bi-play-circle';
-            $etiqueta = $clase['activo'] ? 'Eliminar' : 'Activar clase';
-            ?>
-            <!-- Form independiente — NO anidado en el form de edición -->
-            <form action="<?= route_to('clases.toggle', $clase['id']) ?>"
-                  method="post"
-                  class="text-end"
-                  onsubmit="return confirm('<?= addslashes($confirmar) ?>')">
-                <?= csrf_field() ?>
-                <button type="submit" class="btn btn-sm <?= $colorBtn ?>">
-                    <i class="bi <?= $icono ?>"></i>
-                    <!--<//?= $etiqueta ?> -->
-                </button>
-            </form>
-        <?php endif; ?>
- 
-    </div><!-- /card-body -->
-</div><!-- /card -->
- 
-<?= $this->endSection() ?>
- 
+            <!-- ↑ El form principal cierra aquí, ANTES del botón Eliminar -->
+
+            <?php if ($editando): ?>
+                <?php
+                $confirmar = $clase['activo']
+                    ? '¿Seguro que deseas eliminar esta clase? Los participantes inscritos permanecerán en el registro.'
+                    : '¿Deseas activar esta clase?';
+                $colorBtn = $clase['activo'] ? 'btn-outline-danger' : 'btn-success';
+                $icono    = $clase['activo'] ? 'bi-trash3-fill' : 'bi-play-circle';
+                $etiqueta = $clase['activo'] ? 'Eliminar' : 'Activar clase';
+                ?>
+                <!-- Form independiente — NO anidado en el form de edición -->
+                <form action="<?= route_to('clases.toggle', $clase['id']) ?>"
+                    method="post"
+                    class="text-end"
+                    onsubmit="return confirm('<?= addslashes($confirmar) ?>')">
+                    <?= csrf_field() ?>
+                    <button type="submit" class="btn btn-sm <?= $colorBtn ?>">
+                        <i class="bi <?= $icono ?>"></i>
+                        <!--<//?= $etiqueta ?> -->
+                    </button>
+                </form>
+            <?php endif; ?>
+
+        </div><!-- /card-body -->
+    </div><!-- /card -->
+
+    <?= $this->endSection() ?>
