@@ -58,7 +58,7 @@
         <div class="card h-100">
             <div class="card-header border-0 pt-3 pb-2 px-4 d-flex justify-content-between align-items-center">
                 <h6 class="small mb-0">Próxima clase</h6>
-                <a href="<?= route_to('clases.index') ?>" class="small btn btn-sm btn-link text-decoration-none p-0">
+                <a href="<?= route_to('clases.index') ?>" class="btn btn-sm btn-link text-decoration-none p-0" style="font-size:.75rem">
                     Ver todas
                 </a>
             </div>
@@ -67,16 +67,16 @@
                     <table class="table table-hover table-striped table-sm mb-0">
                         <thead class="small">
                             <tr>
-                                <th>Clase</th>
-                                <th>Horario</th>
-                                <th>Nivel</th>
+                                <th style="font-size:.80rem">Clase</th>
+                                <th style="font-size:.80rem">Horario</th>
+                                <th style="font-size:.80rem">Nivel</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php if (empty($clasesHoy)): ?>
                                 <tr>
-                                    <td colspan="3" class="text-center text-muted py-4">
-                                        <div class="fw-light small" style="font-size:.75rem">
+                                    <td colspan="3" class="text-center text-muted py-4" style="font-size:.75rem">
+                                        <div class="fw-light small">
                                             Sin clases hoy
                                         </div>
                                     </td>
@@ -84,23 +84,23 @@
                             <?php else: ?>
                                 <?php foreach ($clasesHoy as $cl): ?>
                                     <tr>
-                                        <td>
+                                        <td style="font-size:.75rem">
                                             <div class="text-start align-middle">
-                                                <div class="fw-semibold small" style="font-size:.75rem">
+                                                <div class="fw-semibold">
                                                     <?= esc($cl['nombre'], 0, 1) ?>
                                                 </div>
-                                                <div class="text-muted">
+                                                <div class="text-start text-secondary-emphasis">
                                                     Trainer: <?= esc($cl['trainer_nombre'] ?? 'Sin trainer') ?>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="text-muted text-center align-middle">
-                                            <div class="fw-light small" style="font-size:.75rem">
+                                        <td class="text-center align-middle" style="font-size:.75rem">
+                                            <div class="text-secondary-emphasis ">
                                                 <?= substr($cl['hora_inicio'], 0, 5) ?> – <?= substr($cl['hora_fin'], 0, 5) ?>
                                             </div>
                                         </td>
-                                        <td class="small text-secondary-emphasis text-center align-middle">
-                                            <div class="fw-light small" style="font-size:.75rem">
+                                        <td class="text-center align-middle" style="font-size:.75rem">
+                                            <div class="text-secondary-emphasis">
                                                 <?= ucfirst($cl['nivel']) ?>
                                             </div>
                                         </td>
@@ -119,7 +119,7 @@
         <div class="card h-100">
             <div class="card-header border-0 pt-3 pb-2 px-4 d-flex justify-content-between align-items-center">
                 <h6 class="small mb-0">Últimos clientes registrados</h6>
-                <a href="<?= route_to('clientes.index') ?>" class="btn btn-sm btn-link text-decoration-none p-0">
+                <a href="<?= route_to('clientes.index') ?>" class="btn btn-sm btn-link text-decoration-none p-0" style="font-size:.75rem">
                     Ver todos
                 </a>
             </div>
@@ -128,16 +128,16 @@
                     <table class="table table-hover table-striped table-sm mb-0">
                         <thead class="small">
                             <tr>
-                                <th>Cliente</th>
-                                <th>Plan</th>
-                                <th>Nivel</th>
-                                <th>Registro</th>
+                                <th style="font-size:.80rem">Cliente</th>
+                                <th style="font-size:.80rem">Plan</th>
+                                <th style="font-size:.80rem">Nivel</th>
+                                <th style="font-size:.80rem">Registro</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php if (empty($ultimosClientes)): ?>
                                 <tr>
-                                    <td colspan="4" class="text-center text-muted py-4">Sin registros aún</td>
+                                    <td colspan="4" class="text-center text-muted py-4 small">Sin registros aún</td>
                                 </tr>
                             <?php else: ?>
                                 <?php foreach ($ultimosClientes as $c): ?>
@@ -198,10 +198,10 @@
                         <table class="table table-hover table-sm mb-0">
                             <thead class="small">
                                 <tr>
-                                    <th>Cliente</th>
-                                    <th>Plan</th>
-                                    <th>Registro</th>
-                                    <th>Vencimiento</th>
+                                    <th style="font-size:.80rem">Cliente</th>
+                                    <th style="font-size:.80rem">Plan</th>
+                                    <th style="font-size:.80rem">Registro</th>
+                                    <th style="font-size:.80rem">Vencimiento</th>
                                 </tr>
                             </thead>
                             <tbody>
