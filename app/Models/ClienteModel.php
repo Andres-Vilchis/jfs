@@ -50,7 +50,7 @@ class ClienteModel extends Model
         return $this->select('clientes.*, planes.nombre AS plan_nombre, planes.duracion_dias')
             ->join('planes', 'planes.id = clientes.plan_id', 'left')
             ->where('clientes.activo', 1)
-            ->orderBy('clientes.created_at', 'DESC');
+            ->orderBy('clientes.nombre', 'ASC');
     }
 
     // Clientes activos con plan + días de clases inscritas
