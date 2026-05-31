@@ -18,7 +18,7 @@ class ClientesController extends BaseController
     public function index()
     {
         $data = [
-            'clientes' => $this->clienteModel->conPlan()->findAll(),
+            'clientes' => $this->clienteModel->conPlanYClases(),
             'planes'   => (new PlanModel())->where('activo', 1)->findAll(),
         ];
 
@@ -78,7 +78,7 @@ class ClientesController extends BaseController
     public function editar(int $id)
     {
         $data = [
-            'cliente' => $this->clienteModel->findOrFail($id),
+            'cliente' => $this->clienteModel->find($id),
             'planes'  => (new PlanModel())->where('activo', 1)->findAll(),
         ];
 
