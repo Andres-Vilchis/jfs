@@ -50,6 +50,11 @@ class ClientesController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
+
+        $planId           = $this->request->getPost('plan_id') ?: null;
+        $fechaInscripcion = $this->request->getPost('fecha_inscripcion') ?: date('Y-m-d');
+        $fechaVencimiento = $this->calcularVencimiento($planId, $fechaInscripcion);
+
         $this->clienteModel->save([
             'nombre'           => $this->request->getPost('nombre'),
             'apellidos'        => $this->request->getPost('apellidos'),

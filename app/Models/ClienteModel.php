@@ -53,7 +53,7 @@ class ClienteModel extends Model
             ->orderBy('clientes.created_at', 'DESC');
     }
 
-    // Clientes activos con plan + días de clases inscritas agrupados
+    // Clientes activos con plan + días de clases inscritas
     public function conPlanYClases(): array
     {
         $clientes = $this->conPlan()->findAll();
@@ -61,17 +61,20 @@ class ClienteModel extends Model
         $ordenDias = ['lun', 'mar', 'mie', 'jue', 'vie', 'sab', 'dom'];
 
         foreach ($clientes as &$c) {
-            $clases = $this->db->table('clientes_clases cc')
+            $rows = $this->db
+                ->table('clientes_clases cc')
                 ->select('cl.dias_semana')
                 ->join('clases cl', 'cl.id = cc.clase_id')
                 ->where('cc.cliente_id', $c['id'])
                 ->where('cc.activo', 1)
                 ->where('cl.activo', 1)
-                ->get()->getResultArray();
+                ->get()
+                ->getResultArray();
 
+            // Recopilar días únicos de todas las clases del cliente
             $dias = [];
-            foreach ($clases as $clase) {
-                foreach (explode(',', $clase['dias_semana']) as $dia) {
+            foreach ($rows as $row) {
+                foreach (explode(',', $row['dias_semana']) as $dia) {
                     $d = trim($dia);
                     if ($d !== '' && ! in_array($d, $dias)) {
                         $dias[] = $d;
@@ -79,6 +82,7 @@ class ClienteModel extends Model
                 }
             }
 
+            // Ordenar según día de la semana
             usort(
                 $dias,
                 fn($a, $b) =>
