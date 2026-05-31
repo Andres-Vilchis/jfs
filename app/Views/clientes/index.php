@@ -120,7 +120,7 @@
                                 <td class="text-center align-middle">
                                     <span class="small"><?= esc(ucfirst($c['nivel'])) ?></span>
                                 </td>
-                                <td>
+                                <td class="text-center align-middle">
                                     <?php if (!empty($c['dias_clases'])): ?>
                                         <?php foreach ($c['dias_clases'] as $dia): ?>
                                             <span class="badge bg-primary bg-opacity-10 text-primary me-1">
@@ -128,7 +128,7 @@
                                             </span>
                                         <?php endforeach; ?>
                                     <?php else: ?>
-                                        <span class="text-muted small text-center">- -</span>
+                                        <span class="text-muted small">- -</span>
                                     <?php endif; ?>
                                 </td>
 
