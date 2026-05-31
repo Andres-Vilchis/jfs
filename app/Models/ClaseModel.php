@@ -42,6 +42,7 @@ class ClaseModel extends Model
             ->join('trainers t', 't.id = c.trainer_id', 'left')
             ->where('c.activo', 1)
             ->orderBy("FIELD(c.dias_semana,'lun','mar','mie','jue','vie','sab','dom')", '', false)
+            ->orderBy('c.hora_inicio', 'ASC')
             ->get()->getResultArray();
     }
 
