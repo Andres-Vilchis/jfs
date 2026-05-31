@@ -128,7 +128,7 @@
                                             </span>
                                         <?php endforeach; ?>
                                     <?php else: ?>
-                                        <span class="text-muted small">—</span>
+                                        <span class="text-muted small">- -</span>
                                     <?php endif; ?>
                                 </td>
 
