@@ -154,36 +154,33 @@ $fechaInscripcion = set_value('fecha_inscripcion', $cliente['fecha_vencimiento']
 
 <?= $this->section('scripts') ?>
 <script>
-    (function() {
-        const planSelect = document.getElementById('plan_id');
-        const fechaInput = document.getElementById('fecha_inscripcion');
-        const preview = document.getElementById('fecha_vencimiento_preview');
+(function () {
+    const planSelect    = document.getElementById('plan_id');
+    const fechaInput    = document.getElementById('fecha_inscripcion');
+    const preview       = document.getElementById('fecha_vencimiento_preview');
 
-        function calcularVencimiento() {
-            const opt = planSelect.options[planSelect.selectedIndex];
-            const dias = parseInt(opt?.dataset?.dias || '0', 10);
-            const fecha = fechaInput.value;
+    function calcularVencimiento() {
+        const opt   = planSelect.options[planSelect.selectedIndex];
+        const dias  = parseInt(opt?.dataset?.dias || '0', 10);
+        const fecha = fechaInput.value;
 
-            if (!dias || !fecha) {
-                preview.value = '—';
-                return;
-            }
+        if (!dias || !fecha) { preview.value = '—'; return; }
 
-            const d = new Date(fecha + 'T00:00:00');
-            d.setDate(d.getDate() + dias);
+        const d = new Date(fecha + 'T00:00:00');
+        d.setDate(d.getDate() + dias);
 
-            const yyyy = d.getFullYear();
-            const mm = String(d.getMonth() + 1).padStart(2, '0');
-            const dd = String(d.getDate()).padStart(2, '0');
-            preview.value = `${dd}/${mm}/${yyyy}`;
-        }
+        const yyyy = d.getFullYear();
+        const mm   = String(d.getMonth() + 1).padStart(2, '0');
+        const dd   = String(d.getDate()).padStart(2, '0');
+        preview.value = `${dd}/${mm}/${yyyy}`;
+    }
 
-        planSelect.addEventListener('change', calcularVencimiento);
-        fechaInput.addEventListener('change', calcularVencimiento);
+    planSelect.addEventListener('change', calcularVencimiento);
+    fechaInput.addEventListener('change', calcularVencimiento);
 
-        // Calcular al cargar si hay valores previos
-        calcularVencimiento();
-    })();
+    // Calcular al cargar si hay valores previos
+    calcularVencimiento();
+})();
 </script>
 <?= $this->endSection() ?>
 
