@@ -5,6 +5,7 @@
  * @var array $clientes
  * @var array $planes
  */
+$ordenDias = ['lun', 'mar', 'mie', 'jue', 'vie', 'sab', 'dom'];
 ?>
 
 <!-- ── Toast de contacto ──────────────────────────────────────── -->
@@ -61,7 +62,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Cliente</th>
+                        <th class="text-start">Cliente</th>
                         <th class="text-center">Plan</th>
                         <th class="text-center">Nivel</th>
                         <th class="text-center">Clases</th>
@@ -81,7 +82,7 @@
                             if ($diff < 0) {
                                 $badgeClass = 'text-danger-emphasis';
                                 $badgeText  = 'Vencido';
-                            } elseif ($diff <= 7) {
+                            } elseif ($diff <= 5) {
                                 $badgeClass = 'text-warning-emphasis';
                                 $badgeText  = "Vence en {$diff}d";
                             } else {
@@ -116,10 +117,13 @@
                                 <td class="text-center align-middle small text-muted">
                                     <?= esc($c['plan_nombre'] ?? '—') ?>
                                 </td>
+                                <td class="text-center align-middle">
+                                    <span class="small"><?= esc(ucfirst($c['nivel'])) ?></span>
+                                </td>
                                 <td>
                                     <?php if (!empty($c['dias_clases'])): ?>
                                         <?php foreach ($c['dias_clases'] as $dia): ?>
-                                            <span class="text-primary small">
+                                            <span class="badge bg-primary bg-opacity-10 text-primary me-1">
                                                 <?= strtoupper($dia) ?>
                                             </span>
                                         <?php endforeach; ?>
@@ -211,7 +215,7 @@
                         </div>
                         <div class="input-group input-group-sm">
                             <span class="input-group-text" style="min-width:110px">
-                                <i class="bi bi-calendar-check me-1"></i>Vencimiento
+                                <i class="bi bi-calendar-check me-1"></i>Periodo
                             </span>
                             <input type="date" name="fecha_vencimiento" id="m_fecha_vencimiento"
                                 class="form-control">
