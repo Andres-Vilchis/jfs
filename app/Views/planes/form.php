@@ -36,48 +36,46 @@ $editando = isset($plan);
         <div class="row g-2">
 
             <div class="col-12">
-                <div class="input-group input-group-sm">
+                <div class="input-group input-group-sm" style="font-size:.75rem">
                     <span class="input-group-text" style="min-width:130px">Nombre <span class="text-danger">*</span></span>
-                    <input type="text" name="nombre" class="form-control"
-                        placeholder="Ej. Plan Mensual, Plan Trimestral..."
+                    <input type="text" name="nombre" class="form-control" style="font-size:.75rem" placeholder="Ej. Plan Mensual, Plan Trimestral..."
                         value="<?= set_value('nombre', $plan['nombre'] ?? '') ?>" required>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <div class="input-group input-group-sm">
+                <div class="input-group input-group-sm" style="font-size:.75rem">
                     <span class="input-group-text" style="min-width:130px">Precio (MXN) <span class="text-danger">*</span></span>
                     <span class="input-group-text">$</span>
-                    <input type="number" name="precio" step="0.01" min="0" class="form-control"
-                        placeholder="0.00"
+                    <input type="number" name="precio" step="0.01" min="0" class="form-control" style="font-size:.75rem" placeholder="0.00"
                         value="<?= set_value('precio', $plan['precio'] ?? '') ?>" required>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <div class="input-group input-group-sm">
+                <div class="input-group input-group-sm" style="font-size:.75rem">
                     <span class="input-group-text" style="min-width:130px">Duración (días) <span class="text-danger">*</span></span>
-                    <input type="number" name="duracion_dias" min="1" class="form-control"
-                        placeholder="Ej. 30, 90, 365"
+                    <input type="number" name="duracion_dias" min="1" class="form-control" style="font-size:.75rem" placeholder="Ej. 30, 90, 365"
                         value="<?= set_value('duracion_dias', $plan['duracion_dias'] ?? '') ?>" required>
                 </div>
             </div>
 
             <div class="col-12">
-                <div class="input-group input-group-sm">
+                <div class="input-group input-group-sm" style="font-size:.75rem">
                     <span class="input-group-text" style="min-width:130px">Descripción</span>
-                    <textarea name="descripcion" class="form-control" rows="2"
-                        placeholder="Descripción breve del plan..."><?= esc($plan['descripcion'] ?? '') ?></textarea>
+                    <textarea name="descripcion" class="form-control" rows="2" style="font-size:.75rem" placeholder="Descripción breve del plan...">
+                        <?= esc($plan['descripcion'] ?? '') ?></textarea>
                 </div>
             </div>
 
             <div class="col-12">
-                <div class="input-group input-group-sm">
+                <div class="input-group input-group-sm" style="font-size:.75rem">
                     <span class="input-group-text" style="min-width:130px">Beneficios</span>
-                    <textarea name="beneficios" class="form-control" rows="4"
-                        placeholder="Un beneficio por línea...&#10;Acceso ilimitado&#10;Clases grupales&#10;Casillero incluido"><?= esc($plan['beneficios'] ?? '') ?></textarea>
+                    <textarea name="beneficios" class="form-control" rows="4" style="font-size:.75rem"
+                        placeholder="Un beneficio por línea...&#10;Acceso ilimitado&#10;Clases grupales&#10;Casillero incluido">
+                        <?= esc($plan['beneficios'] ?? '') ?></textarea>
                 </div>
-                <div class="form-text ps-1">Escribe un beneficio por línea.</div>
+                <div class="text-muted fst-italic form-text ps-1" style="font-size:.75rem">Escribe un beneficio por línea.</div>
             </div>
         </div>
 

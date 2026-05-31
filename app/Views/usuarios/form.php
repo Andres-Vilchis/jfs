@@ -42,29 +42,27 @@ $grupoActual = $editando ? ($usuario->grupos[0] ?? '') : '';
 
         <div class="row g-2">
             <div class="col-12">
-                <div class="input-group input-group-sm">
+                <div class="input-group input-group-sm" style="font-size:.75rem">
                     <span class="input-group-text" style="min-width:140px">Usuario *</span>
-                    <input type="text" name="username" class="form-control"
-                        placeholder="Nombre de usuario"
+                    <input type="text" name="username" class="form-control" style="font-size:.75rem" placeholder="Nombre de usuario"
                         value="<?= set_value('username', $usuario->username ?? '') ?>" required>
                 </div>
             </div>
 
             <div class="col-12">
-                <div class="input-group input-group-sm">
+                <div class="input-group input-group-sm" style="font-size:.75rem">
                     <span class="input-group-text" style="min-width:140px">Correo *</span>
-                    <input type="email" name="email" class="form-control"
-                        placeholder="correo@ejemplo.com"
+                    <input type="email" name="email" class="form-control" style="font-size:.75rem" placeholder="correo@ejemplo.com"
                         value="<?= set_value('email', $usuario->email ?? '') ?>" required>
                 </div>
             </div>
 
             <div class="col-12">
-                <div class="input-group input-group-sm">
+                <div class="input-group input-group-sm" style="font-size:.75rem">
                     <span class="input-group-text" style="min-width:140px">
                         Contraseña <?= $editando ? '<small class="text-muted">(opcional)</small>' : '*' ?>
                     </span>
-                    <input type="password" name="password" class="form-control"
+                    <input type="password" name="password" class="form-control" style="font-size:.75rem"
                         placeholder="<?= $editando ? 'Dejar vacío para no cambiar' : 'Mínimo 8 caracteres' ?>"
                         autocomplete="new-password"
                         <?= $editando ? '' : 'required' ?>>
@@ -72,9 +70,9 @@ $grupoActual = $editando ? ($usuario->grupos[0] ?? '') : '';
             </div>
 
             <div class="col-12">
-                <div class="input-group input-group-sm">
+                <div class="input-group input-group-sm" style="font-size:.75rem">
                     <span class="input-group-text" style="min-width:140px">Rol *</span>
-                    <select name="grupo" class="form-select form-select-sm" required>
+                    <select name="grupo" class="form-select form-select-sm"  style="font-size:.75rem" required>
                         <option value="">— Selecciona un rol —</option>
                         <?php foreach ($grupos as $key => $label): ?>
                             <option value="<?= $key ?>"

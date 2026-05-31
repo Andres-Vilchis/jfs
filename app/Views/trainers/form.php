@@ -36,45 +36,41 @@ $editando = isset($trainer);
         <div class="row g-2">
 
             <div class="col-md-6">
-                <div class="input-group input-group-sm small">
+                <div class="input-group input-group-sm small" style="font-size:.75rem">
                     <span class="input-group-text">Nombre <span class="text-danger">*</span></span>
-                    <input type="text" name="nombre" class="form-control"
-                        placeholder="Nombre"
+                    <input type="text" name="nombre" class="form-control" placeholder="Nombre" style="font-size:.75rem"
                         value="<?= set_value('nombre', $trainer['nombre'] ?? '') ?>" required>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <div class="input-group input-group-sm small">
+                <div class="input-group input-group-sm small" style="font-size:.75rem">
                     <span class="input-group-text">Apellidos <span class="text-danger">*</span></span>
-                    <input type="text" name="apellidos" class="form-control"
-                        placeholder="Apellidos"
+                    <input type="text" name="apellidos" class="form-control" style="font-size:.75rem" placeholder="Apellidos"
                         value="<?= set_value('apellidos', $trainer['apellidos'] ?? '') ?>" required>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <div class="input-group input-group-sm">
+                <div class="input-group input-group-sm" style="font-size:.75rem">
                     <span class="input-group-text">Correo</span>
-                    <input type="email" name="correo" class="form-control"
-                        placeholder="correo@ejemplo.com"
+                    <input type="email" name="correo" class="form-control" style="font-size:.75rem" placeholder="correo@ejemplo.com"
                         value="<?= set_value('correo', $trainer['correo'] ?? '') ?>">
                 </div>
             </div>
 
             <div class="col-md-6">
-                <div class="input-group input-group-sm">
+                <div class="input-group input-group-sm" style="font-size:.75rem">
                     <span class="input-group-text">Teléfono</span>
-                    <input type="text" name="telefono" class="form-control"
-                        placeholder="10 dígitos"
+                    <input type="text" name="telefono" class="form-control" style="font-size:.75rem" placeholder="10 dígitos"
                         value="<?= set_value('telefono', $trainer['telefono'] ?? '') ?>">
                 </div>
             </div>
 
             <div class="col-md-6">
-                <div class="input-group input-group-sm">
+                <div class="input-group input-group-sm" style="font-size:.75rem">
                     <span class="input-group-text">Nivel <span class="text-danger">*</span></span>
-                    <select name="nivel" class="form-select form-select-sm">
+                    <select name="nivel" class="form-select form-select-sm" style="font-size:.75rem">
                         <?php foreach (['principiante', 'intermedio', 'avanzado'] as $n): ?>
                             <option value="<?= $n ?>"
                                 <?= (($trainer['nivel'] ?? 'principiante') === $n) ? 'selected' : '' ?>>
@@ -86,10 +82,9 @@ $editando = isset($trainer);
             </div>
 
             <div class="col-md-6">
-                <div class="input-group input-group-sm">
+                <div class="input-group input-group-sm" style="font-size:.75rem">
                     <span class="input-group-text">Especialidad</span>
-                    <input type="text" name="especialidad" class="form-control"
-                        placeholder="Ej. Crossfit, Yoga..."
+                    <input type="text" name="especialidad" class="form-control" style="font-size:.75rem" placeholder="Ej. Crossfit, Yoga..."
                         value="<?= set_value('especialidad', $trainer['especialidad'] ?? '') ?>">
                 </div>
             </div>
