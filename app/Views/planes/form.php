@@ -81,7 +81,7 @@ $editando = isset($plan);
             </div>
         </div>
 
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="mt-4 d-flex justify-content-between align-items-center">
             <div>
                 <button type="submit" class="btn btn-sm btn-primary">
                     <i class="bi bi-save me-1"></i>
@@ -99,7 +99,7 @@ $editando = isset($plan);
                 <!-- Form independiente de eliminación — NO anidado en el form de edición -->
                 <form action="<?= route_to('planes.toggle', $plan['id']) ?>"
                     method="post"
-                    class="mt-3 text-end"
+                    class="text-end"
                     onsubmit="return confirm('¿Seguro que deseas eliminar el plan &quot;<?= addslashes(esc($plan['nombre'])) ?>&quot;?')">
                     <?= csrf_field() ?>
                     <button type="submit" class="btn btn-sm btn-outline-danger">

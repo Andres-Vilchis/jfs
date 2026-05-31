@@ -140,13 +140,13 @@ $editando = isset($cliente);
             </div>
         </div>
 
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="mt-4 d-flex justify-content-between align-items-center">
             <button type="submit" class="btn btn-sm btn-primary">
                 <i class="bi bi-save me-1"></i>
                 <?= $editando ? 'Actualizar' : 'Registrar' ?>
             </button>
             <a href="<?= route_to('clientes.index') ?>" class="btn btn-sm btn-outline-secondary ms-2">
-            <i class="bi bi-x-diamond-fill me-1"></i>Cancelar
+                <i class="bi bi-x-diamond-fill me-1"></i>Cancelar
             </a>
         </div>
 
@@ -155,7 +155,9 @@ $editando = isset($cliente);
 
         <?php if ($editando && ($cliente['activo'] ?? 0)): ?>
             <!-- Form independiente de eliminación — NO anidado en el form de edición -->
-            <form action="<?= route_to('clientes.desactivar', $cliente['id']) ?>" method="post" class="mt-3 text-end"
+            <form action="<?= route_to('clientes.desactivar', $cliente['id']) ?>"
+                method="post"
+                class="text-end"
                 onsubmit="return confirm('¿Seguro que deseas eliminar a <?= addslashes(esc($cliente['nombre'] . ' ' . $cliente['apellidos'])) ?>? Esta acción lo eliminará del sistema.')">
                 <?= csrf_field() ?>
                 <button type="submit" class="btn btn-sm btn-outline-danger">

@@ -165,7 +165,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
         </div><!-- /row -->
 
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="mt-4 d-flex justify-content-between align-items-center">
             <div>
                 <button type="submit" class="btn btn-sm btn-primary">
                     <i class="bi bi-save me-1"></i>
@@ -190,7 +190,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             <!-- Form independiente — NO anidado en el form de edición -->
             <form action="<?= route_to('clases.toggle', $clase['id']) ?>"
                   method="post"
-                  class="mt-3 text-end"
+                  class="text-end"
                   onsubmit="return confirm('<?= addslashes($confirmar) ?>')">
                 <?= csrf_field() ?>
                 <button type="submit" class="btn btn-sm <?= $colorBtn ?>">
