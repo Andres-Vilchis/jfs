@@ -40,11 +40,12 @@ $fechaInscripcion = set_value('fecha_inscripcion', $cliente['fecha_vencimiento']
         <?= form_open($action) ?>
 
         <div class="row g-3">
-            <div class="col-md-6">
+            <div class="col-md-6" style="font-size:.75rem">
                 <label class="form-label">Nombre *</label>
                 <?= form_input([
                     'name'  => 'nombre',
                     'class' => 'form-control',
+                    'style' => 'font-size:.75rem',
                     'value' => set_value('nombre', $cliente['nombre'] ?? '')
                 ]) ?>
             </div>
@@ -53,6 +54,7 @@ $fechaInscripcion = set_value('fecha_inscripcion', $cliente['fecha_vencimiento']
                 <?= form_input([
                     'name'  => 'apellidos',
                     'class' => 'form-control',
+                    'style' => 'font-size:.75rem',
                     'value' => set_value('apellidos', $cliente['apellidos'] ?? '')
                 ]) ?>
             </div>
@@ -62,6 +64,7 @@ $fechaInscripcion = set_value('fecha_inscripcion', $cliente['fecha_vencimiento']
                     'name'  => 'correo',
                     'type'  => 'email',
                     'class' => 'form-control',
+                    'style' => 'font-size:.75rem',
                     'value' => set_value('correo', $cliente['correo'] ?? '')
                 ]) ?>
             </div>
@@ -70,6 +73,7 @@ $fechaInscripcion = set_value('fecha_inscripcion', $cliente['fecha_vencimiento']
                 <?= form_input([
                     'name'  => 'telefono',
                     'class' => 'form-control',
+                    'style' => 'font-size:.75rem',
                     'value' => set_value('telefono', $cliente['telefono'] ?? '')
                 ]) ?>
             </div>
@@ -79,12 +83,13 @@ $fechaInscripcion = set_value('fecha_inscripcion', $cliente['fecha_vencimiento']
                     'name'  => 'fecha_nacimiento',
                     'type'  => 'date',
                     'class' => 'form-control',
+                    'style' => 'font-size:.75rem',
                     'value' => set_value('fecha_nacimiento', $cliente['fecha_nacimiento'] ?? '')
                 ]) ?>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" style="font-size:.75rem">
                 <label class="form-label">Género</label>
-                <select name="genero" class="form-select">
+                <select name="genero" class="form-select" style="font-size:.75rem">
                     <option value="">— Selecciona —</option>
                     <?php foreach (['masculino', 'femenino', 'otro'] as $g): ?>
                         <option value="<?= $g ?>" <?= (($cliente['genero'] ?? '') === $g) ? 'selected' : '' ?>>
@@ -93,9 +98,9 @@ $fechaInscripcion = set_value('fecha_inscripcion', $cliente['fecha_vencimiento']
                     <?php endforeach; ?>
                 </select>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" style="font-size:.75rem">
                 <label class="form-label">Nivel *</label>
-                <select name="nivel" class="form-select">
+                <select name="nivel" class="form-select" style="font-size:.75rem">
                     <?php foreach (['principiante', 'intermedio', 'avanzado'] as $n): ?>
                         <option value="<?= $n ?>" <?= (($cliente['nivel'] ?? 'principiante') === $n) ? 'selected' : '' ?>>
                             <?= ucfirst($n) ?>
@@ -105,9 +110,9 @@ $fechaInscripcion = set_value('fecha_inscripcion', $cliente['fecha_vencimiento']
             </div>
 
             <!-- Plan + Fecha de inscripción -->
-            <div class="col-md-6">
+            <div class="col-md-6" style="font-size:.75rem">
                 <label class="form-label">Plan</label>
-                <select name="plan_id" id="plan_id" class="form-select">
+                <select name="plan_id" id="plan_id" class="form-select" style="font-size:.75rem">
                     <option value="">— Sin plan —</option>
                     <?php foreach ($planes as $p): ?>
                         <option value="<?= $p['id'] ?>"
@@ -118,26 +123,28 @@ $fechaInscripcion = set_value('fecha_inscripcion', $cliente['fecha_vencimiento']
                     <?php endforeach; ?>
                 </select>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3" style="font-size:.75rem">
                 <label class="form-label">Fecha de inscripción</label>
                 <?= form_input([
                     'name'  => 'fecha_inscripcion',
                     'id'    => 'fecha_inscripcion',
                     'type'  => 'date',
                     'class' => 'form-control',
+                    'style' => 'font-size:.75rem',
                     'value' => $fechaInscripcion,
                 ]) ?>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3" style="font-size:.75rem">
                 <label class="form-label text-muted">Vence el <small>(calculado)</small></label>
                 <input type="text" id="fecha_vencimiento_preview"
-                    class="form-control-plaintext text-success fw-semibold ps-2"
-                    readonly placeholder="—" value="">
+                    class="form-control-plaintext text-success fw-semibold ps-2" style="font-size:.75rem" readonly placeholder="—" value="">
             </div>
 
-            <div class="col-12">
+            <div class="col-12" style="font-size:.75rem">
                 <label class="form-label">Notas</label>
-                <textarea name="notas" class="form-control" rows="3"><?= esc($cliente['notas'] ?? '') ?></textarea>
+                <textarea name="notas" class="form-control" rows="3" style="font-size:.75rem">
+                    <?= esc($cliente['notas'] ?? '') ?>
+                </textarea>
             </div>
         </div>
 
@@ -154,33 +161,36 @@ $fechaInscripcion = set_value('fecha_inscripcion', $cliente['fecha_vencimiento']
 
 <?= $this->section('scripts') ?>
 <script>
-(function () {
-    const planSelect    = document.getElementById('plan_id');
-    const fechaInput    = document.getElementById('fecha_inscripcion');
-    const preview       = document.getElementById('fecha_vencimiento_preview');
+    (function() {
+        const planSelect = document.getElementById('plan_id');
+        const fechaInput = document.getElementById('fecha_inscripcion');
+        const preview = document.getElementById('fecha_vencimiento_preview');
 
-    function calcularVencimiento() {
-        const opt   = planSelect.options[planSelect.selectedIndex];
-        const dias  = parseInt(opt?.dataset?.dias || '0', 10);
-        const fecha = fechaInput.value;
+        function calcularVencimiento() {
+            const opt = planSelect.options[planSelect.selectedIndex];
+            const dias = parseInt(opt?.dataset?.dias || '0', 10);
+            const fecha = fechaInput.value;
 
-        if (!dias || !fecha) { preview.value = '—'; return; }
+            if (!dias || !fecha) {
+                preview.value = '—';
+                return;
+            }
 
-        const d = new Date(fecha + 'T00:00:00');
-        d.setDate(d.getDate() + dias);
+            const d = new Date(fecha + 'T00:00:00');
+            d.setDate(d.getDate() + dias);
 
-        const yyyy = d.getFullYear();
-        const mm   = String(d.getMonth() + 1).padStart(2, '0');
-        const dd   = String(d.getDate()).padStart(2, '0');
-        preview.value = `${dd}/${mm}/${yyyy}`;
-    }
+            const yyyy = d.getFullYear();
+            const mm = String(d.getMonth() + 1).padStart(2, '0');
+            const dd = String(d.getDate()).padStart(2, '0');
+            preview.value = `${dd}/${mm}/${yyyy}`;
+        }
 
-    planSelect.addEventListener('change', calcularVencimiento);
-    fechaInput.addEventListener('change', calcularVencimiento);
+        planSelect.addEventListener('change', calcularVencimiento);
+        fechaInput.addEventListener('change', calcularVencimiento);
 
-    // Calcular al cargar si hay valores previos
-    calcularVencimiento();
-})();
+        // Calcular al cargar si hay valores previos
+        calcularVencimiento();
+    })();
 </script>
 <?= $this->endSection() ?>
 
