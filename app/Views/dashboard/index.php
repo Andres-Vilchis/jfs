@@ -211,17 +211,25 @@
                                     ?>
                                     <tr>
                                         <td>
-                                            <div class="fw-semibold" style="font-size:.87rem">
+                                            <div class="fw-semibold small">
                                                 <?= esc($p['nombre'] . ' ' . $p['apellidos']) ?>
                                             </div>
-                                            <div class="text-muted" style="font-size:.75rem">
+                                            <div class="fw-light text-muted text-secondary-emphasis small">
                                                 <?= esc($p['telefono'] ?? '—') ?>
                                             </div>
                                         </td>
-                                        <td class="text-center align-middle" style="font-size:.75rem"><?= esc($p['plan_nombre'] ?? '—') ?></td>
-                                        <td class="text-center align-middle text-success-emphasis" style="font-size:.75rem"><?= date('d/m/Y', strtotime($p['fecha_registro'])) ?></td>
+                                        <td class="text-center align-middle">
+                                            <div class="fw-light text-muted text-secondary-emphasis small">
+                                                <?= esc($p['plan_nombre'] ?? '—') ?>
+                                            </div>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <div class="fw-light text-muted text-success-emphasis small">
+                                                <?= date('d/m/Y', strtotime($p['fecha_registro'])) ?>
+                                            </div>
+                                        </td>
                                         <td class="text-center align-middle" style="font-size:.75rem">
-                                            <span class="<?= $dias <= 3 ? 'text-danger-emphasis' : 'text-warning-emphasis' ?>">
+                                            <span class="fw-light small<?= $dias <= 3 ? 'text-danger-emphasis' : 'text-warning-emphasis' ?>">
                                                 <?= $dias === 0 ? 'Hoy' : "{$dias} día(s)" ?>
                                             </span>
                                         </td>
