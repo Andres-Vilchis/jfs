@@ -87,7 +87,7 @@
                                         <td>
                                             <div class="text-start align-middle">
                                                 <div class="fw-semibold small" style="font-size:.75rem">
-                                                    <?= esc($cl['nombre']) ?>
+                                                    <?= esc($cl['nombre'], 0, 1) ?>
                                                 </div>
                                                 <div class="text-muted">
                                                     Trainer: <?= esc($cl['trainer_nombre'] ?? 'Sin trainer') ?>
@@ -131,7 +131,7 @@
                                 <th>Cliente</th>
                                 <th>Plan</th>
                                 <th>Nivel</th>
-                                <th>Vencimiento</th>
+                                <th>Registro</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -163,7 +163,7 @@
                                             <span class="small text-secondary-emphasis"><?= ucfirst($c['nivel']) ?></span>
                                         </td>
                                         <td class="text-center align-middle">
-                                            <span class="<?= $badge[0] ?>" style="font-size:.75rem"><?= $badge[1] ?></span>
+                                            <div class="small text-secondary-emphasis"><?= esc($c['fecha_regictro']) ?></div>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
