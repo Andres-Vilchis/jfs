@@ -158,12 +158,20 @@
                                                 <?= esc($c['correo'] ?? '—') ?>
                                             </div>
                                         </td>
-                                        <td class="small text-muted text-center align-middle"><?= esc($c['plan_nombre'] ?? '—') ?></td>
-                                        <td class="text-center align-middle">
-                                            <span class="small text-secondary-emphasis"><?= ucfirst($c['nivel']) ?></span>
+                                        <td class="small text-muted text-center align-middle">
+                                            <div class="small text-secondary-emphasis">
+                                                <?= esc($c['plan_nombre'] ?? '—') ?>
+                                            </div>
                                         </td>
                                         <td class="text-center align-middle">
-                                            <div class="small text-secondary-emphasis"><?= esc($c['fecha_regictro']) ?></div>
+                                            <div class="small text-secondary-emphasis">
+                                                <?= ucfirst($c['nivel']) ?>
+                                            </div>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <div class="small text-success-emphasis">
+                                                <?= esc($c['fecha_registro']) ?>
+                                            </div>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -182,7 +190,7 @@
                 <div class="card-header border-0 pt-3 pb-2 px-4 bg-warning bg-opacity-10">
                     <h6 class="small mb-0 text-warning-emphasis">
                         <i class="bi bi-exclamation-triangle-fill me-1"></i>
-                        Membresías a vencer <small>(próx. 7 días)</small>
+                        Próximos a vencer <small>(7 días)</small>
                     </h6>
                 </div>
                 <div class="card-body px-0 py-0">
@@ -192,7 +200,7 @@
                                 <tr>
                                     <th>Cliente</th>
                                     <th>Plan</th>
-                                    <th>Vence</th>
+                                    <th>Registro</th>
                                     <th>Vencimiento</th>
                                 </tr>
                             </thead>
@@ -207,11 +215,11 @@
                                                 <?= esc($p['nombre'] . ' ' . $p['apellidos']) ?>
                                             </div>
                                             <div class="text-muted" style="font-size:.75rem">
-                                                <?= esc($p['correo'] ?? '—') ?>
+                                                <?= esc($p['telefono'] ?? '—') ?>
                                             </div>
                                         </td>
                                         <td class="text-center align-middle" style="font-size:.75rem"><?= esc($p['plan_nombre'] ?? '—') ?></td>
-                                        <td class="text-center align-middle" style="font-size:.75rem"><?= date('d/m/Y', strtotime($p['fecha_vencimiento'])) ?></td>
+                                        <td class="text-center align-middle text-success-emphasis" style="font-size:.75rem"><?= date('d/m/Y', strtotime($p['fecha_registro'])) ?></td>
                                         <td class="text-center align-middle" style="font-size:.75rem">
                                             <span class="<?= $dias <= 3 ? 'text-danger-emphasis' : 'text-warning-emphasis' ?>">
                                                 <?= $dias === 0 ? 'Hoy' : "{$dias} día(s)" ?>
