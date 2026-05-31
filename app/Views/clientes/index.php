@@ -4,8 +4,8 @@
 /**
  * @var array $clientes
  * @var array $planes
+ * @var array $ordenDias = ['lun', 'mar', 'mie', 'jue', 'vie', 'sab', 'dom'];
  */
-$ordenDias = ['lun', 'mar', 'mie', 'jue', 'vie', 'sab', 'dom'];
 ?>
 
 <!-- ── Toast de contacto ──────────────────────────────────────── -->

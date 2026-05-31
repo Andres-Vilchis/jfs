@@ -18,6 +18,7 @@ class ClientesController extends BaseController
     {
         return view('clientes/index', [
             'clientes' => $this->clienteModel->conPlanYClases(),
+            'planes'   => (new PlanModel())->where('activo', 1)->findAll(),
         ]);
     }
 
