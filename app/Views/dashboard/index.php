@@ -27,7 +27,7 @@
     </span>
 </div>
 
-<!-- Tarjetas de totales -->
+<!-- Tarjetas de totales 
 <div class="row g-3 mb-4">
     <div class="col-6 col-xl-3">
         <a class="text-decoration-none" href="<?= route_to('clientes.index') ?>">
@@ -50,14 +50,14 @@
         </div>
     </div>
 </div>
-
+-->
 <div class="row g-3">
 
     <!-- Clases de hoy -->
     <div class="col-12 col-xl-5">
         <div class="card h-100">
             <div class="card-header border-0 pt-3 pb-2 px-4 d-flex justify-content-between align-items-center">
-                <h6 class="small mb-0">Clases de hoy</h6>
+                <h6 class="small mb-0">Próxima clase</h6>
                 <a href="<?= route_to('clases.index') ?>" class="small btn btn-sm btn-link text-decoration-none p-0">
                     Ver todas
                 </a>
@@ -76,25 +76,33 @@
                             <?php if (empty($clasesHoy)): ?>
                                 <tr>
                                     <td colspan="3" class="text-center text-muted py-4">
-                                        Sin clases hoy
+                                        <div class="fw-light small" style="font-size:.75rem">
+                                            Sin clases hoy
+                                        </div>
                                     </td>
                                 </tr>
                             <?php else: ?>
                                 <?php foreach ($clasesHoy as $cl): ?>
                                     <tr>
                                         <td>
-                                            <div class="fw-semibold" style="font-size:.87rem">
-                                                <?= esc($cl['nombre']) ?>
-                                            </div>
-                                            <div class="text-muted" style="font-size:.75rem">
-                                                <?= esc($cl['trainer_nombre'] ?? 'Sin trainer') ?>
+                                            <div class="text-start align-middle">
+                                                <div class="fw-semibold small" style="font-size:.75rem">
+                                                    <?= esc($cl['nombre']) ?>
+                                                </div>
+                                                <div class="text-muted">
+                                                    Trainer: <?= esc($cl['trainer_nombre'] ?? 'Sin trainer') ?>
+                                                </div>
                                             </div>
                                         </td>
-                                        <td class="text-muted text-center align-middle" style="font-size:.75rem">
-                                            <?= substr($cl['hora_inicio'], 0, 5) ?> – <?= substr($cl['hora_fin'], 0, 5) ?>
+                                        <td class="text-muted text-center align-middle">
+                                            <div class="fw-light small" style="font-size:.75rem">
+                                                <?= substr($cl['hora_inicio'], 0, 5) ?> – <?= substr($cl['hora_fin'], 0, 5) ?>
+                                            </div>
                                         </td>
                                         <td class="small text-secondary-emphasis text-center align-middle">
-                                            <?= ucfirst($cl['nivel']) ?>
+                                            <div class="fw-light small" style="font-size:.75rem">
+                                                <?= ucfirst($cl['nivel']) ?>
+                                            </div>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
