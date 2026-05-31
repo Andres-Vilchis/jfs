@@ -210,26 +210,26 @@
                                     $dias = (int) (new DateTime())->diff(new DateTime($p['fecha_vencimiento']))->format('%r%a');
                                     ?>
                                     <tr>
-                                        <td>
-                                            <div class="fw-semibold small">
+                                        <td class="text-start align-middle" style="font-size:.75rem">
+                                            <div class="fw-semibold">
                                                 <?= esc($p['nombre'] . ' ' . $p['apellidos']) ?>
                                             </div>
-                                            <div class="fw-light text-muted text-secondary-emphasis small">
+                                            <div class="fw-light text-muted text-secondary-emphasis">
                                                 <?= esc($p['telefono'] ?? '—') ?>
                                             </div>
                                         </td>
-                                        <td class="text-center align-middle">
-                                            <div class="fw-light text-muted text-secondary-emphasis small">
+                                        <td class="text-center align-middle" style="font-size:.75rem">
+                                            <div class="fw-light text-muted text-secondary-emphasis">
                                                 <?= esc($p['plan_nombre'] ?? '—') ?>
                                             </div>
                                         </td>
-                                        <td class="text-center align-middle">
-                                            <div class="fw-light text-muted text-success-emphasis small">
+                                        <td class="text-center align-middle" style="font-size:.75rem">
+                                            <div class="fw-light text-muted text-success-emphasis">
                                                 <?= date('d/m/Y', strtotime($p['fecha_registro'])) ?>
                                             </div>
                                         </td>
                                         <td class="text-center align-middle" style="font-size:.75rem">
-                                            <span class="fw-light small<?= $dias <= 3 ? 'text-danger-emphasis' : 'text-warning-emphasis' ?>">
+                                            <span class="fw-semibold <?= $dias <= 3 ? 'text-danger-emphasis' : 'text-warning-emphasis' ?>">
                                                 <?= $dias === 0 ? 'Hoy' : "{$dias} día(s)" ?>
                                             </span>
                                         </td>
