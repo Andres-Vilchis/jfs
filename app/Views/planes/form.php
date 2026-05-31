@@ -81,7 +81,7 @@ $editando = isset($plan);
             </div>
         </div>
 
-        <div class="mt-4 d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items-center">
             <div>
                 <button type="submit" class="btn btn-sm btn-primary">
                     <i class="bi bi-save me-1"></i>
