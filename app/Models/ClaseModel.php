@@ -12,9 +12,16 @@ class ClaseModel extends Model
     protected $useTimestamps = true;
 
     protected $allowedFields = [
-        'nombre', 'descripcion', 'trainer_id', 'nivel',
-        'capacidad_max', 'hora_inicio', 'hora_fin',
-        'dias_semana', 'salon', 'activo',
+        'nombre',
+        'descripcion',
+        'trainer_id',
+        'nivel',
+        'capacidad_max',
+        'hora_inicio',
+        'hora_fin',
+        'dias_semana',
+        'salon',
+        'activo',
     ];
 
     protected $validationRules = [
@@ -42,8 +49,13 @@ class ClaseModel extends Model
     public function hoy(): array
     {
         $dias = [
-            1 => 'lun', 2 => 'mar', 3 => 'mie',
-            4 => 'jue', 5 => 'vie', 6 => 'sab', 0 => 'dom',
+            1 => 'lun',
+            2 => 'mar',
+            3 => 'mie',
+            4 => 'jue',
+            5 => 'vie',
+            6 => 'sab',
+            0 => 'dom',
         ];
         $hoy = $dias[date('w')];
 
@@ -52,7 +64,7 @@ class ClaseModel extends Model
             ->join('trainers t', 't.id = c.trainer_id', 'left')
             ->where('c.activo', 1)
             ->like('c.dias_semana', $hoy)
-            ->orderBy('c.hora_inicio', 'ASC')
+            ->orderBy("FIELD(c.dias_semana,'lun','mar','mie','jue','vie','sab','dom')", '', false)
             ->get()->getResultArray();
     }
 }
