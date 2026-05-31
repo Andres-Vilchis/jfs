@@ -150,26 +150,26 @@
                                     else                $badge = ['text-success-emphasis', date('d/m/Y', strtotime($c['fecha_vencimiento']))];
                                     ?>
                                     <tr>
-                                        <td>
-                                            <div class="fw-semibold" style="font-size:.87rem">
+                                        <td style="font-size:.75rem">
+                                            <div class="fw-semibold">
                                                 <?= esc($c['nombre'] . ' ' . $c['apellidos']) ?>
                                             </div>
-                                            <div class="text-muted" style="font-size:.75rem">
+                                            <div class="text-muted">
                                                 <?= esc($c['correo'] ?? '—') ?>
                                             </div>
                                         </td>
-                                        <td class="small text-muted text-center align-middle">
-                                            <div class="small text-secondary-emphasis">
+                                        <td class="text-center align-middle" style="font-size:.75rem">
+                                            <div class="text-secondary-emphasis">
                                                 <?= esc($c['plan_nombre'] ?? '—') ?>
                                             </div>
                                         </td>
-                                        <td class="text-center align-middle">
-                                            <div class="small text-secondary-emphasis">
+                                        <td class="text-center align-middle" style="font-size:.75rem">
+                                            <div class="text-secondary-emphasis">
                                                 <?= ucfirst($c['nivel']) ?>
                                             </div>
                                         </td>
-                                        <td class="text-center align-middle">
-                                            <div class="small text-success-emphasis">
+                                        <td class="text-center align-middle" style="font-size:.75rem">
+                                            <div class="text-success-emphasis">
                                                 <?= esc($c['fecha_registro']) ?>
                                             </div>
                                         </td>
@@ -214,17 +214,17 @@
                                             <div class="fw-semibold">
                                                 <?= esc($p['nombre'] . ' ' . $p['apellidos']) ?>
                                             </div>
-                                            <div class="fw-light text-muted text-secondary-emphasis">
+                                            <div class="text-secondary-emphasis">
                                                 <?= esc($p['telefono'] ?? '—') ?>
                                             </div>
                                         </td>
                                         <td class="text-center align-middle" style="font-size:.75rem">
-                                            <div class="fw-light text-muted text-secondary-emphasis">
-                                                <?= esc($p['plan_nombre'] ?? '—') ?>
+                                            <div class="text-secondary-emphasis">
+                                                <?= esc($c['plan_nombre'] ?? '—') ?>
                                             </div>
                                         </td>
                                         <td class="text-center align-middle" style="font-size:.75rem">
-                                            <div class="fw-light text-muted text-success-emphasis">
+                                            <div class="text-success-emphasis">
                                                 <?= date('d/m/Y', strtotime($p['fecha_registro'])) ?>
                                             </div>
                                         </td>
