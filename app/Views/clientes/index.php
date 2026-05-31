@@ -115,10 +115,10 @@
                                     </div>
                                 </td>
                                 <td class="text-center align-middle small text-muted">
-                                    <p class="fw-light small"><?= esc($c['plan_nombre'] ?? '—') ?></p>
+                                    <div class="fw-light small"><?= esc($c['plan_nombre'] ?? '—') ?></div>
                                 </td>
-                                <td class="text-center align-middle small">
-                                    <p class="fw-light small"><?= esc(ucfirst($c['nivel'])) ?></p>
+                                <td class="text-center align-middle small text-muted">
+                                    <div class="fw-light small"><?= esc(ucfirst($c['nivel'])) ?></div>
                                 </td>
                                 <td class="text-center align-middle small">
                                     <?php if (! empty($c['dias_clases'])): ?>
