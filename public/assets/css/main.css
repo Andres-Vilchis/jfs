@@ -11,6 +11,6 @@ th {
   text-align: center;
 }
 
-.input-group span{
+.input-group > span{
    font-size:.75rem" !important;
 }
