@@ -92,10 +92,10 @@
                         ?>
                             <tr>
                                 <td style="width:1%; white-space:nowrap;">
-                                    <div class="d-flex align-items-center gap-1">
+                                    <div class="d-flex align-items-center gap-1 small">
                                         <!-- Tres puntos → Toast contacto -->
                                         <button type="button"
-                                            class="btn btn-link btn-sm p-0 lh-1 text-info border-0"
+                                            class="btn btn-link btn-sm p-0 lh-1 text-info border-0 small"
                                             title="Contacto"
                                             onclick="abrirContacto(
                                                 '<?= esc(addslashes($c['nombre'] . ' ' . $c['apellidos']), 'js') ?>',
@@ -123,7 +123,7 @@
                                 <td class="text-center align-middle">
                                     <?php if (! empty($c['dias_clases'])): ?>
                                         <?php foreach ($c['dias_clases'] as $dia): ?>
-                                            <span class="badge bg-primary bg-opacity-10 text-primary me-1">
+                                            <span class="badge bg-primary bg-opacity-10 text-primary small me-1">
                                                 <?= strtoupper(trim($dia)) ?>
                                             </span>
                                         <?php endforeach; ?>
