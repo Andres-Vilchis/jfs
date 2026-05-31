@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\ClaseModel;
 use App\Models\TrainerModel;
 
 class TrainersController extends BaseController
@@ -16,6 +17,7 @@ class TrainersController extends BaseController
     public function index()
     {
         return view('trainers/index', [
+            'fecha_formateada' => fechaFormateada(),
             'trainers' => $this->trainerModel->conClases(),
         ]);
     }
@@ -55,14 +57,8 @@ class TrainersController extends BaseController
 
     public function editar(int $id)
     {
-        $trainer = $this->trainerModel->find($id);
-
-        if (! $trainer) {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-        }
-
         return view('trainers/form', [
-            'trainer' => $trainer,
+            'trainer' => $this->trainerModel->find($id),
         ]);
     }
 
@@ -95,15 +91,36 @@ class TrainersController extends BaseController
 
     public function toggleActivo(int $id)
     {
-        $trainer = $this->trainerModel->find($id);
-
+        $trainer     = $this->trainerModel->find($id);
         if (! $trainer) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
 
-        $this->trainerModel->update($id, ['activo' => $trainer['activo'] ? 0 : 1]);
+        $nuevoEstado = $trainer['activo'] ? 0 : 1;
+        $this->trainerModel->update($id, ['activo' => $nuevoEstado]);
 
-        return redirect()->to('/trainers')
-            ->with('success', 'Trainer actualizado.');
+        if ($nuevoEstado === 0) {
+            // Suspender también las clases activas del trainer
+            $db            = db_connect();
+            $clasesActivas = $db->table('clases')
+                ->where('trainer_id', $id)
+                ->where('activo', 1)
+                ->countAllResults();
+
+            if ($clasesActivas > 0) {
+                $db->table('clases')
+                    ->where('trainer_id', $id)
+                    ->where('activo', 1)
+                    ->update(['activo' => 0]);
+
+                $msg = "Trainer suspendido. Se suspendieron automáticamente {$clasesActivas} clase(s) asignadas a este trainer.";
+            } else {
+                $msg = 'Trainer suspendido. No tenía clases activas asignadas.';
+            }
+        } else {
+            $msg = 'Trainer activado correctamente.';
+        }
+
+        return redirect()->to('/trainers')->with('success', $msg);
     }
 }
