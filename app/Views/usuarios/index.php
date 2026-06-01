@@ -75,7 +75,7 @@ $badgeRol = [
                                     </div>
                                 </td>
                                 <td class="text-center">
-                                    <span class="small text-<?= $badgeRol[$grupo] ?? 'secondary' ?>-emphasis">
+                                    <span class="text-<?= $badgeRol[$grupo] ?? 'secondary' ?>-emphasis" style="font-size:.75rem">
                                         <?= ucfirst($grupo) ?>
                                     </span>
                                 </td>
