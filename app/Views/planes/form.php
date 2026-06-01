@@ -45,7 +45,7 @@ $editando = isset($plan);
 
             <div class="col-md-6">
                 <div class="input-group input-group-sm" style="font-size:.75rem">
-                    <span class="input-group-text" style="min-width:130px">Precio $<span class="text-danger">*</span></span>
+                    <span class="input-group-text" style="min-width:130px">Precio MXN$<span class="text-danger">*</span></span>
                     <input type="number" name="precio" step="0.01" min="0" class="form-control" style="font-size:.75rem" placeholder="0.00"
                         value="<?= set_value('precio', $plan['precio'] ?? '') ?>" required>
                 </div>
@@ -60,7 +60,7 @@ $editando = isset($plan);
             </div>
 
             <div class="col-12">
-                <div class="input-group input-group-sm" style="font-size:.75rem">
+                <div class="input-group input-group-sm">
                     <span class="input-group-text" style="min-width:130px">Descripción</span>
                     <textarea name="descripcion" class="form-control" rows="2" placeholder="Descripción breve del plan...">
                         <?= esc($plan['descripcion'] ?? '') ?></textarea>
@@ -68,7 +68,7 @@ $editando = isset($plan);
             </div>
 
             <div class="col-12">
-                <div class="input-group input-group-sm" style="font-size:.75rem">
+                <div class="input-group input-group-sm">
                     <span class="input-group-text" style="min-width:130px">Beneficios</span>
                     <textarea name="beneficios" class="form-control" rows="4"
                         placeholder="Un beneficio por línea...&#10;Acceso ilimitado&#10;Clases grupales&#10;Casillero incluido">

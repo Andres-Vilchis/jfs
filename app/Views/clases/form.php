@@ -8,7 +8,7 @@
  * @var int        $inscritos   (solo en edición)
  */
 $editando      = isset($clase);
-$diasGuardados = $editando ? explode(',', $clase['dias_semana']) : [];
+$diasGuardados = $editando ? trim(explode(',', $clase['dias_semana'])[0]) : '';
 $diasOpciones  = ['lun', 'mar', 'mie', 'jue', 'vie', 'sab', 'dom'];
 $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 ?>
@@ -143,22 +143,19 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
                 </div>
             </div>
 
-            <!-- Días de la semana -->
-            <div class="col-md-6" style="font-size:.75rem">
-                <label class="form-label d-block">Días de la semana <span class="text-danger">*</span></label>
-                <div class="d-flex flex-wrap gap-2 pt-1">
-                    <?php foreach ($diasOpciones as $i => $dia): ?>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox"
-                                name="dias_semana[]"
-                                id="dia_<?= $dia ?>"
-                                value="<?= $dia ?>"
-                                <?= in_array($dia, $diasGuardados) ? 'checked' : '' ?>>
-                            <label class="form-check-label" for="dia_<?= $dia ?>">
-                                <?= $diasLabels[$i] ?>
-                            </label>
-                        </div>
-                    <?php endforeach; ?>
+            <!-- Día de la semana (un solo día) -->
+            <div class="col-md-6">
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text"><i class="bi bi-calendar-week me-1"></i>Día <span class="text-danger">*</span></span>
+                    <select name="dias_semana[]" class="form-select" style="font-size:.75rem" required>
+                        <option value="">— Selecciona un día —</option>
+                        <?php foreach ($diasOpciones as $valor => $etiqueta): ?>
+                            <option value="<?= $valor ?>"
+                                <?= (set_value('dias_semana.0', $diasGuardados) === $valor) ? 'selected' : '' ?>>
+                                <?= $etiqueta ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
             </div>
 
