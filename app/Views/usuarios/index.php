@@ -21,9 +21,9 @@ $badgeRol = [
         <small class="text-muted"><?= $fecha_formateada ?></small>
     </div>
     <span class="text-muted small">
-    <a href="<?= route_to('usuarios.crear') ?>" class="btn btn-sm btn-primary">
-        <i class="bi bi-person-plus-fill me-1"></i> Nuevo usuario
-    </a>
+        <a href="<?= route_to('usuarios.crear') ?>" class="btn btn-sm btn-primary">
+            <i class="bi bi-person-plus-fill me-1"></i> Nuevo usuario
+        </a>
     </span>
 </div>
 
@@ -49,10 +49,8 @@ $badgeRol = [
             <table class="table table-hover table-striped mb-0">
                 <thead>
                     <tr>
-                        <th>Usuario</th>
-                        <th>Email</th>
-                        <th>Rol</th>
-                        <th>Estado</th>
+                        <th class="text-start">Usuario</th>
+                        <th class="text-center">Rol</th>
                         <th class="text-end">Acciones</th>
                     </tr>
                 </thead>
@@ -66,20 +64,19 @@ $badgeRol = [
                             <?php $grupo = $u->grupos[0] ?? 'sin rol'; ?>
                             <tr>
                                 <td>
-                                    <div class="fw-semibold"><?= esc($u->username) ?></div>
-                                    <?php if (auth()->id() == $u->id): ?>
-                                        <small class="text-muted">— tú —</small>
-                                    <?php endif; ?>
+                                    <div class="fw-semibold" style="font-size:.75rem">
+                                        <?= esc($u->username) ?>
+                                    </div>
+                                    <small class="text-muted">
+                                        <?php if (auth()->id() == $u->id): ?>
+                                            — Tú: &nbsp;
+                                        <?php endif; ?>
+                                        <?= esc($u->email) ?>
+                                    </small>
                                 </td>
-                                <td class="small"><?= esc($u->email) ?></td>
                                 <td>
-                                    <span class="badge bg-<?= $badgeRol[$grupo] ?? 'secondary' ?>">
+                                    <span class="small text-<?= $badgeRol[$grupo] ?? 'secondary' ?>-emphasis">
                                         <?= ucfirst($grupo) ?>
-                                    </span>
-                                </td>
-                                <td>
-                                    <span class="badge <?= $u->active ? 'bg-success' : 'bg-secondary' ?>">
-                                        <?= $u->active ? 'Activo' : 'Inactivo' ?>
                                     </span>
                                 </td>
                                 <td class="text-end">
@@ -87,16 +84,6 @@ $badgeRol = [
                                         class="btn btn-sm btn-outline-primary">
                                         <i class="bi bi-pencil"></i>
                                     </a>
-                                    <?php if (auth()->id() != $u->id): ?>
-                                        <form action="<?= route_to('usuarios.toggle', $u->id) ?>"
-                                            method="post" class="d-inline">
-                                            <?= csrf_field() ?>
-                                            <button class="btn btn-sm <?= $u->active ? 'btn-outline-warning' : 'btn-outline-success' ?>"
-                                                onclick="return confirm('¿Cambiar estado del usuario?')">
-                                                <i class="bi bi-<?= $u->active ? 'pause-circle' : 'play-circle' ?>"></i>
-                                            </button>
-                                        </form>
-                                    <?php endif; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
