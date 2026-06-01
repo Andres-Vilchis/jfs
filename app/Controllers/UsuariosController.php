@@ -68,14 +68,17 @@ class UsuariosController extends BaseController
             'username' => $this->request->getPost('username'),
             'active'   => 1,
         ]);
-        $user->setPassword($this->request->getPost('password'));
-        $this->userModel->save($user);
+
+        $this->userModel->save($user);  // Guardar SIN password primero
 
         $user = $this->userModel->findById($this->userModel->getInsertID());
+
+        // Crear identidad de email (esto también guarda la contraseña hasheada)
         $user->createEmailIdentity([
             'email'    => $this->request->getPost('email'),
             'password' => $this->request->getPost('password'),
         ]);
+
         $user->addGroup($this->request->getPost('grupo'));
 
         return redirect()->to('/usuarios')
