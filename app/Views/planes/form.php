@@ -45,8 +45,7 @@ $editando = isset($plan);
 
             <div class="col-md-6">
                 <div class="input-group input-group-sm" style="font-size:.75rem">
-                    <span class="input-group-text" style="min-width:130px">Precio (MXN) <span class="text-danger">*</span></span>
-                    <span class="input-group-text">$</span>
+                    <span class="input-group-text" style="min-width:130px">Precio $<span class="text-danger">*</span></span>
                     <input type="number" name="precio" step="0.01" min="0" class="form-control" style="font-size:.75rem" placeholder="0.00"
                         value="<?= set_value('precio', $plan['precio'] ?? '') ?>" required>
                 </div>

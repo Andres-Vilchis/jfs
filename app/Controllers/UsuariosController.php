@@ -120,21 +120,18 @@ class UsuariosController extends BaseController
             'username' => $this->request->getPost('username'),
         ]);
 
-        // Actualiza email
         $identity = $usuario->getEmailIdentity();
         if ($identity) {
             $identity->secret = $this->request->getPost('email');
             model(\CodeIgniter\Shield\Models\UserIdentityModel::class)->save($identity);
         }
 
-        // Actualiza contraseña si se ingresó una nueva
         $nuevaPassword = $this->request->getPost('password');
         if (! empty($nuevaPassword)) {
             $usuario->setPassword($nuevaPassword);
             $this->userModel->save($usuario);
         }
 
-        // Actualiza grupo
         $usuario->syncGroups($this->request->getPost('grupo'));
 
         return redirect()->to('/usuarios')
