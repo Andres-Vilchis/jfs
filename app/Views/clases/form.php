@@ -43,7 +43,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             <!-- Nombre -->
             <div class="col-12">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text" style="font-size:.75rem">Nombre de la clase <span class="text-danger">*</span></span>
+                    <span class="input-group-text" style="font-size:.75rem">Nombre de la clase &nbsp;<span class="text-danger">*</span></span>
                     <?= form_input([
                         'name'        => 'nombre',
                         'class'       => 'form-control',
@@ -57,7 +57,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             <!-- Trainer -->
             <div class="col-md-6">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text" style="font-size:.75rem">Trainer <span class="text-danger">*</span></span>
+                    <span class="input-group-text" style="font-size:.75rem">Trainer &nbsp;<span class="text-danger">*</span></span>
                     <select name="trainer_id" class="form-select" style="font-size:.75rem">
                         <option value="">— Selecciona —</option>
                         <?php foreach ($trainers as $t): ?>
@@ -74,7 +74,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             <!-- Nivel -->
             <div class="col-md-6">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text" style="font-size:.75rem">Nivel <span class="text-danger">*</span></span>
+                    <span class="input-group-text" style="font-size:.75rem">Nivel &nbsp;<span class="text-danger">*</span></span>
                     <select name="nivel" class="form-select" style="font-size:.75rem">
                         <?php foreach (['principiante', 'intermedio', 'avanzado'] as $n): ?>
                             <option value="<?= $n ?>"
@@ -89,7 +89,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             <!-- Hora inicio -->
             <div class="col-md-4">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text" style="font-size:.75rem"><i class="bi bi-clock"></i> Hr. inicio *</span>
+                    <span class="input-group-text" style="font-size:.75rem"><i class="bi bi-clock me-1"></i> Hr. inicio &nbsp;<span class="text-danger">*</span></span>
                     <?= form_input([
                         'name'  => 'hora_inicio',
                         'type'  => 'time',
@@ -103,7 +103,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             <!-- Hora fin -->
             <div class="col-md-4">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text" style="font-size:.75rem"><i class="bi bi-clock-history"></i> Hr. fin <span class="text-danger">*</span></span>
+                    <span class="input-group-text" style="font-size:.75rem"><i class="bi bi-clock-history me-1"></i> Hr. fin &nbsp;<span class="text-danger">*</span></span>
                     <?= form_input([
                         'name'  => 'hora_fin',
                         'type'  => 'time',
@@ -117,7 +117,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             <!-- Capacidad máx -->
             <div class="col-md-4">
                 <div class="input-group input-group-sm" style="font-size:.75rem">
-                    <span class="input-group-text" style="font-size:.75rem"><i class="bi bi-people"></i> Capacidad <span class="text-danger">*</span></span>
+                    <span class="input-group-text" style="font-size:.75rem"><i class="bi bi-people me-1"></i> Capacidad &nbsp;<span class="text-danger">*</span></span>
                     <?= form_input([
                         'name'  => 'capacidad_max',
                         'type'  => 'number',
@@ -132,7 +132,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             <!-- Salón -->
             <div class="col-md-6">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text" style="font-size:.75rem"><i class="bi bi-door-open"></i> Salón</span>
+                    <span class="input-group-text" style="font-size:.75rem"><i class="bi bi-door-open me-1"></i> Salón</span>
                     <?= form_input([
                         'name'        => 'salon',
                         'class'       => 'form-control',
@@ -146,7 +146,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             <!-- Día de la semana (un solo día) -->
             <div class="col-md-6">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text"><i class="bi bi-calendar-week me-1"></i>Día <span class="text-danger">*</span></span>
+                    <span class="input-group-text"><i class="bi bi-calendar-week me-1"></i>Día &nbsp;<span class="text-danger">*</span></span>
                     <select name="dias_semana[]" class="form-select" style="font-size:.75rem" required>
                         <option value="">— Selecciona un día —</option>
                         <?php foreach ($diasOpciones as $valor => $etiqueta): ?>
@@ -160,7 +160,7 @@ $diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
             </div>
 
             <!-- Descripción -->
-            <div class="col-12" style="font-size:.75rem">
+            <div class="col-12">
                 <textarea name="descripcion" class="form-control text-start" rows="2" placeholder="Descripción breve de la clase...">
                     <?= esc($clase['descripcion'] ?? '') ?>
                 </textarea>

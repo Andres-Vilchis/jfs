@@ -40,7 +40,7 @@ $fechaInscripcion = set_value('fecha_inscripcion', $cliente['fecha_vencimiento']
 
             <div class="col-md-6">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text">Nombre *</span>
+                    <span class="input-group-text">Nombre &nbsp;<span class="text-danger">*</span></span>
                     <input type="text" name="nombre" class="form-control" style="font-size:.75rem"
                         value="<?= set_value('nombre', $cliente['nombre'] ?? '') ?>" required>
                 </div>
@@ -48,7 +48,7 @@ $fechaInscripcion = set_value('fecha_inscripcion', $cliente['fecha_vencimiento']
 
             <div class="col-md-6">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text">Apellidos *</span>
+                    <span class="input-group-text">Apellidos &nbsp;<span class="text-danger">*</span></span>
                     <input type="text" name="apellidos" class="form-control" style="font-size:.75rem"
                         value="<?= set_value('apellidos', $cliente['apellidos'] ?? '') ?>" required>
                 </div>
@@ -94,7 +94,7 @@ $fechaInscripcion = set_value('fecha_inscripcion', $cliente['fecha_vencimiento']
 
             <div class="col-md-4">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text">Nivel *</span>
+                    <span class="input-group-text">Nivel &nbsp;<span class="text-danger">*</span></span>
                     <select name="nivel" class="form-select form-select-sm" style="font-size:.75rem">
                         <?php foreach (['principiante', 'intermedio', 'avanzado'] as $n): ?>
                             <option value="<?= $n ?>" <?= (($cliente['nivel'] ?? 'principiante') === $n) ? 'selected' : '' ?>>
@@ -107,7 +107,7 @@ $fechaInscripcion = set_value('fecha_inscripcion', $cliente['fecha_vencimiento']
 
             <div class="col-md-6">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text">Plan</span>
+                    <span class="input-group-text">Plan &nbsp;<span class="text-danger">*</span></span>
                     <select name="plan_id" id="plan_id" class="form-select form-select-sm" style="font-size:.75rem">
                         <option value="">— Sin plan —</option>
                         <?php foreach ($planes as $p): ?>
@@ -124,8 +124,7 @@ $fechaInscripcion = set_value('fecha_inscripcion', $cliente['fecha_vencimiento']
             <div class="col-md-3">
                 <div class="input-group input-group-sm">
                     <span class="input-group-text">Inscripción</span>
-                    <input type="date" name="fecha_inscripcion" id="fecha_inscripcion"
-                        class="form-control" style="font-size:.75rem"
+                    <input type="date" name="fecha_inscripcion" id="fecha_inscripcion" class="form-control" style="font-size:.75rem"
                         value="<?= $fechaInscripcion ?>">
                 </div>
             </div>
@@ -133,10 +132,7 @@ $fechaInscripcion = set_value('fecha_inscripcion', $cliente['fecha_vencimiento']
             <div class="col-md-3">
                 <div class="input-group input-group-sm">
                     <span class="input-group-text">Vence</span>
-                    <input type="text" id="fecha_vencimiento_preview"
-                        class="form-control text-success fw-semibold"
-                        style="font-size:.75rem"
-                        readonly value="">
+                    <input type="text" id="fecha_vencimiento_preview" class="form-control text-success fw-semibold" style="font-size:.75rem" readonly value="">
                 </div>
             </div>
 

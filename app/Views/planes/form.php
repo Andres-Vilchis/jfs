@@ -37,7 +37,7 @@ $editando = isset($plan);
 
             <div class="col-12">
                 <div class="input-group input-group-sm" style="font-size:.75rem">
-                    <span class="input-group-text" style="min-width:130px">Nombre <span class="text-danger">*</span></span>
+                    <span class="input-group-text" style="min-width:130px">Nombre &nbsp;<span class="text-danger">*</span></span>
                     <input type="text" name="nombre" class="form-control" style="font-size:.75rem" placeholder="Ej. Plan Mensual, Plan Trimestral..."
                         value="<?= set_value('nombre', $plan['nombre'] ?? '') ?>" required>
                 </div>
@@ -45,7 +45,7 @@ $editando = isset($plan);
 
             <div class="col-md-6">
                 <div class="input-group input-group-sm" style="font-size:.75rem">
-                    <span class="input-group-text" style="min-width:130px">Precio MXN$<span class="text-danger">*</span></span>
+                    <span class="input-group-text">Precio MXN$ &nbsp;<span class="text-danger">*</span></span>
                     <input type="number" name="precio" step="0.01" min="0" class="form-control" style="font-size:.75rem" placeholder="0.00"
                         value="<?= set_value('precio', $plan['precio'] ?? '') ?>" required>
                 </div>
@@ -53,7 +53,7 @@ $editando = isset($plan);
 
             <div class="col-md-6">
                 <div class="input-group input-group-sm" style="font-size:.75rem">
-                    <span class="input-group-text" style="min-width:130px">Duración (días) <span class="text-danger">*</span></span>
+                    <span class="input-group-text">Duración (días) &nbsp;<span class="text-danger">*</span></span>
                     <input type="number" name="duracion_dias" min="1" class="form-control" style="font-size:.75rem" placeholder="Ej. 30, 90, 365"
                         value="<?= set_value('duracion_dias', $plan['duracion_dias'] ?? '') ?>" required>
                 </div>
