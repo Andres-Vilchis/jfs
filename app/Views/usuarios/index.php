@@ -49,7 +49,7 @@ $badgeRol = [
             <table class="table table-hover table-striped mb-0">
                 <thead>
                     <tr>
-                        <th class="text-start" style="max-width: 120px;">Usuario</th>
+                        <th class="text-start">Usuario</th>
                         <th class="text-center">Rol</th>
                         <th class="text-end">Acciones</th>
                     </tr>
@@ -64,10 +64,10 @@ $badgeRol = [
                             <?php $grupo = $u->grupos[0] ?? 'sin rol'; ?>
                             <tr>
                                 <td>
-                                    <div class="fw-semibold" style="font-size:.75rem">
+                                    <div class="fw-semibold d-flex flex-column gap-2" style="font-size:.75rem">
                                         <?= esc($u->username) ?>
                                     </div>
-                                    <div class="text-muted" style="font-size:.75rem">
+                                    <div class="text-muted d-flex flex-column gap-2" style="font-size:.75rem">
                                         <?php if (auth()->id() == $u->id): ?>
                                             — Tú: &nbsp;
                                         <?php endif; ?>
