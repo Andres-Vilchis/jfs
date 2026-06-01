@@ -155,6 +155,7 @@
                 <?= csrf_field() ?>
                 <div class="modal-body py-3">
                     <div class="d-flex flex-column gap-2">
+                        <div>
                         <div class="input-group input-group-sm">
                             <span class="input-group-text">Nombre</span>
                             <input type="text" name="nombre" id="m_nombre" class="form-control small" style="font-size:.75rem" placeholder="Nombre" required>
@@ -163,10 +164,12 @@
                             <span class="input-group-text">Apellidos</span>
                             <input type="text" name="apellidos" id="m_apellidos" class="form-control small" style="font-size:.75rem" placeholder="Apellidos" required>
                         </div>
+                        </div>
                         <div class="input-group input-group-sm">
                             <span class="input-group-text">Correo</span>
                             <input type="email" name="correo" id="m_correo" class="form-control small" style="font-size:.75rem" placeholder="correo@ejemplo.com">
                         </div>
+                        <div>
                         <div class="input-group input-group-sm">
                             <span class="input-group-text">Teléfono</span>
                             <input type="text" name="telefono" id="m_telefono" class="form-control small" style="font-size:.75rem" placeholder="10 dígitos">
@@ -175,6 +178,8 @@
                             <span class="input-group-text">Nacimiento</span>
                             <input type="date" name="fecha_nacimiento" id="m_fecha_nacimiento" class="form-control small" style="font-size:.75rem">
                         </div>
+                        </div>
+                        <div>
                         <div class="input-group input-group-sm small">
                             <span class="input-group-text">Género</span>
                             <select name="genero" id="m_genero" class="form-select small" style="font-size:.75rem">
@@ -191,6 +196,7 @@
                                 <option value="intermedio">Intermedio</option>
                                 <option value="avanzado">Avanzado</option>
                             </select>
+                        </div>
                         </div>
                         <div class="input-group input-group-sm">
                             <span class="input-group-text">Plan</span>
