@@ -77,15 +77,7 @@ class ClaseModel extends Model
     // Clases de hoy
     public function hoy(): array
     {
-        $dias = [
-            '0' => 'dom',
-            '1' => 'lun',
-            '2' => 'mar',
-            '3' => 'mie',
-            '4' => 'jue',
-            '5' => 'vie',
-            '6' => 'sab',
-        ];
+        $dias = [ 'dom', 'lun', 'mar', 'mie', 'jue', 'vie', 'sab', ];
         $hoy = $dias[date('w')];
 
         return $this->db
@@ -93,8 +85,7 @@ class ClaseModel extends Model
             ->select('c.*, CONCAT(t.nombre, " ", t.apellidos) AS trainer_nombre')
             ->join('trainers t', 't.id = c.trainer_id', 'left')
             ->where('c.activo', 1)
-            ->like('c.dias_semana', $hoy)
-            ->orderBy("FIELD(c.dias_semana,'dom','lun','mar','mie','jue','vie','sab')", '', false)
+            ->where("FIND_IN_SET('{$hoy}', c.dias_semana) >", 0, false)
             ->orderBy('c.hora_inicio', 'ASC')
             ->get()
             ->getResultArray();
@@ -102,20 +93,11 @@ class ClaseModel extends Model
     // Clases de hoy
     public function proximaClaseHoy(): array
     {
-        $dias = [
-            '0' => 'dom',
-            '1' => 'lun',
-            '2' => 'mar',
-            '3' => 'mie',
-            '4' => 'jue',
-            '5' => 'vie',
-            '6' => 'sab',
-        ];
-
-        $hoy  = date('w');
+        $dias = [ 'dom', 'lun', 'mar', 'mie', 'jue', 'vie', 'sab', ];
+        $hoy  = $dias[date('w')];
         $hora = date('H:i:s');
 
-        $resultado =  $this->db
+        $resultado = $this->db
             ->table('clases c')
             ->select('c.*, CONCAT(t.nombre, " ", t.apellidos) AS trainer_nombre')
             ->join('trainers t', 't.id = c.trainer_id', 'left')

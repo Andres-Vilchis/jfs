@@ -149,10 +149,10 @@ $diasLabels    = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
                     <span class="input-group-text">Día &nbsp;<span class="text-danger">*</span></span>
                     <select name="dias_semana[]" class="form-select" style="font-size:.75rem" required>
                         <option value="">— Selecciona un día —</option>
-                        <?php foreach ($diasOpciones as $valor => $etiqueta): ?>
-                            <option value="<?= $valor ?>"
-                                <?= (set_value('dias_semana.0', $diasGuardados) === $valor) ? 'selected' : '' ?>>
-                                <?= $etiqueta ?>
+                        <?php foreach ($diasOpciones as $dia): ?>
+                            <option value="<?= $dia ?>"
+                                <?= (set_value('dias_semana.0', $diasGuardados) === $dia) ? 'selected' : '' ?>>
+                                <?= ucfirst($dia) ?>
                             </option>
                         <?php endforeach; ?>
                     </select>
