@@ -58,7 +58,7 @@ class ClienteModel extends Model
     {
         $clientes = $this->conPlan()->findAll();
 
-        $orden = ['lun' => 0, 'mar' => 1, 'mie' => 2, 'jue' => 3, 'vie' => 4, 'sab' => 5, 'dom' => 6];
+        $orden = ['dom' => 0, 'lun' => 1, 'mar' => 2, 'mie' => 3, 'jue' => 4, 'vie' => 5, 'sab' => 6];
 
         foreach ($clientes as &$c) {
             $rows = $this->db
