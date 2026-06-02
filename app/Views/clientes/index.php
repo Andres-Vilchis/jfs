@@ -122,7 +122,7 @@
                                 </td>
                                 <td class="text-center align-middle small">
                                     <?php if (! empty($c['dias_clases'])): ?>
-                                        <?php foreach ($c['dias_clases'] as $dia): ?>
+                                        <?php foreach (explode(',', $c['dias_semana']) as $key => $dia): ?>
                                             <span class="badge bg-primary bg-opacity-10 text-primary small me-1">
                                                 <?= strtoupper(trim($dia)) ?>
                                             </span>

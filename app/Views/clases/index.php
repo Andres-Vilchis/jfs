@@ -70,7 +70,7 @@
                         </div>
 
                         <div class="mt-2 small">
-                            <?php foreach (explode(',', $c['dias_semana']) as $dia): ?>
+                            <?php foreach (explode(',', $c['dias_semana']) as $key => $dia): ?>
                                 <span class="badge bg-primary bg-opacity-10 text-primary me-1">
                                     <?= strtoupper(trim($dia)) ?>
                                 </span>
@@ -89,8 +89,8 @@
                         </a>
 
                         <a href="<?= route_to('clases.participantes', $c['id']) ?>"
-                           class="btn btn-sm btn-success"
-                           title="Gestionar participantes">
+                            class="btn btn-sm btn-success"
+                            title="Gestionar participantes">
                             <i class="bi bi-person-plus-fill"></i>
                             <span class="ms-1 small"><?= $inscritos ?>/<?= $c['capacidad_max'] ?></span>
                         </a>
