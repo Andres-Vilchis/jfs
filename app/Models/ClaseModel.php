@@ -115,12 +115,6 @@ class ClaseModel extends Model
         $hoy  = $dias[date('w')];
         $hora = date('H:i:s');
 
-        dd([
-            'dia_php' => date('w'),
-            'dia_texto' => $hoy,
-            'hora' => $hora,
-        ]);
-
         $resultado =  $this->db
             ->table('clases c')
             ->select('c.*, CONCAT(t.nombre, " ", t.apellidos) AS trainer_nombre')
