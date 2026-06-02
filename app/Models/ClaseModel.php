@@ -88,13 +88,15 @@ class ClaseModel extends Model
         ];
         $hoy = $dias[date('w')];
 
-        return $this->db->table('clases c')
+        return $this->db
+            ->table('clases c')
             ->select('c.*, CONCAT(t.nombre, " ", t.apellidos) AS trainer_nombre')
             ->join('trainers t', 't.id = c.trainer_id', 'left')
             ->where('c.activo', 1)
             ->like('c.dias_semana', $hoy)
             ->orderBy("FIELD(c.dias_semana,'lun','mar','mie','jue','vie','sab','dom')", '', false)
             ->orderBy('c.hora_inicio', 'ASC')
-            ->get()->getResultArray();
+            ->get()
+            ->getResultArray();
     }
 }

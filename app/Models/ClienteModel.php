@@ -71,23 +71,19 @@ class ClienteModel extends Model
                 ->get()
                 ->getResultArray();
 
-            // Recopilar días únicos de todas las clases del cliente
             $dias = [];
             foreach ($rows as $row) {
-                foreach (explode(',', $row['dias_semana']) as $dia) {
-                    $d = trim($dia);
-                    if ($d !== '' && ! in_array($d, $dias)) {
-                        $dias[] = $d;
+                // Sanitizar por si hay registros viejos con índices numéricos
+                $diasLimpios = ClaseModel::sanitizarDias($row['dias_semana']);
+                foreach (explode(',', $diasLimpios) as $dia) {
+                    $dia = trim($dia);
+                    if ($dia !== '' && !in_array($dia, $dias)) {
+                        $dias[] = $dia;
                     }
                 }
             }
 
-            // Ordenar según día de la semana
-            usort(
-                $dias,
-                fn($a, $b) =>
-                array_search($a, $ordenDias) - array_search($b, $ordenDias)
-            );
+            usort($dias, fn($a, $b) => ($orden[$a] ?? 9) - ($orden[$b] ?? 9));
 
             $c['dias_clases'] = $dias;
         }
