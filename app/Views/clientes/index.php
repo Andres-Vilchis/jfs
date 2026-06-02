@@ -209,8 +209,7 @@
                         </div>
                         <div class="input-group input-group-sm">
                             <span class="input-group-text">Notas</span>
-                            <textarea name="notas" id="m_notas" class="form-control small" style="font-size:.75rem" rows="2" placeholder="Observaciones...">
-                            </textarea>
+                            <textarea name="notas" id="m_notas" class="form-control small" style="font-size:.75rem" rows="2" placeholder="Observaciones..."></textarea>
                         </div>
                     </div>
                 </div>

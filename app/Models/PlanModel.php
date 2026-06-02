@@ -12,8 +12,12 @@ class PlanModel extends Model
     protected $useTimestamps = true;
 
     protected $allowedFields = [
-        'nombre', 'descripcion', 'precio',
-        'duracion_dias', 'beneficios', 'activo',
+        'nombre',
+        'descripcion',
+        'precio',
+        'duracion_dias',
+        'beneficios',
+        'activo',
     ];
 
     protected $validationRules = [

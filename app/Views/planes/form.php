@@ -62,16 +62,14 @@ $editando = isset($plan);
             <div class="col-12">
                 <div class="input-group input-group-sm">
                     <span class="input-group-text">Descripción</span>
-                    <textarea name="descripcion" class="form-control" rows="2">
-                        <?= esc($plan['descripcion'] ?? '') ?></textarea>
+                    <textarea name="descripcion" class="form-control" rows="2"><?= esc($plan['descripcion'] ?? '') ?></textarea>
                 </div>
             </div>
 
             <div class="col-12">
                 <div class="input-group input-group-sm">
                     <span class="input-group-text">Beneficios</span>
-                    <textarea name="beneficios" class="form-control" rows="4">
-                        <?= esc($plan['beneficios'] ?? '') ?></textarea>
+                    <textarea name="beneficios" class="form-control" rows="4"><?= esc($plan['beneficios'] ?? '') ?></textarea>
                 </div>
                 <div class="text-muted fst-italic form-text ps-1" style="font-size:.75rem">Escribe un beneficio por línea.</div>
             </div>
