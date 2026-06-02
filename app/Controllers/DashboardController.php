@@ -38,7 +38,7 @@ class DashboardController extends BaseController
         $ultimosClientes = $clienteModel->ultimos(3);
 
         // Clases de hoy
-        $clasesHoy = $claseModel->hoy();
+        $proximaClase = $claseModel->proximaClaseHoy();
 
         $data = [
             'fecha_formateada' => fechaFormateada(),
@@ -49,7 +49,7 @@ class DashboardController extends BaseController
             'proximosVencer'   => $proximosVencer,
             'vencidos'         => $vencidos,
             'ultimosClientes'  => $ultimosClientes,
-            'clasesHoy'        => $clasesHoy,
+            'proximaClase'     => $proximaClase,
         ];
 
         return view('dashboard/index', $data);

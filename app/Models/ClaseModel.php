@@ -121,10 +121,10 @@ class ClaseModel extends Model
             ->join('trainers t', 't.id = c.trainer_id', 'left')
             ->where('c.activo', 1)
             ->where("FIND_IN_SET('{$hoy}', c.dias_semana) >", 0, false)
-            ->where('c.hora_inicio >=', $hora)
+            ->where('c.hora_fin >', $hora)
             ->orderBy('c.hora_inicio', 'ASC')
             ->limit(1)
             ->get()
-            ->getResultArray();
+            ->getRowArray();
     }
 }

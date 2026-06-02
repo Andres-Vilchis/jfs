@@ -11,7 +11,7 @@
  * @var list<array{nombre: string, apellidos: string, correo: string|null, plan_nombre: string|null, fecha_vencimiento: string}> $proximosVencer
  * @var int    $vencidos
  * @var list<array{nombre: string, apellidos: string, correo: string|null, plan_nombre: string|null, nivel: string, fecha_vencimiento: string|null}> $ultimosClientes
- * @var list<array{nombre: string, trainer_nombre: string|null, hora_inicio: string, hora_fin: string, nivel: string}> $proximaClase
+ * @var list<array{nombre: string, trainer_nombre: string|null, hora_inicio: string, hora_fin: string, nivel: string},  $proximaClase
  */
 ?>
 
@@ -82,30 +82,26 @@
                                     </td>
                                 </tr>
                             <?php else: ?>
-                                <?php foreach ($proximaClase as $cl): ?>
-                                    <tr>
-                                        <td style="font-size:.75rem">
-                                            <div class="text-start align-middle">
-                                                <div class="fw-semibold">
-                                                    <?= esc($cl['nombre']) ?>
-                                                </div>
-                                                <div class="text-start text-secondary-emphasis">
-                                                    Trainer: <?= esc($cl['trainer_nombre'] ?? 'Sin trainer') ?>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-center align-middle" style="font-size:.75rem">
-                                            <div class="text-secondary-emphasis ">
-                                                <?= substr($cl['hora_inicio'], 0, 5) ?> – <?= substr($cl['hora_fin'], 0, 5) ?>
-                                            </div>
-                                        </td>
-                                        <td class="text-center align-middle" style="font-size:.75rem">
-                                            <div class="text-secondary-emphasis">
-                                                <?= ucfirst($cl['nivel']) ?>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
+                                <tr>
+                                    <td style="font-size:.75rem">
+                                        <div class="fw-semibold">
+                                            <?= esc($proximaClase['nombre']) ?>
+                                        </div>
+                                        <div class="text-secondary-emphasis">
+                                            Trainer: <?= esc($proximaClase['trainer_nombre'] ?? 'Sin trainer') ?>
+                                        </div>
+                                    </td>
+
+                                    <td class="text-center align-middle" style="font-size:.75rem">
+                                        <?= substr($proximaClase['hora_inicio'], 0, 5) ?>
+                                        –
+                                        <?= substr($proximaClase['hora_fin'], 0, 5) ?>
+                                    </td>
+
+                                    <td class="text-center align-middle" style="font-size:.75rem">
+                                        <?= ucfirst($proximaClase['nivel']) ?>
+                                    </td>
+                                </tr>
                             <?php endif; ?>
                         </tbody>
                     </table>
