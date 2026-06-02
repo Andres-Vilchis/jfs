@@ -72,8 +72,9 @@
                                 <th style="font-size:.80rem">Nivel</th>
                             </tr>
                         </thead>
-                        <tbody><?php if (!empty($proximaClase) && is_array($proximaClase)): ?>
-                            <tr>
+                        <tbody>
+                            <?php if (!empty($proximaClase)): ?>
+                                <tr>
                                     <td style="font-size:.75rem">
                                         <div class="fw-semibold">
                                             <?= esc($proximaClase['nombre'] ?? '') ?>
