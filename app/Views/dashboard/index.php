@@ -11,7 +11,7 @@
  * @var list<array{nombre: string, apellidos: string, correo: string|null, plan_nombre: string|null, fecha_vencimiento: string}> $proximosVencer
  * @var int    $vencidos
  * @var list<array{nombre: string, apellidos: string, correo: string|null, plan_nombre: string|null, nivel: string, fecha_vencimiento: string|null}> $ultimosClientes
- * @var list<array{nombre: string, trainer_nombre: string|null, hora_inicio: string, hora_fin: string, nivel: string},  $proximaClase
+ * @var list<array{nombre: string, trainer_nombre: string|null, hora_inicio: string, hora_fin: string, nivel: string} > $proximaClase
  */
 ?>
 
@@ -73,7 +73,12 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <pre>
+<?php print_r($proximaClase); ?>
+</pre>
                             <?php if (!empty($proximaClase) && is_array($proximaClase)): ?>
+
+
                                 <tr>
                                     <td style="font-size:.75rem">
                                         <div class="fw-semibold">
