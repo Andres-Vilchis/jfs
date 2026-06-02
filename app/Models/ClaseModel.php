@@ -40,13 +40,13 @@ class ClaseModel extends Model
     public static function sanitizarDias(string $dias): string
     {
         $map = [
-            '0' => 'dom',
-            '1' => 'lun',
-            '2' => 'mar',
-            '3' => 'mie',
-            '4' => 'jue',
-            '5' => 'vie',
-            '6' => 'sab',
+            '0' => 'lun',
+            '1' => 'mar',
+            '2' => 'mie',
+            '3' => 'jue',
+            '4' => 'vie',
+            '5' => 'sab',
+            '6' => 'dom',
         ];
         $partes = array_filter(explode(',', $dias), fn($x) => trim($x) !== '');
         $clean  = array_map(fn($d) => $map[trim($d)] ?? trim($d), $partes);
@@ -78,13 +78,13 @@ class ClaseModel extends Model
     public function hoy(): array
     {
         $dias = [
-            1 => 'lun',
-            2 => 'mar',
-            3 => 'mie',
-            4 => 'jue',
-            5 => 'vie',
-            6 => 'sab',
-            0 => 'dom',
+            '0' => 'lun',
+            '1' => 'mar',
+            '2' => 'mie',
+            '3' => 'jue',
+            '4' => 'vie',
+            '5' => 'sab',
+            '6' => 'dom',
         ];
         $hoy = $dias[date('w')];
 
