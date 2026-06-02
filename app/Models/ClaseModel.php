@@ -115,7 +115,7 @@ class ClaseModel extends Model
         $hoy  = $dias[date('w')];
         $hora = date('H:i:s');
 
-        return $this->db
+        $resultado =  $this->db
             ->table('clases c')
             ->select('c.*, CONCAT(t.nombre, " ", t.apellidos) AS trainer_nombre')
             ->join('trainers t', 't.id = c.trainer_id', 'left')
@@ -126,5 +126,7 @@ class ClaseModel extends Model
             ->limit(1)
             ->get()
             ->getRowArray();
+
+        return $resultado ?? [];
     }
 }
