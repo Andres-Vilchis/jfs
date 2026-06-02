@@ -73,19 +73,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if (empty($proximaClase)): ?>
-                                <tr>
-                                    <td colspan="3" class="text-center text-muted py-4" style="font-size:.75rem">
-                                        <div class="fw-semibold">
-                                            Sin próxima clase
-                                        </div>
-                                    </td>
-                                </tr>
-                            <?php else: ?>
+                            <?php if (!empty($proximaClase) && is_array($proximaClase)): ?>
                                 <tr>
                                     <td style="font-size:.75rem">
                                         <div class="fw-semibold">
-                                            <?= esc($proximaClase['nombre']) ?>
+                                            <?= esc($proximaClase['nombre'] ?? '') ?>
                                         </div>
                                         <div class="text-secondary-emphasis">
                                             Trainer: <?= esc($proximaClase['trainer_nombre'] ?? 'Sin trainer') ?>
@@ -93,13 +85,21 @@
                                     </td>
 
                                     <td class="text-center align-middle" style="font-size:.75rem">
-                                        <?= substr($proximaClase['hora_inicio'], 0, 5) ?>
+                                        <?= isset($proximaClase['hora_inicio']) ? substr($proximaClase['hora_inicio'], 0, 5) : '--:--' ?>
                                         –
-                                        <?= substr($proximaClase['hora_fin'], 0, 5) ?>
+                                        <?= isset($proximaClase['hora_fin']) ? substr($proximaClase['hora_fin'], 0, 5) : '--:--' ?>
                                     </td>
 
                                     <td class="text-center align-middle" style="font-size:.75rem">
-                                        <?= ucfirst($proximaClase['nivel']) ?>
+                                        <?= ucfirst($proximaClase['nivel'] ?? '-') ?>
+                                    </td>
+                                </tr>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="3" class="text-center text-muted py-4" style="font-size:.75rem">
+                                        <div class="fw-semibold">
+                                            Sin próxima clase
+                                        </div>
                                     </td>
                                 </tr>
                             <?php endif; ?>
