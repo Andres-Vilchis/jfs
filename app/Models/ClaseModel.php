@@ -33,17 +33,45 @@ class ClaseModel extends Model
         'nivel'         => 'required|in_list[principiante,intermedio,avanzado]',
     ];
 
-    // Clases con nombre del trainer y conteo de inscritos
+    /**
+     * Convierte un string de días (posiblemente con índices numéricos viejos)
+     * a su equivalente de texto. Ej: "0,1,2" → "dom,lun,mar" | "lun,mar" → "lun,mar"
+     */
+    public static function sanitizarDias(string $dias): string
+    {
+        $map = [
+            '0' => 'dom',
+            '1' => 'lun',
+            '2' => 'mar',
+            '3' => 'mie',
+            '4' => 'jue',
+            '5' => 'vie',
+            '6' => 'sab',
+        ];
+        $partes = array_filter(explode(',', $dias), fn($x) => trim($x) !== '');
+        $clean  = array_map(fn($d) => $map[trim($d)] ?? trim($d), $partes);
+        return implode(',', $clean);
+    }
+
     public function conTrainer(): array
     {
-        return $this->db->table('clases c')
+        $rows = $this->db
+            ->table('clases c')
             ->select('c.*, CONCAT(t.nombre, " ", t.apellidos) AS trainer_nombre,
                       (SELECT COUNT(*) FROM clientes_clases cc WHERE cc.clase_id = c.id AND cc.activo = 1) AS inscritos')
             ->join('trainers t', 't.id = c.trainer_id', 'left')
             ->where('c.activo', 1)
             ->orderBy("FIELD(c.dias_semana,'lun','mar','mie','jue','vie','sab','dom')", '', false)
             ->orderBy('c.hora_inicio', 'ASC')
-            ->get()->getResultArray();
+            ->get()
+            ->getResultArray();
+
+        // Sanitizar días por si existen registros viejos con índices numéricos
+        foreach ($rows as &$row) {
+            $row['dias_semana'] = self::sanitizarDias($row['dias_semana']);
+        }
+
+        return $rows;
     }
 
     // Clases de hoy
