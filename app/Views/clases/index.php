@@ -29,6 +29,7 @@
         <?php foreach ($clases as $c): ?>
             <?php
             $inscritos   = (int) ($c['inscritos'] ?? 0);
+            $capacidadTotal = (int) $c['capacidad_max'];
             $disponibles = (int) $c['capacidad_max'] - $inscritos;
             $colorCapacidad = $disponibles <= 0
                 ? 'text-danger'
@@ -55,7 +56,9 @@
                             </span>
                             <span class="<?= $colorCapacidad ?>">
                                 <i class="bi bi-people me-1"></i>
-                                <?php if ($disponibles <= 0): ?>
+                                <?php if ($capacidadTotal == $disponibles): ?>
+                                    Sin asistentes
+                                <?php elseif ($disponibles <= 0): ?>
                                     Sin lugares disponibles
                                 <?php else: ?>
                                     <?= $disponibles ?> lugar<?= $disponibles !== 1 ? 'es' : '' ?> disponible<?= $disponibles !== 1 ? 's' : '' ?>
