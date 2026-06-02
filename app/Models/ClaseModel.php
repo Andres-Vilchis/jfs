@@ -112,7 +112,7 @@ class ClaseModel extends Model
             '6' => 'sab',
         ];
 
-        $hoy  = $dias[date('w')];
+        $hoy  = date('w');
         $hora = date('H:i:s');
 
         $resultado =  $this->db
