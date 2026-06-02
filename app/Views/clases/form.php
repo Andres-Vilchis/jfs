@@ -9,8 +9,8 @@
  */
 $editando      = isset($clase);
 $diasGuardados = $editando ? trim(explode(',', $clase['dias_semana'])[0]) : '';
-$diasOpciones  = ['lun', 'mar', 'mie', 'jue', 'vie', 'sab', 'dom'];
-$diasLabels    = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
+$diasOpciones  = ['dom', 'lun', 'mar', 'mie', 'jue', 'vie', 'sab'];
+$diasLabels    = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
 ?>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
