@@ -11,7 +11,7 @@
  * @var list<array{nombre: string, apellidos: string, correo: string|null, plan_nombre: string|null, fecha_vencimiento: string}> $proximosVencer
  * @var int    $vencidos
  * @var list<array{nombre: string, apellidos: string, correo: string|null, plan_nombre: string|null, nivel: string, fecha_vencimiento: string|null}> $ultimosClientes
- * @var list<array{nombre: string, trainer_nombre: string|null, hora_inicio: string, hora_fin: string, nivel: string}> $clasesHoy
+ * @var list<array{nombre: string, trainer_nombre: string|null, hora_inicio: string, hora_fin: string, nivel: string}> $proximaClase
  */
 ?>
 
@@ -73,16 +73,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if (empty($clasesHoy)): ?>
+                            <?php if (empty($proximaClase)): ?>
                                 <tr>
                                     <td colspan="3" class="text-center text-muted py-4" style="font-size:.75rem">
                                         <div class="fw-semibold">
-                                            Sin clases hoy
+                                            Sin próxima clase
                                         </div>
                                     </td>
                                 </tr>
                             <?php else: ?>
-                                <?php foreach ($clasesHoy as $cl): ?>
+                                <?php foreach ($proximaClase as $cl): ?>
                                     <tr>
                                         <td style="font-size:.75rem">
                                             <div class="text-start align-middle">

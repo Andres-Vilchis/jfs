@@ -40,13 +40,13 @@ class ClaseModel extends Model
     public static function sanitizarDias(string $dias): string
     {
         $map = [
-            '0' => 'lun',
-            '1' => 'mar',
-            '2' => 'mie',
-            '3' => 'jue',
-            '4' => 'vie',
-            '5' => 'sab',
-            '6' => 'dom',
+            '0' => 'dom',
+            '1' => 'lun',
+            '2' => 'mar',
+            '3' => 'mie',
+            '4' => 'jue',
+            '5' => 'vie',
+            '6' => 'sab',
         ];
         $partes = array_filter(explode(',', $dias), fn($x) => trim($x) !== '');
         $clean  = array_map(fn($d) => $map[trim($d)] ?? trim($d), $partes);
@@ -78,13 +78,13 @@ class ClaseModel extends Model
     public function hoy(): array
     {
         $dias = [
-            '0' => 'lun',
-            '1' => 'mar',
-            '2' => 'mie',
-            '3' => 'jue',
-            '4' => 'vie',
-            '5' => 'sab',
-            '6' => 'dom',
+            '0' => 'dom',
+            '1' => 'lun',
+            '2' => 'mar',
+            '3' => 'mie',
+            '4' => 'jue',
+            '5' => 'vie',
+            '6' => 'sab',
         ];
         $hoy = $dias[date('w')];
 
@@ -94,8 +94,36 @@ class ClaseModel extends Model
             ->join('trainers t', 't.id = c.trainer_id', 'left')
             ->where('c.activo', 1)
             ->like('c.dias_semana', $hoy)
-            ->orderBy("FIELD(c.dias_semana,'lun','mar','mie','jue','vie','sab','dom')", '', false)
+            ->orderBy("FIELD(c.dias_semana,'dom','lun','mar','mie','jue','vie','sab')", '', false)
             ->orderBy('c.hora_inicio', 'ASC')
+            ->get()
+            ->getResultArray();
+    }
+    // Clases de hoy
+    public function proximaClaseHoy(): array
+    {
+        $dias = [
+            '0' => 'dom',
+            '1' => 'lun',
+            '2' => 'mar',
+            '3' => 'mie',
+            '4' => 'jue',
+            '5' => 'vie',
+            '6' => 'sab',
+        ];
+
+        $hoy  = $dias[date('w')];
+        $hora = date('H:i:s');
+
+        return $this->db
+            ->table('clases c')
+            ->select('c.*, CONCAT(t.nombre, " ", t.apellidos) AS trainer_nombre')
+            ->join('trainers t', 't.id = c.trainer_id', 'left')
+            ->where('c.activo', 1)
+            ->where("FIND_IN_SET('{$hoy}', c.dias_semana) >", 0, false)
+            ->where('c.hora_inicio >=', $hora)
+            ->orderBy('c.hora_inicio', 'ASC')
+            ->limit(1)
             ->get()
             ->getResultArray();
     }
