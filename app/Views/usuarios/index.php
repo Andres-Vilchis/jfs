@@ -57,7 +57,7 @@ $badgeRol = [
                 <tbody>
                     <?php if (empty($usuarios)): ?>
                         <tr>
-                            <td colspan="5" class="text-center text-muted py-4">Sin usuarios</td>
+                            <td colspan="3" class="text-center text-muted py-4">Sin usuarios</td>
                         </tr>
                     <?php else: ?>
                         <?php foreach ($usuarios as $u): ?>

@@ -43,7 +43,7 @@ $grupoActual = $editando ? ($usuario->grupos[0] ?? '') : '';
         <div class="row g-2">
             <div class="col-12">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text">Usuario  &nbsp;<span class="text-danger">*</span></span>
+                    <span class="input-group-text">Usuario &nbsp;<span class="text-danger">*</span></span>
                     <input type="text" name="username" class="form-control" style="font-size:.75rem" placeholder="Nombre de usuario"
                         value="<?= set_value('username', $usuario->username ?? '') ?>" required>
                 </div>
@@ -51,7 +51,7 @@ $grupoActual = $editando ? ($usuario->grupos[0] ?? '') : '';
 
             <div class="col-12">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text">Correo  &nbsp;<span class="text-danger">*</span></span>
+                    <span class="input-group-text">Correo &nbsp;<span class="text-danger">*</span></span>
                     <input type="email" name="email" class="form-control" style="font-size:.75rem" placeholder="correo@ejemplo.com"
                         value="<?= set_value('email', $usuario->email ?? '') ?>" required>
                 </div>
@@ -71,15 +71,15 @@ $grupoActual = $editando ? ($usuario->grupos[0] ?? '') : '';
 
             <div class="col-12">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text">Rol  &nbsp;<span class="text-danger">*</span></span>
+                    <span class="input-group-text">Rol &nbsp;<span class="text-danger">*</span></span>
                     <select name="grupo" class="form-select form-select-sm" style="font-size:.75rem" required>
-                        <option value="">— Selecciona un rol —</option>
+                        <option value=""> — Selecciona un rol — </option>
                         <?php foreach ($grupos as $key => $label): ?>
-                            <option value="<?= $key ?>"
-                                <?= ($grupoActual === $key) ? 'selected' : '' ?>>
-                                <?= $label ?>
+                            <option value="<?= esc($key) ?>" <?= set_select( 'grupo', $key, set_value('grupo', $grupoActual) === $key ) ?>>
+                                <?= esc($label) ?>
                             </option>
                         <?php endforeach; ?>
+
                     </select>
                 </div>
             </div>

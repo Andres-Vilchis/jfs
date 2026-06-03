@@ -2,19 +2,18 @@
 
 namespace App\Controllers;
 
-use CodeIgniter\Shield\Models\UserModel;
+use App\Models\UsuarioModel;
 use CodeIgniter\Shield\Entities\User;
 
 class UsuariosController extends BaseController
 {
-    protected UserModel $userModel;
+    protected UsuarioModel $usuarioModel;
 
     public function __construct()
     {
-        $this->userModel = new UserModel();
+        $this->usuarioModel = new UsuarioModel();
     }
 
-    // Solo admin puede acceder
     private function soloAdmin()
     {
         if (! auth()->loggedIn() || ! auth()->user()->inGroup('admin')) {
@@ -25,26 +24,22 @@ class UsuariosController extends BaseController
 
     public function index()
     {
-        if ($r = $this->soloAdmin()) return $r;
-
-        $usuarios = $this->userModel->findAll();
-
-        // Agrega grupos y email a cada usuario
-        foreach ($usuarios as &$u) {
-            $u->grupos = $u->getGroups();
-            $identity  = $u->getEmailIdentity();
-            $u->email  = $identity?->secret ?? '—';
+        if ($r = $this->soloAdmin()) {
+            return $r;
         }
 
         return view('usuarios/index', [
             'fecha_formateada' => fechaFormateada(),
-            'usuarios' => $usuarios
+            'usuarios'         => $this->usuarioModel->obtenerTodos(),
         ]);
     }
 
     public function crear()
     {
-        if ($r = $this->soloAdmin()) return $r;
+        if ($r = $this->soloAdmin()) {
+            return $r;
+        }
+
         return view('usuarios/form');
     }
 
@@ -64,22 +59,12 @@ class UsuariosController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $user = new User([
-            'username' => $this->request->getPost('username'),
-            'active'   => 1,
-        ]);
-
-        $this->userModel->save($user);  // Guardar SIN password primero
-
-        $user = $this->userModel->findById($this->userModel->getInsertID());
-
-        // Crear identidad de email (esto también guarda la contraseña hasheada)
-        $user->createEmailIdentity([
-            'email'    => $this->request->getPost('email'),
-            'password' => $this->request->getPost('password'),
-        ]);
-
-        $user->addGroup($this->request->getPost('grupo'));
+        $this->usuarioModel->crear(
+            $this->request->getPost('username'),
+            $this->request->getPost('email'),
+            $this->request->getPost('password'),
+            $this->request->getPost('grupo')
+        );
 
         return redirect()->to('/usuarios')
             ->with('success', 'Usuario creado correctamente.');
@@ -87,52 +72,46 @@ class UsuariosController extends BaseController
 
     public function editar(int $id)
     {
-        if ($r = $this->soloAdmin()) return $r;
+        if ($r = $this->soloAdmin()) {
+            return $r;
+        }
 
-        $usuario          = $this->userModel->findById($id);
-        $usuario->grupos  = $usuario->getGroups();
-        $identity         = $usuario->getEmailIdentity();
-        $usuario->email   = $identity?->secret ?? '';
+        $usuario = $this->usuarioModel->obtenerPorId($id);
 
-        return view('usuarios/form', ['usuario' => $usuario]);
+        if (! $usuario) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        return view('usuarios/form', [
+            'usuario' => $usuario,
+        ]);
     }
 
     public function actualizar(int $id)
     {
-        if ($r = $this->soloAdmin()) return $r;
+        if ($r = $this->soloAdmin()) {
+            return $r;
+        }
 
         $rules = [
             'username' => "required|min_length[3]|is_unique[users.username,id,{$id}]",
-            'email'    => "required|valid_email",
+            'email'    => 'required|valid_email',
             'grupo'    => 'required|in_list[admin,recepcionista,entrenador,cliente]',
         ];
 
         if (! $this->validate($rules)) {
-            return redirect()->back()->withInput()
+            return redirect()->back()
+                ->withInput()
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $usuario = $this->userModel->findById($id);
-
-        // Actualiza username
-        $this->userModel->save([
-            'id'       => $id,
-            'username' => $this->request->getPost('username'),
-        ]);
-
-        $identity = $usuario->getEmailIdentity();
-        if ($identity) {
-            $identity->secret = $this->request->getPost('email');
-            model(\CodeIgniter\Shield\Models\UserIdentityModel::class)->save($identity);
-        }
-
-        $nuevaPassword = $this->request->getPost('password');
-        if (! empty($nuevaPassword)) {
-            $usuario->setPassword($nuevaPassword);
-            $this->userModel->save($usuario);
-        }
-
-        $usuario->syncGroups($this->request->getPost('grupo'));
+        $this->usuarioModel->actualizar(
+            $id,
+            $this->request->getPost('username'),
+            $this->request->getPost('email'),
+            $this->request->getPost('password'),
+            $this->request->getPost('grupo')
+        );
 
         return redirect()->to('/usuarios')
             ->with('success', 'Usuario actualizado correctamente.');
@@ -140,21 +119,16 @@ class UsuariosController extends BaseController
 
     public function toggleActivo(int $id)
     {
-        if ($r = $this->soloAdmin()) return $r;
+        if ($r = $this->soloAdmin()) {
+            return $r;
+        }
 
-        // No desactivarse a sí mismo
-        if (auth()->id() == $id) {
+        if (auth()->id() === $id) {
             return redirect()->to('/usuarios')
                 ->with('error', 'No puedes desactivarte a ti mismo.');
         }
 
-        $usuario = $this->userModel->findById($id);
-        if ($usuario->active) {
-            $usuario->deactivate();
-        } else {
-            $usuario->activate();
-        }
-        $this->userModel->save($usuario);
+        $this->usuarioModel->toggleActivo($id);
 
         return redirect()->to('/usuarios')
             ->with('success', 'Usuario actualizado.');
