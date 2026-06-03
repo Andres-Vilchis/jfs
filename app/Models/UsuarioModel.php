@@ -77,24 +77,40 @@ class UsuarioModel extends Model
             return;
         }
 
-        $this->userModel->save([
-            'id'       => $id,
-            'username' => $username,
-        ]);
-
-        $identity = $usuario->getEmailIdentity();
-
-        if ($identity) {
-            $identity->secret = $email;
-            $this->identityModel->save($identity);
+        // Username
+        if ($usuario->username !== $username) {
+            $this->userModel->update($id, [
+                'username' => $username,
+            ]);
         }
 
+        // Email
+        $identity = $usuario->getEmailIdentity();
+
+        if (
+            $identity !== null
+            && trim((string) $identity->secret) !== trim($email)
+        ) {
+            $this->identityModel->update(
+                $identity->id,
+                [
+                    'secret' => $email,
+                ]
+            );
+        }
+
+        // Password
         if (! empty($password)) {
             $usuario->setPassword($password);
             $this->userModel->save($usuario);
         }
 
-        $usuario->syncGroups($grupo);
+        // Grupo
+        $gruposActuales = $usuario->getGroups();
+
+        if ( count($gruposActuales) !== 1 || $gruposActuales[0] !== $grupo ) {
+            $usuario->syncGroups($grupo);
+        }
     }
 
     public function toggleActivo(int $id): void
