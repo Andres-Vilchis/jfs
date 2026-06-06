@@ -7,7 +7,7 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom shadow-sm">
     <div class="container-fluid">
         <a class="navbar-brand fw-semibold fs-6" href="<?= route_to('dashboard') ?>" >
-        <img src="<?= base_url('./assets/img/jfs_logo.png') ?>" class="rounded" alt="JFS" height="36.8">  JF System
+        <img src="<?= base_url('./assets/img/JFS_logo.png') ?>" class="rounded" alt="JFS" height="36.8">  JF System
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarMain" aria-controls="navbarMain"
