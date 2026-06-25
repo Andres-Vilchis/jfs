@@ -157,7 +157,7 @@
                                     <th style="font-size:.80rem">Cliente</th>
                                     <th class="text-center" style="font-size:.80rem">Plan</th>
                                     <th class="text-center" style="font-size:.80rem">Vencimiento</th>
-                                    <th class="text-center" style="font-size:.80rem"></th>
+                                    <th class="text-center" style="font-size:.80rem">Pagar</th>
                                 </tr>
                             </thead>
                             <tbody>

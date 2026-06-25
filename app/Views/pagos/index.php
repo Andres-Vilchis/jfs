@@ -37,7 +37,7 @@
                         <th class="text-center" style="font-size:.80rem">Plan</th>
                         <th class="text-center" style="font-size:.80rem">Próximo corte</th>
                         <th class="text-center" style="font-size:.80rem">Último pago</th>
-                        <th class="text-center" style="font-size:.80rem"></th>
+                        <th class="text-center" style="font-size:.80rem">Pagar</th>
                     </tr>
                 </thead>
                 <tbody>

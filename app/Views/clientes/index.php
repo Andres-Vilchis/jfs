@@ -65,7 +65,7 @@
                         <th class="text-center" style="font-size:.80rem">Plan</th>
                         <th class="text-center" style="font-size:.80rem">Nivel</th>
                         <th class="text-center" style="font-size:.80rem">Clases</th>
-                        <th class="text-center" style="font-size:.80rem"></th>
+                        <th class="text-center" style="font-size:.80rem">Pagar</th>
                     </tr>
                 </thead>
                 <tbody>
