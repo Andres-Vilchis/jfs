@@ -53,15 +53,15 @@
                             $diff       = $venc ? (int) $hoy->diff($venc)->format('%r%a') : null;
 
                             if ($esPorClase) {
-                                $corteHtml = '<span class="badge bg-secondary bg-opacity-10 text-secondary small">Por clase</span>';
+                                $corteHtml = '<span class="text-muted small">Por clase</span>';
                             } elseif ($venc === null) {
                                 $corteHtml = '<span class="text-muted small">—</span>';
                             } elseif ($diff < 0) {
-                                $corteHtml = '<span class="text-danger fw-semibold small">Vencido (' . date('d/m/Y', strtotime($c['fecha_vencimiento'])) . ')</span>';
+                                $corteHtml = '<span class="text-danger small">Vencido (' . date('d/m/Y', strtotime($c['fecha_vencimiento'])) . ')</span>';
                             } elseif ($diff <= 2) {
-                                $corteHtml = '<span class="text-warning fw-semibold small">' . date('d/m/Y', strtotime($c['fecha_vencimiento'])) . ' (' . $diff . 'd)</span>';
+                                $corteHtml = '<span class="text-warning small">' . date('d/m/Y', strtotime($c['fecha_vencimiento'])) . ' (' . $diff . 'd)</span>';
                             } elseif ($diff <= 5) {
-                                $corteHtml = '<span class="text-success fw-semibold small">' . date('d/m/Y', strtotime($c['fecha_vencimiento'])) . ' (' . $diff . 'd)</span>';
+                                $corteHtml = '<span class="text-success small">' . date('d/m/Y', strtotime($c['fecha_vencimiento'])) . ' (' . $diff . 'd)</span>';
                             } else {
                                 $corteHtml = '<span class="text-success-emphasis small">' . date('d/m/Y', strtotime($c['fecha_vencimiento'])) . '</span>';
                             }
