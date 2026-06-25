@@ -2,9 +2,8 @@
 <?= $this->section('content') ?>
 <?php
 /**
- * @var array $clientes
- * @var array $planes
- * @var array $ordenDias = ['lun', 'mar', 'mie', 'jue', 'vie', 'sab', 'dom'];
+ * @var list<array{id:int,nombre:string,apellidos:string,telefono:string|null,correo:string|null,plan_id:int|null,plan_nombre:string|null,plan_precio:float|null,duracion_dias:int|null,fecha_vencimiento:string|null,nivel:string,notas:string|null,dias_clases:string[]}> $clientes
+ * @var list<array{id:int,nombre:string,precio:float,duracion_dias:int}> $planes
  */
 ?>
 
@@ -49,7 +48,7 @@
 <?php if (session()->getFlashdata('errors')): ?>
     <div class="alert alert-danger alert-dismissible fade show py-2">
         <ul class="mb-0 small">
-            <?php foreach (session()->getFlashdata('errors') as $e): ?>
+            <?php foreach ((array) session()->getFlashdata('errors') as $e): ?>
                 <li><?= esc($e) ?></li>
             <?php endforeach; ?>
         </ul>
@@ -59,27 +58,35 @@
 <div class="card">
     <div class="card-body px-0 py-0">
         <div class="table-responsive">
-            <table>
+            <table class="table table-hover table-sm mb-0">
                 <thead>
                     <tr>
-                        <th class="text-start">Cliente</th>
-                        <th class="text-center">Plan</th>
-                        <th class="text-center">Nivel</th>
-                        <th class="text-center">Clases</th>
+                        <th class="text-start" style="font-size:.80rem">Cliente</th>
+                        <th class="text-center" style="font-size:.80rem">Plan</th>
+                        <th class="text-center" style="font-size:.80rem">Nivel</th>
+                        <th class="text-center" style="font-size:.80rem">Clases</th>
+                        <th class="text-center" style="font-size:.80rem"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if (empty($clientes)): ?>
                         <tr>
-                            <td colspan="3" class="text-center text-muted py-4">Sin clientes registrados</td>
+                            <td colspan="5" class="text-center text-muted py-4">Sin clientes registrados</td>
+                            <!-- ↑ corregido: era colspan="3", ahora 5 para cubrir todas las columnas -->
                         </tr>
                     <?php else: ?>
                         <?php foreach ($clientes as $c):
                             $primerApellido = explode(' ', trim($c['apellidos']))[0];
+
+                            // ↓ corregido: null-check explícito antes de instanciar DateTime
                             $hoy  = new DateTime();
-                            $venc = new DateTime($c['fecha_vencimiento'] ?? 'now');
-                            $diff = (int) $hoy->diff($venc)->format('%r%a');
-                            if ($diff < 0) {
+                            $venc = $c['fecha_vencimiento'] ? new DateTime($c['fecha_vencimiento']) : null;
+                            $diff = $venc ? (int) $hoy->diff($venc)->format('%r%a') : null;
+
+                            if ($diff === null) {
+                                $badgeClass = 'text-muted';
+                                $badgeText  = '—';
+                            } elseif ($diff < 0) {
                                 $badgeClass = 'text-danger-emphasis';
                                 $badgeText  = 'Vencido';
                             } elseif ($diff <= 5) {
@@ -116,6 +123,8 @@
                                 </td>
                                 <td class="text-center align-middle small text-muted">
                                     <div class="fw-light small"><?= esc($c['plan_nombre'] ?? '—') ?></div>
+                                    <!-- Badge de vencimiento bajo el nombre del plan -->
+                                    <div class="<?= $badgeClass ?>" style="font-size:.70rem"><?= $badgeText ?></div>
                                 </td>
                                 <td class="text-center align-middle small text-muted">
                                     <div class="fw-light small"><?= esc(ucfirst($c['nivel'])) ?></div>
@@ -131,7 +140,19 @@
                                         <span class="text-muted small">- -</span>
                                     <?php endif; ?>
                                 </td>
-
+                                <td class="text-center align-middle">
+                                    <button type="button"
+                                        class="btn btn-sm btn-outline-primary"
+                                        style="font-size:.72rem"
+                                        data-id="<?= $c['id'] ?>"
+                                        data-nombre="<?= esc($c['nombre'] . ' ' . $c['apellidos'], 'attr') ?>"
+                                        data-plan="<?= esc($c['plan_nombre'] ?? '—', 'attr') ?>"
+                                        data-monto="<?= number_format((float)($c['plan_precio'] ?? 0), 2) ?>"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modalPagarClientes">
+                                        <i class="bi bi-cash-coin me-1"></i>Pagar
+                                    </button>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     <?php endif; ?>
@@ -222,7 +243,6 @@
                             <i class="bi bi-x-diamond-fill me-1"></i>Cancelar
                         </button>
                     </div>
-
             </form>
             <form id="formBaja" method="post" action="" class="m-0">
                 <?= csrf_field() ?>
@@ -235,6 +255,57 @@
         </div>
     </div>
 </div>
+</div>
+
+<!-- ── Modal Pagar desde Clientes ──────────────────────────────── -->
+<div class="modal fade" id="modalPagarClientes" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header py-2">
+                <h6 class="modal-title small">
+                    <i class="bi bi-cash-coin me-1 text-primary"></i>Registrar pago
+                </h6>
+                <button type="button" class="btn-close btn-sm" data-bs-dismiss="modal"></button>
+            </div>
+            <form id="formPagarClientes" method="post" action="">
+                <?= csrf_field() ?>
+                <input type="hidden" name="origen" value="clientes">
+                <div class="modal-body py-3 d-flex flex-column gap-2">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-text" style="min-width:90px">Cliente</span>
+                        <input type="text" id="mpc_nombre" class="form-control form-control-sm" readonly style="font-size:.75rem">
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-text" style="min-width:90px">Plan</span>
+                        <input type="text" id="mpc_plan" class="form-control form-control-sm" readonly style="font-size:.75rem">
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-text" style="min-width:90px">Costo</span>
+                        <span class="input-group-text">$</span>
+                        <input type="number" name="monto" id="mpc_monto" class="form-control form-control-sm"
+                            step="0.01" min="0" required style="font-size:.75rem">
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-text" style="min-width:90px">Fecha pago</span>
+                        <input type="date" name="fecha_pago" id="mpc_fecha"
+                            class="form-control form-control-sm" required
+                            value="<?= date('Y-m-d') ?>" style="font-size:.75rem">
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-text" style="min-width:90px">Notas</span>
+                        <input type="text" name="notas" class="form-control form-control-sm"
+                            placeholder="Opcional" style="font-size:.75rem">
+                    </div>
+                </div>
+                <div class="modal-footer py-2">
+                    <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-sm btn-primary">
+                        <i class="bi bi-floppy-fill me-1"></i>Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 <?= $this->section('scripts') ?>
@@ -263,8 +334,9 @@
         ).show();
     }
 
-    /* ── Modal ficha ────────────────────────────────────────────── */
     document.addEventListener('DOMContentLoaded', function() {
+
+        /* ── Modal ficha ────────────────────────────────────────── */
         const fichaModal = document.getElementById('fichaModal');
         fichaModal.addEventListener('show.bs.modal', function(event) {
             const trigger = event.relatedTarget;
@@ -286,6 +358,17 @@
                 '<?= base_url('clientes/actualizar') ?>/' + c.id;
             document.getElementById('formBaja').action =
                 '<?= base_url('clientes/desactivar') ?>/' + c.id;
+        });
+
+        /* ── Modal pagar desde Clientes ─────────────────────────── */
+        const modalPagarC = document.getElementById('modalPagarClientes');
+        modalPagarC.addEventListener('show.bs.modal', function(e) {
+            const btn = e.relatedTarget;
+            document.getElementById('mpc_nombre').value = btn.dataset.nombre;
+            document.getElementById('mpc_plan').value = btn.dataset.plan;
+            document.getElementById('mpc_monto').value = btn.dataset.monto;
+            document.getElementById('formPagarClientes').action =
+                '<?= base_url('pagos/registrar') ?>/' + btn.dataset.id;
         });
 
         function setSelect(id, value) {

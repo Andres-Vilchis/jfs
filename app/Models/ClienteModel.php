@@ -23,6 +23,7 @@ class ClienteModel extends Model
         'fecha_registro',
         'plan_id',
         'fecha_vencimiento',
+        'ultimo_pago',
         'nivel',
         'foto',
         'notas',
@@ -44,10 +45,10 @@ class ClienteModel extends Model
         'correo'    => ['valid_email' => 'El correo no es válido.'],
     ];
 
-    // Clientes activos con datos de su plan
+    // Clientes activos con datos de su plan (incluye precio para botón Pagar)
     public function conPlan()
     {
-        return $this->select('clientes.*, planes.nombre AS plan_nombre, planes.duracion_dias')
+        return $this->select('clientes.*, planes.nombre AS plan_nombre, planes.duracion_dias, planes.precio AS plan_precio')
             ->join('planes', 'planes.id = clientes.plan_id', 'left')
             ->where('clientes.activo', 1)
             ->orderBy('clientes.nombre', 'ASC');
@@ -73,7 +74,6 @@ class ClienteModel extends Model
 
             $dias = [];
             foreach ($rows as $row) {
-                // Sanitizar por si hay registros viejos con índices numéricos
                 $diasLimpios = ClaseModel::sanitizarDias($row['dias_semana']);
                 foreach (explode(',', $diasLimpios) as $dia) {
                     $dia = trim($dia);

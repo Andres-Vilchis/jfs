@@ -8,7 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 
 // Rutas públicas
 $routes->get('/',      'Auth\LoginController::index');
-$routes->get('/login', 'Auth\LoginController::index',    ['as' => 'login']);
+$routes->get('/login', 'Auth\LoginController::index', ['as' => 'login']);
 $routes->post('/auth/login/attempt', 'Auth\LoginController::attempt');
 $routes->post('/logout', '\CodeIgniter\Shield\Controllers\LoginController::logoutAction', ['as' => 'logout']);
 
@@ -30,11 +30,11 @@ $routes->group('', ['filter' => 'session'], function ($routes) {
         $routes->post('/usuarios/toggle/(:num)',     'UsuariosController::toggleActivo/$1', ['as' => 'usuarios.toggle']);
 
         // Planes
-        $routes->get('/planes',                    'PlanesController::index',         ['as' => 'planes.index']);
-        $routes->get('/planes/crear',              'PlanesController::crear',         ['as' => 'planes.crear']);
-        $routes->post('/planes/guardar',           'PlanesController::guardar',       ['as' => 'planes.guardar']);
-        $routes->get('/planes/editar/(:num)',      'PlanesController::editar/$1',     ['as' => 'planes.editar']);
-        $routes->post('/planes/actualizar/(:num)', 'PlanesController::actualizar/$1', ['as' => 'planes.actualizar']);
+        $routes->get('/planes',                    'PlanesController::index',           ['as' => 'planes.index']);
+        $routes->get('/planes/crear',              'PlanesController::crear',           ['as' => 'planes.crear']);
+        $routes->post('/planes/guardar',           'PlanesController::guardar',         ['as' => 'planes.guardar']);
+        $routes->get('/planes/editar/(:num)',      'PlanesController::editar/$1',       ['as' => 'planes.editar']);
+        $routes->post('/planes/actualizar/(:num)', 'PlanesController::actualizar/$1',   ['as' => 'planes.actualizar']);
         $routes->post('/planes/toggle/(:num)',     'PlanesController::toggleActivo/$1', ['as' => 'planes.toggle']);
     });
 
@@ -48,6 +48,12 @@ $routes->group('', ['filter' => 'session'], function ($routes) {
         $routes->get('/clientes/editar/(:num)',      'ClientesController::editar/$1',      ['as' => 'clientes.editar']);
         $routes->post('/clientes/actualizar/(:num)', 'ClientesController::actualizar/$1',  ['as' => 'clientes.actualizar']);
         $routes->post('/clientes/desactivar/(:num)', 'ClientesController::desactivar/$1', ['as' => 'clientes.desactivar']);
+        $routes->post('/clientes/pagar/(:num)',       'ClientesController::pagar/$1',      ['as' => 'clientes.pagar']);
+
+        // Pagos
+        $routes->get('/pagos',                      'PagosController::index',            ['as' => 'pagos.index']);
+        $routes->post('/pagos/registrar/(:num)',     'PagosController::registrar/$1',     ['as' => 'pagos.registrar']);
+        $routes->get('/pagos/historial/(:num)',      'PagosController::historial/$1',     ['as' => 'pagos.historial']);
     });
 
     // ── Admin, Recepcionista y Entrenador ─────────────────────────
@@ -62,9 +68,9 @@ $routes->group('', ['filter' => 'session'], function ($routes) {
         $routes->post('/clases/toggle/(:num)',     'ClasesController::toggleActivo/$1', ['as' => 'clases.toggle']);
 
         // Participantes de clase
-        $routes->get('/clases/(:num)/participantes',                    'ClasesController::participantes/$1',                    ['as' => 'clases.participantes']);
-        $routes->post('/clases/(:num)/participantes/agregar',           'ClasesController::agregarParticipante/$1',              ['as' => 'clases.agregarParticipante']);
-        $routes->post('/clases/(:num)/participantes/quitar/(:num)',     'ClasesController::quitarParticipante/$1/$2',            ['as' => 'clases.quitarParticipante']);
+        $routes->get('/clases/(:num)/participantes',                  'ClasesController::participantes/$1',         ['as' => 'clases.participantes']);
+        $routes->post('/clases/(:num)/participantes/agregar',         'ClasesController::agregarParticipante/$1',   ['as' => 'clases.agregarParticipante']);
+        $routes->post('/clases/(:num)/participantes/quitar/(:num)',   'ClasesController::quitarParticipante/$1/$2', ['as' => 'clases.quitarParticipante']);
 
         // Trainers
         $routes->get('/trainers',                    'TrainersController::index',           ['as' => 'trainers.index']);

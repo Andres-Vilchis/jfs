@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\ClienteModel;
 use App\Models\PlanModel;
+use App\Models\PagoModel;
 
 class ClientesController extends BaseController
 {
@@ -50,24 +51,23 @@ class ClientesController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-
         $planId           = $this->request->getPost('plan_id') ?: null;
         $fechaInscripcion = $this->request->getPost('fecha_inscripcion') ?: date('Y-m-d');
         $fechaVencimiento = $this->calcularVencimiento($planId, $fechaInscripcion);
 
         $this->clienteModel->save([
-            'nombre'           => $this->request->getPost('nombre'),
-            'apellidos'        => $this->request->getPost('apellidos'),
-            'correo'           => $this->request->getPost('correo'),
-            'telefono'         => $this->request->getPost('telefono'),
-            'fecha_nacimiento' => $this->request->getPost('fecha_nacimiento') ?: null,
-            'genero'           => $this->request->getPost('genero'),
-            'fecha_registro'   => date('Y-m-d'),
-            'plan_id'          => $this->request->getPost('plan_id') ?: null,
+            'nombre'            => $this->request->getPost('nombre'),
+            'apellidos'         => $this->request->getPost('apellidos'),
+            'correo'            => $this->request->getPost('correo'),
+            'telefono'          => $this->request->getPost('telefono'),
+            'fecha_nacimiento'  => $this->request->getPost('fecha_nacimiento') ?: null,
+            'genero'            => $this->request->getPost('genero'),
+            'fecha_registro'    => date('Y-m-d'),
+            'plan_id'           => $planId,
             'fecha_vencimiento' => $this->request->getPost('fecha_vencimiento') ?: null,
-            'nivel'            => $this->request->getPost('nivel'),
-            'notas'            => $this->request->getPost('notas'),
-            'activo'           => 1,
+            'nivel'             => $this->request->getPost('nivel'),
+            'notas'             => $this->request->getPost('notas'),
+            'activo'            => 1,
         ]);
 
         return redirect()->to('/clientes')
@@ -77,8 +77,13 @@ class ClientesController extends BaseController
     // Formulario editar
     public function editar(int $id)
     {
+        $cliente = $this->clienteModel->find($id);
+        if (! $cliente) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
         $data = [
-            'cliente' => $this->clienteModel->find($id),
+            'cliente' => $cliente,
             'planes'  => (new PlanModel())->where('activo', 1)->findAll(),
         ];
 
@@ -101,16 +106,16 @@ class ClientesController extends BaseController
         }
 
         $this->clienteModel->update($id, [
-            'nombre'           => $this->request->getPost('nombre'),
-            'apellidos'        => $this->request->getPost('apellidos'),
-            'correo'           => $this->request->getPost('correo'),
-            'telefono'         => $this->request->getPost('telefono'),
-            'fecha_nacimiento' => $this->request->getPost('fecha_nacimiento') ?: null,
-            'genero'           => $this->request->getPost('genero'),
-            'plan_id'          => $this->request->getPost('plan_id') ?: null,
+            'nombre'            => $this->request->getPost('nombre'),
+            'apellidos'         => $this->request->getPost('apellidos'),
+            'correo'            => $this->request->getPost('correo'),
+            'telefono'          => $this->request->getPost('telefono'),
+            'fecha_nacimiento'  => $this->request->getPost('fecha_nacimiento') ?: null,
+            'genero'            => $this->request->getPost('genero'),
+            'plan_id'           => $this->request->getPost('plan_id') ?: null,
             'fecha_vencimiento' => $this->request->getPost('fecha_vencimiento') ?: null,
-            'nivel'            => $this->request->getPost('nivel'),
-            'notas'            => $this->request->getPost('notas'),
+            'nivel'             => $this->request->getPost('nivel'),
+            'notas'             => $this->request->getPost('notas'),
         ]);
 
         return redirect()->to('/clientes')
@@ -124,6 +129,13 @@ class ClientesController extends BaseController
         return redirect()->to('/clientes')
             ->with('success', 'Cliente desactivado.');
     }
+
+    // Registrar pago desde la vista Clientes (delega a PagosController)
+    public function pagar(int $id)
+    {
+        return (new \App\Controllers\PagosController())->registrar($id);
+    }
+
     private function calcularVencimiento(?int $planId, string $fechaInscripcion): ?string
     {
         if (! $planId || ! $fechaInscripcion) {
