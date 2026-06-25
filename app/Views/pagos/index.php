@@ -53,17 +53,17 @@
                             $diff       = $venc ? (int) $hoy->diff($venc)->format('%r%a') : null;
 
                             if ($esPorClase) {
-                                $corteHtml = '<span class="text-muted small">Por clase</span>';
+                                $corteHtml = '<span class="text-muted">Por clase</span>';
                             } elseif ($venc === null) {
-                                $corteHtml = '<span class="text-muted small">—</span>';
+                                $corteHtml = '<span class="text-muted">—</span>';
                             } elseif ($diff < 0) {
-                                $corteHtml = '<span class="text-danger small">Vencido (' . date('d/m/Y', strtotime($c['fecha_vencimiento'])) . ')</span>';
+                                $corteHtml = '<span class="text-danger">Vencido (' . date('d/m/Y', strtotime($c['fecha_vencimiento'])) . ')</span>';
                             } elseif ($diff <= 2) {
-                                $corteHtml = '<span class="text-warning small">' . date('d/m/Y', strtotime($c['fecha_vencimiento'])) . ' (' . $diff . 'd)</span>';
+                                $corteHtml = '<span class="text-warning">' . date('d/m/Y', strtotime($c['fecha_vencimiento'])) . ' (' . $diff . 'd)</span>';
                             } elseif ($diff <= 5) {
-                                $corteHtml = '<span class="text-success small">' . date('d/m/Y', strtotime($c['fecha_vencimiento'])) . ' (' . $diff . 'd)</span>';
+                                $corteHtml = '<span class="text-success">' . date('d/m/Y', strtotime($c['fecha_vencimiento'])) . ' (' . $diff . 'd)</span>';
                             } else {
-                                $corteHtml = '<span class="text-success-emphasis small">' . date('d/m/Y', strtotime($c['fecha_vencimiento'])) . '</span>';
+                                $corteHtml = '<span class="text-success-emphasis">' . date('d/m/Y', strtotime($c['fecha_vencimiento'])) . '</span>';
                             }
                         ?>
                             <tr>
