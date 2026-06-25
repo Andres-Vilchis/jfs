@@ -15,7 +15,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarMain">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0"  style="font-size:.87rem">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="font-size:.87rem">
                 <li class="nav-item">
                     <a class="nav-link <?= esActivo('dashboard') ?>" href="<?= route_to('dashboard') ?>">
                         <i class="bi bi-house-fill me-1"></i> Dashboard
@@ -26,6 +26,13 @@
                         <i class="bi bi-people-fill me-1"></i> Clientes
                     </a>
                 </li>
+                <?php if (auth()->user()->inGroup('admin', 'recepcionista')): ?>
+                <li class="nav-item">
+                    <a class="nav-link <?= esActivo('pagos') ?>" href="<?= route_to('pagos.index') ?>">
+                        <i class="bi bi-cash-coin me-1"></i> Pagos
+                    </a>
+                </li>
+                <?php endif; ?>
                 <li class="nav-item">
                     <a class="nav-link <?= esActivo('trainers') ?>" href="<?= route_to('trainers.index') ?>">
                         <i class="bi bi-person-arms-up me-1"></i> Trainers
@@ -50,10 +57,6 @@
                 <?php endif; ?>
             </ul>
             <div class="d-flex align-items-center gap-3">
-               <!-- <span class="text-muted small">
-                    <i class="bi bi-person-circle me-1"></i>
-                    <?//= esc(auth()->user()->username) ?>
-                </span>-->
                 <form action="<?= route_to('logout') ?>" method="post">
                     <?= csrf_field() ?>
                     <button type="submit" class="small btn btn-outline-secondary btn-sm">

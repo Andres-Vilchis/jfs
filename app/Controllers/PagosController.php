@@ -20,7 +20,8 @@ class PagosController extends BaseController
     }
 
     /**
-     * Vista principal: tabla de todos los clientes activos con datos de pago.
+     * Vista principal: clientes activos ordenados del pago más reciente al más antiguo.
+     * Clientes sin pago registrado aparecen al final.
      * GET /pagos
      */
     public function index()
@@ -29,7 +30,8 @@ class PagosController extends BaseController
             ->select('clientes.*, planes.nombre AS plan_nombre, planes.precio AS plan_precio, planes.duracion_dias')
             ->join('planes', 'planes.id = clientes.plan_id', 'left')
             ->where('clientes.activo', 1)
-            ->orderBy('clientes.nombre', 'ASC')
+            ->orderBy('clientes.ultimo_pago IS NULL', 'ASC')  // NULLs al final
+            ->orderBy('clientes.ultimo_pago', 'DESC')         // más reciente primero
             ->findAll();
 
         $data = [
@@ -52,7 +54,7 @@ class PagosController extends BaseController
         }
 
         $rules = [
-            'fecha_pago' => 'required|valid_date',   // ← corregido: sin formato entre corchetes
+            'fecha_pago' => 'required|valid_date',
             'monto'      => 'required|decimal',
         ];
 
