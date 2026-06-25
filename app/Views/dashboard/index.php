@@ -209,7 +209,7 @@
                                                 data-monto="<?= number_format((float)($a['plan_precio'] ?? 0), 2) ?>"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#modalPagarDash">
-                                                <i class="bi bi-cash-coin me-1"></i>Pagar
+                                                <i class="bi bi-currency-dollar"></i>
                                             </button>
                                         </td>
                                     </tr>
