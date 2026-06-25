@@ -67,23 +67,23 @@
                             }
                         ?>
                             <tr>
-                                <td class="align-middle" style="font-size:.75rem">
+                                <td class="align-middle" style="font-size:.70rem">
                                     <a href="<?= route_to('clientes.editar', $c['id']) ?>"
                                         class="fw-semibold text-decoration-none link-body-emphasis">
                                         <?= esc($c['nombre'] . ' ' . $c['apellidos']) ?>
                                     </a>
                                 </td>
-                                <td class="text-center align-middle" style="font-size:.75rem">
+                                <td class="text-center align-middle" style="font-size:.70rem">
                                     <?= esc($c['plan_nombre'] ?? '—') ?>
                                     <?php if (isset($c['plan_precio'])): ?>
                                         <div class="text-muted" style="font-size:.70rem">$<?= number_format((float)$c['plan_precio'], 2) ?></div>
                                     <?php endif; ?>
                                 </td>
-                                <td class="text-center align-middle"><?= $corteHtml ?></td>
-                                <td class="text-center align-middle" style="font-size:.75rem">
+                                <td class="text-center align-middle small" style="font-size:.70rem"><?= $corteHtml ?></td>
+                                <td class="text-center align-middle small" style="font-size:.70rem">
                                     <?= $c['ultimo_pago'] ? date('d/m/Y', strtotime($c['ultimo_pago'])) : '<span class="text-muted">—</span>' ?>
                                 </td>
-                                <td class="text-center align-middle">
+                                <td class="text-center align-middle small">
                                     <button type="button"
                                         class="btn btn-sm btn-outline-primary btn-pagar"
                                         style="font-size:.72rem"

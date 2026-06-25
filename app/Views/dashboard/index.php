@@ -139,7 +139,6 @@
             <div class="card">
                 <div class="card-header border-0 pt-3 pb-2 px-4 d-flex justify-content-between align-items-center">
                     <h6 class="small mb-0">
-                        <i class="bi bi-bell-fill me-1 text-warning"></i>
                         Alertas de vencimiento
                         <?php if ($vencidos > 0): ?>
                             <span class="badge bg-danger ms-1"><?= $vencidos ?> vencido<?= $vencidos > 1 ? 's' : '' ?></span>
