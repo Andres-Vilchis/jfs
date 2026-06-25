@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Variables esperadas:
  * @var callable $esActivo
@@ -6,8 +7,8 @@
 ?>
 <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom shadow-sm">
     <div class="container-fluid">
-        <a class="navbar-brand fw-semibold fs-6" href="<?= route_to('dashboard') ?>" >
-        <img src="<?= base_url('./assets/img/jfsgrbglg.png') ?>" class="rounded me-1" alt="JFS" height="30">  JF System
+        <a class="navbar-brand fw-semibold fs-6" href="<?= route_to('dashboard') ?>">
+            <img src="<?= base_url('./assets/img/jfsgrbglg.png') ?>" class="rounded me-1" alt="JFS" height="30"> JF System
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarMain" aria-controls="navbarMain"
@@ -26,13 +27,6 @@
                         <i class="bi bi-people-fill me-1"></i> Clientes
                     </a>
                 </li>
-                <?php if (auth()->user()->inGroup('admin', 'recepcionista')): ?>
-                <li class="nav-item">
-                    <a class="nav-link <?= esActivo('pagos') ?>" href="<?= route_to('pagos.index') ?>">
-                        <i class="bi bi-cash-coin me-1"></i> Pagos
-                    </a>
-                </li>
-                <?php endif; ?>
                 <li class="nav-item">
                     <a class="nav-link <?= esActivo('trainers') ?>" href="<?= route_to('trainers.index') ?>">
                         <i class="bi bi-person-arms-up me-1"></i> Trainers
@@ -44,16 +38,23 @@
                     </a>
                 </li>
                 <?php if (auth()->user()->inGroup('admin')): ?>
-                <li class="nav-item">
-                    <a class="nav-link <?= esActivo('planes') ?>" href="<?= route_to('planes.index') ?>">
-                        <i class="bi bi-bag-dash-fill me-1"></i> Planes
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?= esActivo('usuarios') ?>" href="<?= route_to('usuarios.index') ?>">
-                        <i class="bi bi-shield-lock-fill me-1"></i> Usuarios
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?= esActivo('planes') ?>" href="<?= route_to('planes.index') ?>">
+                            <i class="bi bi-bag-dash-fill me-1"></i> Planes
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?= esActivo('usuarios') ?>" href="<?= route_to('usuarios.index') ?>">
+                            <i class="bi bi-shield-lock-fill me-1"></i> Usuarios
+                        </a>
+                    </li>
+                <?php endif; ?>
+                <?php if (auth()->user()->inGroup('admin', 'recepcionista')): ?>
+                    <li class="nav-item">
+                        <a class="nav-link <?= esActivo('pagos') ?>" href="<?= route_to('pagos.index') ?>">
+                            <i class="bi bi-cash-coin me-1"></i> Pagos
+                        </a>
+                    </li>
                 <?php endif; ?>
             </ul>
             <div class="d-flex align-items-center gap-3">
