@@ -79,8 +79,8 @@
                                         <div class="text-muted" style="font-size:.70rem">$<?= number_format((float)$c['plan_precio'], 2) ?></div>
                                     <?php endif; ?>
                                 </td>
-                                <td class="text-center align-middle small" style="font-size:.70rem"><?= $corteHtml ?></td>
-                                <td class="text-center align-middle small" style="font-size:.70rem">
+                                <td class="text-center align-middle" style="font-size:.70rem"><?= $corteHtml ?></td>
+                                <td class="text-center align-middle" style="font-size:.70rem">
                                     <?= $c['ultimo_pago'] ? date('d/m/Y', strtotime($c['ultimo_pago'])) : '<span class="text-muted">—</span>' ?>
                                 </td>
                                 <td class="text-center align-middle small">
