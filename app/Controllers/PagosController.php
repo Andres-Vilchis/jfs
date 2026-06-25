@@ -30,8 +30,8 @@ class PagosController extends BaseController
             ->select('clientes.*, planes.nombre AS plan_nombre, planes.precio AS plan_precio, planes.duracion_dias')
             ->join('planes', 'planes.id = clientes.plan_id', 'left')
             ->where('clientes.activo', 1)
-            ->orderBy('clientes.ultimo_pago IS NULL', 'ASC')  // NULLs al final
-            ->orderBy('clientes.ultimo_pago', 'DESC')         // más reciente primero
+            ->orderBy('ISNULL(clientes.ultimo_pago)', 'ASC', false)  // NULLs al final, false = sin escapar
+            ->orderBy('clientes.ultimo_pago', 'DESC')                // más reciente primero
             ->findAll();
 
         $data = [
